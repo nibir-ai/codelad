@@ -14,7 +14,8 @@ import * as ext from './extensions.ts';
 import { getCurrentExtensionTarget, getPlatformSpecificAssetName } from './extensionTarget.ts';
 import fancyLog from 'fancy-log';
 import ansiColors from 'ansi-colors';
-import { Stream } from 'stream';
+import { PassThrough, Stream } from 'stream';
+import { assertJsDebugDefinition, ensureCodeladJsDebug, getJsDebugRecipeHash } from '../codelad/buildJsDebug.ts';
 
 export interface IExtensionDefinition {
 	name: string;
@@ -23,6 +24,8 @@ export interface IExtensionDefinition {
 	repo: string;
 	/** Download the pinned OSS GitHub release independently of the user extension gallery. */
 	useGithub?: boolean;
+	/** Build the Codelad derivative from pinned source instead of downloading a runtime bundle. */
+	codeladSource?: 'js-debug';
 	platforms?: string[];
 	vsix?: string;
 	/**
@@ -70,8 +73,12 @@ function isUpToDate(extension: IExtensionDefinition): boolean {
 	const packageContents = fs.readFileSync(packagePath, { encoding: 'utf8' });
 
 	try {
-		const diskVersion = JSON.parse(packageContents).version;
-		return (diskVersion === extension.version);
+		const manifest = JSON.parse(packageContents);
+		if (extension.codeladSource) {
+			assertJsDebugDefinition(extension);
+			return manifest.version === extension.version && manifest._codeladBuildRecipeHash === getJsDebugRecipeHash();
+		}
+		return manifest.version === extension.version;
 	} catch (err) {
 		return false;
 	}
@@ -84,7 +91,16 @@ function isInsiders(): boolean {
 function getExtensionDownloadStream(extension: IExtensionDefinition) {
 	let input: Stream;
 
-	if (extension.vsix) {
+	if (extension.codeladSource) {
+		assertJsDebugDefinition(extension);
+		const output = new PassThrough({ objectMode: true });
+		ensureCodeladJsDebug(root).then(artifact => {
+			ext.fromVsix(artifact.path, { ...extension, sha256: artifact.sha256 })
+				.on('error', error => output.destroy(error))
+				.pipe(output);
+		}, error => output.destroy(error));
+		input = output;
+	} else if (extension.vsix) {
 		input = ext.fromVsix(path.join(root, extension.vsix), extension);
 	} else if (extension.platformSpecific) {
 		// A platform-specific extension publishes its VSIX assets on a GitHub release using a

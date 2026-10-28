@@ -1,0 +1,14 @@
+{
+	"extensionId": "ms-vscode.js-debug",
+	"version": "1.140.0-codelad.1",
+	"upstreamVersion": "1.140.0",
+	"sourceCommit": "bccbbafdcb6bb96ab0706f411a1e66681d5bc4de",
+	"sourceArchiveSha256": "46ba78b532b46efcc65c7655923fca343d24dd14bd8f2d103eeb6f587b82dacd",
+	"upstreamVsixSha256": "d535f02a47031671f8c988bb7e79d6fec1a881883d9c9fa15ff81f28eae98500",
+	"packageLockSha256": "9637efc2ced5dc1b9994d1e591afbab56065d641c047532b24af1faeb6895e14",
+	"gulpfileSha256": "c48e30fb8f465d2ad0c069a803c30f6e5563fd43353ea3bd99e7f927633b8981",
+	"replacements": {
+		"dapTelemetryReporter.ts": "c18cc33505ff3e8f862dbd5e0bc994be806db951e20cd97128f156b8d25ec434",
+		"vscodeExperimentationService.ts": "9b037a75fdf7d2351eeab7c4f3a26ff8f6afe23bb72d49fe7cd79e935375cf04"
+	}
+}

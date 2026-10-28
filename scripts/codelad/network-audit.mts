@@ -31,7 +31,11 @@ if (values.summarize) {
 		process.exitCode = 1;
 	}
 } else {
-	const executable = resolve(values.executable ?? '.build/electron/Codelad.exe');
+	const product: { applicationName: string; nameLong: string; nameShort: string } = JSON.parse(readFileSync(new URL('../../product.json', import.meta.url), 'utf8'));
+	const defaultExecutable = process.platform === 'win32' ? `.build/electron/${product.nameShort}.exe`
+		: process.platform === 'darwin' ? `.build/electron/${product.nameLong}.app/Contents/MacOS/${product.nameShort}`
+			: `.build/electron/${product.applicationName}`;
+	const executable = resolve(values.executable ?? defaultExecutable);
 	if (!existsSync(executable)) {
 		throw new Error('Build the actual desktop executable first, then pass --executable with its path.');
 	}
@@ -54,11 +58,13 @@ if (values.summarize) {
 	delete environment.ELECTRON_RUN_AS_NODE;
 	let captureFailed = false;
 	const child = spawn(executable, args, { stdio: 'inherit', env: environment });
-	if (process.platform === 'win32' && child.pid) {
-		const capture = spawn('powershell.exe', [
+	if ((process.platform === 'win32' || process.platform === 'linux') && child.pid) {
+		const captureCommand = process.platform === 'win32' ? 'powershell.exe' : process.execPath;
+		const captureArgs = process.platform === 'win32' ? [
 			'-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', fileURLToPath(new URL('./capture-connections.ps1', import.meta.url)),
 			'-RootProcessId', String(child.pid), '-OutputFile', join(directory, 'connections.jsonl')
-		], { stdio: 'inherit', windowsHide: true });
+		] : [fileURLToPath(new URL('./capture-linux-connections.mts', import.meta.url)), '--root-pid', String(child.pid), '--output', join(directory, 'connections.jsonl')];
+		const capture = spawn(captureCommand, captureArgs, { stdio: 'inherit', windowsHide: true });
 		capture.on('error', () => { console.error('Process-tree connection sampling could not start.'); captureFailed = true; process.exitCode = 1; });
 		capture.on('exit', code => {
 			if (code !== 0) {

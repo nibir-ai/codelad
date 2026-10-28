@@ -1,0 +1,44 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+import { inject, injectable } from 'inversify';
+import { IEvent } from '../common/events';
+import Dap from '../dap/api';
+import { IsVSCode } from '../ioc-extras';
+import { LogFunctions } from './classification';
+import { Batchable, ITelemetryReporter } from './telemetryReporter';
+
+/** Codelad compatibility API: no payload inspection, buffering, timers, metrics or DAP telemetry. */
+@injectable()
+export class DapTelemetryReporter implements ITelemetryReporter {
+	constructor(@inject(IsVSCode) _isVsCode: boolean = true) { }
+
+	public readonly onFlush: IEvent<void> = () => ({ dispose() { } });
+	public readonly setGlobalMetric = (..._args: Parameters<LogFunctions['setGlobalMetric']>): void => { };
+	public report<K extends keyof LogFunctions>(_key: K, ..._args: Parameters<LogFunctions[K]>): void { }
+	public reportOperation(_key: Batchable, _method: string, _duration: number, _error?: Error): void { }
+	public attachDap(_dap: Dap.Api): void { }
+	public pushOutput(_event: Dap.OutputEventParams): void { }
+	public flush(): void { }
+	public dispose(): void { }
+}
+
+// Retain the upstream local error formatter used by source-map diagnostics.
+const extractFileNamePattern = /(?:[A-z]:)?(?:[\\/][^:]*)+[\\/]([^:]*:)/g;
+
+interface IErrorTelemetryProperties {
+	message: string | undefined;
+	name: string | undefined;
+	stack: string | undefined;
+}
+
+/** Formats a local diagnostic error without transmitting it. */
+export function extractErrorDetails(e: Error): { error: IErrorTelemetryProperties } {
+	const message = String(e.message);
+	const name = String(e.name);
+	extractFileNamePattern.lastIndex = 0;
+	const stack = typeof e.stack === 'string' ? e.stack.replace(extractFileNamePattern, '$1') : undefined;
+	return { error: { message, name, stack } };
+}

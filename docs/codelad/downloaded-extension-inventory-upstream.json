@@ -1,0 +1,68 @@
+{
+	"scope": "Manifest inventory only. Does not establish license compliance, absence of networking, or which extensions a packaged artifact includes. Run again against the final packaged extensions folder.",
+	"extensions": [
+		{
+			"id": "ms-vscode.js-debug",
+			"version": "1.140.0",
+			"manifest": "ms-vscode.js-debug/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [
+				"LICENSE.txt",
+				"ThirdPartyNotices.txt"
+			],
+			"telemetryDependencies": [
+				"vscode-tas-client"
+			],
+			"explicitActivationEvents": [
+				"onDebugDynamicConfigurations",
+				"onDebugInitialConfigurations",
+				"onFileSystem:jsDebugNetworkFs",
+				"onDebugResolve:pwa-node",
+				"onDebugResolve:node-terminal",
+				"onDebugResolve:pwa-extensionHost",
+				"onDebugResolve:pwa-chrome",
+				"onDebugResolve:pwa-msedge",
+				"onDebugResolve:pwa-editor-browser",
+				"onDebugResolve:node",
+				"onDebugResolve:chrome",
+				"onDebugResolve:extensionHost",
+				"onDebugResolve:msedge",
+				"onDebugResolve:editor-browser",
+				"onCommand:extension.js-debug.clearAutoAttachVariables",
+				"onCommand:extension.js-debug.setAutoAttachVariables",
+				"onCommand:extension.js-debug.autoAttachToProcess",
+				"onCommand:extension.js-debug.pickNodeProcess",
+				"onCommand:extension.js-debug.requestCDPProxy",
+				"onCommand:extension.js-debug.completion.nodeTool"
+			]
+		},
+		{
+			"id": "ms-vscode.js-debug-companion",
+			"version": "1.1.3",
+			"manifest": "ms-vscode.js-debug-companion/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [
+				"LICENSE.txt",
+				"ThirdPartyNotices.txt"
+			],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onCommand:js-debug-companion.launchAndAttach",
+				"onCommand:js-debug-companion.kill",
+				"onCommand:js-debug-companion.launch",
+				"onCommand:js-debug-companion.defaultBrowser"
+			]
+		},
+		{
+			"id": "ms-vscode.vscode-js-profile-table",
+			"version": "1.0.11",
+			"manifest": "ms-vscode.vscode-js-profile-table/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [
+				"ThirdPartyNotices.txt"
+			],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		}
+	]
+}

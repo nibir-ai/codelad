@@ -13,11 +13,11 @@ interface IDependencyManifest {
 	readonly optionalDependencies?: Readonly<Record<string, string>>;
 }
 
-const removedPackages = new Set(['@microsoft/1ds-core-js', '@microsoft/1ds-post-js', '@vscode/deviceid', '@vscode/extension-telemetry', 'vscode-tas-client', 'tas-client', 'applicationinsights']);
+export const removedTelemetryPackages: ReadonlySet<string> = new Set(['@microsoft/1ds-core-js', '@microsoft/1ds-post-js', '@vscode/deviceid', '@vscode/extension-telemetry', 'vscode-tas-client', 'tas-client', 'applicationinsights']);
 
 /** Guards direct runtime dependency regressions; does not replace a transitive or runtime audit. */
 export function assertNoTelemetryDependencies(manifest: IDependencyManifest): void {
-	const prohibited = [...new Set([...Object.keys(manifest.dependencies ?? {}), ...Object.keys(manifest.optionalDependencies ?? {})])].filter(name => removedPackages.has(name));
+	const prohibited = [...new Set([...Object.keys(manifest.dependencies ?? {}), ...Object.keys(manifest.optionalDependencies ?? {})])].filter(name => removedTelemetryPackages.has(name));
 	if (prohibited.length) {
 		throw new Error(`Removed telemetry dependencies reintroduced: ${prohibited.sort().join(', ')}`);
 	}

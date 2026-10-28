@@ -3,16 +3,15 @@
 	"extensions": [
 		{
 			"id": "ms-vscode.js-debug",
-			"version": "1.140.0",
+			"version": "1.140.0-codelad.1",
 			"manifest": "ms-vscode.js-debug/package.json",
 			"declaredLicense": "MIT",
 			"licenseFiles": [
+				"LICENSE",
 				"LICENSE.txt",
 				"ThirdPartyNotices.txt"
 			],
-			"telemetryDependencies": [
-				"vscode-tas-client"
-			],
+			"telemetryDependencies": [],
 			"explicitActivationEvents": [
 				"onDebugDynamicConfigurations",
 				"onDebugInitialConfigurations",

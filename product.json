@@ -55,7 +55,8 @@
 		},
 		{
 			"name": "ms-vscode.js-debug",
-			"version": "1.140.0",
+			"version": "1.140.0-codelad.1",
+			"codeladSource": "js-debug",
 			"sha256": "d535f02a47031671f8c988bb7e79d6fec1a881883d9c9fa15ff81f28eae98500",
 			"repo": "https://github.com/microsoft/vscode-js-debug",
 			"metadata": {

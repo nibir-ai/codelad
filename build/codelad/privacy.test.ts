@@ -28,8 +28,8 @@ test('direct runtime collector dependencies are rejected without inspecting vers
 	}
 });
 
-test('recorded downloaded debugger is rejected while the other pinned extension inventories pass', () => {
-	const inventory: { extensions: { id: string; telemetryDependencies: string[] }[] } = JSON.parse(readFileSync(new URL('../../docs/codelad/downloaded-extension-inventory.json', import.meta.url), 'utf8'));
+test('historical upstream downloaded debugger is rejected while the other pinned extension inventories pass', () => {
+	const inventory: { extensions: { id: string; telemetryDependencies: string[] }[] } = JSON.parse(readFileSync(new URL('../../docs/codelad/downloaded-extension-inventory-upstream.json', import.meta.url), 'utf8'));
 	const rejected: string[] = [];
 	for (const extension of inventory.extensions) {
 		try {

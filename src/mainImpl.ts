@@ -38,6 +38,16 @@ const args = parseCLIArgs();
 perf.mark('code/willConfigureCommandlineSwitches');
 const argvConfig = configureCommandlineSwitchesSync(args);
 perf.mark('code/didConfigureCommandlineSwitches');
+
+// Native dictionaries otherwise download from Google's CDN as soon as a session is created,
+// even though the workbench itself disables spellchecking. Language extensions remain available.
+if (process.platform === 'win32' || process.platform === 'linux') {
+	app.on('session-created', session => {
+		session.setSpellCheckerEnabled(false);
+		session.setSpellCheckerLanguages([]);
+	});
+}
+
 // Enable sandbox globally unless
 // 1) disabled via command line using either
 //    `--no-sandbox` or `--disable-chromium-sandbox` argument.

@@ -1,0 +1,18 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+import { injectable } from 'inversify';
+import { IDisposable } from '../common/disposable';
+import { IExperimentationService, IExperiments } from './experimentationService';
+
+/** Retains debugger defaults without initializing TAS, reading user state or polling. */
+@injectable()
+export class VSCodeExperimentationService implements IExperimentationService, IDisposable {
+	dispose(): void { }
+
+	async getTreatment<K extends keyof IExperiments>(_name: K, defaultValue: IExperiments[K]): Promise<IExperiments[K]> {
+		return defaultValue;
+	}
+}
