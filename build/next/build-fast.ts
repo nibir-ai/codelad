@@ -14,7 +14,7 @@ import { applyIncrementalClientChanges, mapWithConcurrency, MAX_CONCURRENT_FILE_
 const STATE_SCHEMA = 2;
 const BUILD_RECIPE = 4;
 const LOCK_STALE_AFTER_MS = 30_000;
-const BUILD_SCOPES = ['src', 'extensions', '.vscode/extensions', 'build', 'gulpfile.mjs', 'package.json', 'package-lock.json', '.nvmrc'];
+const BUILD_SCOPES = ['src', 'extensions', '.vscode/extensions', 'build', 'gulpfile.mjs', 'package.json', 'package-lock.json', 'product.json', '.nvmrc'];
 const API_PROPOSALS_OUTPUT = 'src/vs/platform/extensions/common/extensionsApiProposals.ts';
 const EXTENSION_POINTS_OUTPUT = 'src/vs/workbench/services/extensions/common/extensionPoints.json';
 const EXTENSION_BUILD_ARGS = ['run', 'gulp', 'transpile-extensions', 'compile-extension-media'];
@@ -76,9 +76,11 @@ export async function runBuildFast(repoRoot: string, force: boolean, clientOnly 
 
 	try {
 		const environment = readEnvironment(repoRoot);
+		const productFile = path.join(repoRoot, 'product.json');
+		const includeCopilot = !fs.existsSync(productFile) || !!JSON.parse(fs.readFileSync(productFile, 'utf8')).defaultChatAgent;
 		const statePath = path.join(stateDir, 'state.json');
 		const saved = await readState(statePath);
-		const selectedLanes: readonly BuildLane[] = clientOnly ? ['client'] : buildLanes;
+		const selectedLanes: readonly BuildLane[] = clientOnly ? ['client'] : buildLanes.filter(lane => includeCopilot || lane !== 'copilot');
 
 		let before: BuildFastSnapshot;
 		const changes: Record<BuildLane, readonly string[]> = { client: [], extensions: [], copilot: [] };
@@ -95,12 +97,12 @@ export async function runBuildFast(repoRoot: string, force: boolean, clientOnly 
 		} catch (error) {
 			console.warn(`[build-fast] Git discovery failed; running a full build without updating incremental state: ${getErrorMessage(error)}`);
 			await fs.promises.rm(statePath, { force: true });
-			await runAllFull(repoRoot, clientOnly);
+			await runAllFull(repoRoot, clientOnly, includeCopilot);
 			return;
 		}
 
 		const outputs = await getOutputStatus(repoRoot);
-		const plan = createBuildPlan(saved, environment, changes, outputs, force, clientOnly);
+		const plan = createBuildPlan(saved, environment, changes, outputs, force, clientOnly, includeCopilot);
 		logPlan(plan);
 
 		const hasBuildWork = plan.client !== 'skip' || plan.extensions !== 'skip' || plan.copilot !== 'skip';
@@ -159,7 +161,7 @@ export async function runBuildFast(repoRoot: string, force: boolean, clientOnly 
 			await fs.promises.writeFile(path.join(repoRoot, 'out', 'date'), getGitCommitDate(), 'utf8');
 		}
 
-		await writeState(statePath, createBuildFastState(saved.state, environment, builtSnapshot, clientOnly));
+		await writeState(statePath, createBuildFastState(saved.state, environment, builtSnapshot, clientOnly, includeCopilot));
 	} finally {
 		await lock.dispose();
 	}
@@ -208,7 +210,7 @@ export function selectBuiltSnapshot(before: BuildFastSnapshot, after: BuildFastS
 	return { snapshot: inputsChanged ? before : after, inputsChanged };
 }
 
-export function createBuildFastState(saved: BuildFastState | undefined, environment: string, snapshot: BuildFastSnapshot, clientOnly: boolean): BuildFastState {
+export function createBuildFastState(saved: BuildFastState | undefined, environment: string, snapshot: BuildFastSnapshot, clientOnly: boolean, includeCopilot = true): BuildFastState {
 	const compatible = saved?.schema === STATE_SCHEMA && saved.recipe === BUILD_RECIPE && saved.environment === environment;
 	return {
 		schema: STATE_SCHEMA,
@@ -216,24 +218,24 @@ export function createBuildFastState(saved: BuildFastState | undefined, environm
 		environment,
 		client: snapshot,
 		extensions: clientOnly ? (compatible ? saved.extensions : undefined) : snapshot,
-		copilot: clientOnly ? (compatible ? saved.copilot : undefined) : snapshot,
+		copilot: !includeCopilot ? undefined : clientOnly ? (compatible ? saved.copilot : undefined) : snapshot,
 	};
 }
 
-export function createBuildPlan(saved: StateReadResult, environment: string, changes: BuildFastChanges, outputs: OutputStatus, force: boolean, clientOnly = false): BuildFastPlan {
-	const selectedLanes: readonly BuildLane[] = clientOnly ? ['client'] : buildLanes;
+export function createBuildPlan(saved: StateReadResult, environment: string, changes: BuildFastChanges, outputs: OutputStatus, force: boolean, clientOnly = false, includeCopilot = true): BuildFastPlan {
+	const selectedLanes: readonly BuildLane[] = clientOnly ? ['client'] : buildLanes.filter(lane => includeCopilot || lane !== 'copilot');
 	const changedPaths = [...new Set(selectedLanes.flatMap(lane => changes[lane].filter(filePath => affectsLane(filePath, lane))))].sort();
 	if (force) {
-		return fullPlan('forced by --force', changedPaths, clientOnly);
+		return fullPlan('forced by --force', changedPaths, clientOnly, includeCopilot);
 	}
 	if (!saved.state) {
-		return fullPlan(saved.reason ?? 'incremental state is unavailable', changedPaths, clientOnly);
+		return fullPlan(saved.reason ?? 'incremental state is unavailable', changedPaths, clientOnly, includeCopilot);
 	}
 	if (saved.state.schema !== STATE_SCHEMA || saved.state.recipe !== BUILD_RECIPE) {
-		return fullPlan('incremental state schema or recipe changed', changedPaths, clientOnly);
+		return fullPlan('incremental state schema or recipe changed', changedPaths, clientOnly, includeCopilot);
 	}
 	if (saved.state.environment !== environment) {
-		return fullPlan('build environment changed', changedPaths, clientOnly);
+		return fullPlan('build environment changed', changedPaths, clientOnly, includeCopilot);
 	}
 
 	const modes: Record<BuildLane, LaneMode> = { client: 'skip', extensions: 'skip', copilot: 'skip' };
@@ -366,6 +368,7 @@ function isGlobalBuildInput(filePath: string): boolean {
 		|| filePath === 'gulpfile.mjs'
 		|| filePath === 'package.json'
 		|| filePath === 'package-lock.json'
+		|| filePath === 'product.json'
 		|| filePath === '.nvmrc';
 }
 
@@ -380,8 +383,8 @@ function affectsLane(filePath: string, lane: BuildLane): boolean {
 	}
 }
 
-function fullPlan(reason: string, changedPaths: readonly string[], clientOnly: boolean): BuildFastPlan {
-	return { reason, changedPaths, client: 'full', extensions: clientOnly ? 'skip' : 'full', copilot: clientOnly ? 'skip' : 'full' };
+function fullPlan(reason: string, changedPaths: readonly string[], clientOnly: boolean, includeCopilot: boolean): BuildFastPlan {
+	return { reason, changedPaths, client: 'full', extensions: clientOnly ? 'skip' : 'full', copilot: clientOnly || !includeCopilot ? 'skip' : 'full' };
 }
 
 async function getOutputStatus(repoRoot: string): Promise<OutputStatus> {
@@ -405,7 +408,7 @@ function validateSelectedOutputs(plan: BuildFastPlan, outputs: OutputStatus): vo
 	}
 }
 
-async function runAllFull(repoRoot: string, clientOnly: boolean): Promise<void> {
+async function runAllFull(repoRoot: string, clientOnly: boolean, includeCopilot: boolean): Promise<void> {
 	await runCommand(repoRoot, npmCommand(), [
 		'run',
 		'gulp',
@@ -417,8 +420,8 @@ async function runAllFull(repoRoot: string, clientOnly: boolean): Promise<void> 
 		runCommand(repoRoot, process.execPath, [path.join(repoRoot, 'build', 'next', 'index.ts'), 'transpile'], 'client'),
 		...(!clientOnly ? [
 			runCommand(repoRoot, npmCommand(), EXTENSION_BUILD_ARGS, 'extensions'),
-			runCommand(repoRoot, npmCommand(), COPILOT_BUILD_ARGS, 'copilot'),
 		] : []),
+		...(!clientOnly && includeCopilot ? [runCommand(repoRoot, npmCommand(), COPILOT_BUILD_ARGS, 'copilot')] : []),
 	]);
 }
 

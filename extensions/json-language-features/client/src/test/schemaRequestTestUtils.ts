@@ -190,7 +190,7 @@ export async function createSchemaClient(transport: 'browser' | 'node', options:
 			createSchemaLoadStatusItem: statusItem,
 			createLanguageStatusItem: statusItem
 		},
-		'@vscode/extension-telemetry': class { dispose() { } },
+		'@codelad/no-telemetry': class { dispose() { } },
 		fs: {
 			promises: {
 				...fs,

@@ -17,6 +17,14 @@ const environment = 'test-environment';
 const outputsPresent: OutputStatus = { client: true, extensions: true, copilot: true };
 
 suite('build-fast planning', () => {
+	test('distribution without a default agent builds the editor and extensions without Copilot', () => {
+		const plan = createBuildPlan({ state: undefined, reason: 'fresh' }, environment, changes(), outputsPresent, false, false, false);
+		const snapshot: BuildFastSnapshot = { head: 'current', dirty: {} };
+		const saved = createBuildFastState(undefined, environment, snapshot, false, false);
+		assert.deepStrictEqual({ lanes: [plan.client, plan.extensions, plan.copilot], saved: [!!saved.client, !!saved.extensions, !!saved.copilot] }, {
+			lanes: ['full', 'full', 'skip'], saved: [true, true, false]
+		});
+	});
 	test('parses NUL-separated Git paths', () => {
 		assert.deepStrictEqual(
 			parseNullSeparatedPaths(Buffer.from('src/one.ts\0extensions/two file.ts\0')),

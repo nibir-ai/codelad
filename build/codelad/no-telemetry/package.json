@@ -1,0 +1,25 @@
+{
+  "name": "@codelad/no-telemetry",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "main": "./out/index.cjs",
+  "types": "./out/index.d.cts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./out/index.d.mts",
+        "default": "./out/index.js"
+      },
+      "require": {
+        "types": "./out/index.d.cts",
+        "default": "./out/index.cjs"
+      }
+    }
+  },
+  "files": ["out", "LICENSE"],
+  "scripts": {
+    "prepare": "node build.mts"
+  }
+}

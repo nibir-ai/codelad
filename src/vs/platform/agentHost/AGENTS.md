@@ -10,6 +10,8 @@
 
 # Multi-Chat Architecture
 
+> Codelad distribution override: telemetry collection, remote experiments and GitHub/Microsoft telemetry transports are removed. The telemetry interfaces below remain inert for caller compatibility; they do not collect identifiers, process prompts, initialize SDKs or upload events. Local operational diagnostics and user-visible session state remain separate from telemetry.
+
 > Node runtime service construction is documented separately in [`node/serviceBootstrapping.md`](node/serviceBootstrapping.md). Host startup timings, process-lifetime correlation, and session workload counts are documented in [`PERFORMANCE.md`](PERFORMANCE.md).
 
 > **Status: COMPLETE** (2026-07-01) All waves A–D and gates G-B1, G-C1, G-C2, G-D1 are done. Codex, Claude, and Copilot all use the unified orchestrator path.

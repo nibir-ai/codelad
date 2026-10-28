@@ -16,6 +16,7 @@ import { ContextKeyExpr, IContextKeyService } from '../../../../platform/context
 import { ExtensionIdentifier, IExtensionManifest } from '../../../../platform/extensions/common/extensions.js';
 import { SyncDescriptor } from '../../../../platform/instantiation/common/descriptors.js';
 import { IProductService } from '../../../../platform/product/common/productService.js';
+import product from '../../../../platform/product/common/product.js';
 import { Registry } from '../../../../platform/registry/common/platform.js';
 import { registerIcon } from '../../../../platform/theme/common/iconRegistry.js';
 import { ViewPaneContainer } from '../../../browser/parts/views/viewPaneContainer.js';
@@ -73,10 +74,10 @@ const chatViewDescriptor: IViewDescriptor = {
 	when: ContextKeyExpr.and(
 		ChatContextKeys.accountPolicyGateActive.negate(),
 		ContextKeyExpr.or(
-			ContextKeyExpr.and(
+			product.defaultChatAgent ? ContextKeyExpr.and(
 				ChatContextKeys.Setup.hidden.negate(),
 				ChatContextKeys.Setup.disabledInWorkspace.negate(),
-			),
+			) : ContextKeyExpr.false(),
 			ChatContextKeys.panelParticipantRegistered,
 			ChatContextKeys.extensionInvalid
 		)

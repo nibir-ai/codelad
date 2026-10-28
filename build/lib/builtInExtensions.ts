@@ -21,6 +21,8 @@ export interface IExtensionDefinition {
 	version: string;
 	sha256: string;
 	repo: string;
+	/** Download the pinned OSS GitHub release independently of the user extension gallery. */
+	useGithub?: boolean;
 	platforms?: string[];
 	vsix?: string;
 	/**
@@ -45,7 +47,7 @@ const root = path.dirname(path.dirname(import.meta.dirname));
 const productjson = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, '../../product.json'), 'utf8'));
 const builtInExtensions = productjson.builtInExtensions as IExtensionDefinition[] || [];
 const webBuiltInExtensions = productjson.webBuiltInExtensions as IExtensionDefinition[] || [];
-const controlFilePath = path.join(os.homedir(), '.vscode-oss-dev', 'extensions', 'control.json');
+const controlFilePath = path.join(os.homedir(), `${productjson.dataFolderName}-dev`, 'extensions', 'control.json');
 const ENABLE_LOGGING = !process.env['VSCODE_BUILD_BUILTIN_EXTENSIONS_SILENCE_PLEASE'];
 
 function log(...messages: string[]): void {
@@ -93,7 +95,7 @@ function getExtensionDownloadStream(extension: IExtensionDefinition) {
 			return es.readArray([]);
 		}
 		input = ext.fromGithub(extension, { asset, latest: isInsiders() });
-	} else if (productjson.extensionsGallery?.serviceUrl) {
+	} else if (productjson.extensionsGallery?.serviceUrl && !extension.useGithub) {
 		input = ext.fromMarketplace(productjson.extensionsGallery.serviceUrl, extension);
 	} else {
 		input = ext.fromGithub(extension, { latest: isInsiders() });

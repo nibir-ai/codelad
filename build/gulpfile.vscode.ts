@@ -36,6 +36,8 @@ import rceditCallback from 'rcedit';
 import { spawnTsgo } from './lib/tsgo.ts';
 import { runEsbuildTranspile, runEsbuildBundle, getBootstrapEntryPointsForTarget } from './lib/esbuild.ts';
 import { generateNodeCompileCache, shouldGenerateNodeCompileCache } from './lib/nodeCompileCache.ts';
+import { assertCodeladPrivacy } from './codelad/privacy.ts';
+import { assertCodeladDependencyManifests } from './codelad/dependencies.ts';
 
 
 const glob = promisify(globCallback);
@@ -224,6 +226,8 @@ function packageTask(platform: string, arch: string, sourceFolderName: string, d
 				if (dictationRuntime) {
 					json.dictationRuntime = dictationRuntime;
 				}
+				assertCodeladPrivacy(json);
+				assertCodeladDependencyManifests(root, json.skipBuiltinExtensions);
 				return json;
 			}))
 			.pipe(es.through(function (file) {

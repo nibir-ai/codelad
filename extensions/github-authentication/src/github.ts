@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as vscode from 'vscode';
-import TelemetryReporter from '@vscode/extension-telemetry';
+import TelemetryReporter from '@codelad/no-telemetry';
 import { Keychain } from './common/keychain';
 import { GitHubServer, IGitHubServer, IGitHubToken } from './githubServer';
 import { EntraTokenExchangeError, EntraTokenExchangeFailure, IEntraRenewedToken } from './entraTokenExchange';

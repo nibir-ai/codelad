@@ -7,6 +7,7 @@ import assert from 'assert';
 import { DeferredPromise, timeout } from '../../../../../../base/common/async.js';
 import { CancellationToken, CancellationTokenSource } from '../../../../../../base/common/cancellation.js';
 import { IDefaultAccount } from '../../../../../../base/common/defaultAccount.js';
+import { IDefaultChatAgent } from '../../../../../../base/common/product.js';
 import { CancellationError, isCancellationError } from '../../../../../../base/common/errors.js';
 import { Emitter } from '../../../../../../base/common/event.js';
 import { DisposableStore, toDisposable } from '../../../../../../base/common/lifecycle.js';
@@ -27,7 +28,6 @@ import { CustomizationMarketplaceConfiguration } from '../../../../../../platfor
 import { IDefaultAccountService } from '../../../../../../platform/defaultAccount/common/defaultAccount.js';
 import { NullLogService } from '../../../../../../platform/log/common/log.js';
 import { IOpenerService } from '../../../../../../platform/opener/common/opener.js';
-import product from '../../../../../../platform/product/common/product.js';
 import { IProductService } from '../../../../../../platform/product/common/productService.js';
 import { NullTelemetryService, NullTelemetryServiceShape } from '../../../../../../platform/telemetry/common/telemetryUtils.js';
 import { AuthenticationSession, AuthenticationSessionsChangeEvent, IAuthenticationService } from '../../../../../services/authentication/common/authentication.js';
@@ -131,9 +131,8 @@ suite('CopilotConnectorsService', () => {
 			}
 		}();
 		const productService = new class extends mock<IProductService>() {
-			override readonly defaultChatAgent = {
-				...product.defaultChatAgent,
-				mcpConnectorsUrl: 'https://api.github.test/copilot-connectors/api/v1',
+			override readonly defaultChatAgent = new class extends mock<IDefaultChatAgent>() {
+				override readonly mcpConnectorsUrl = 'https://api.github.test/copilot-connectors/api/v1';
 			};
 		}();
 		const configurationService = new TestConfigurationService({

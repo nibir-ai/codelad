@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import assert from 'assert';
+import { isUUID } from '../../common/uuid.js';
 import { getMachineId, getSqmMachineId, getDevDeviceId } from '../../node/id.js';
 import { getMac } from '../../node/macAddress.js';
 import { flakySuite } from './testUtils.js';
@@ -13,23 +14,22 @@ flakySuite('ID', () => {
 	ensureNoDisposablesAreLeakedInTestSuite();
 
 	test('getMachineId', async function () {
-		const errors = [];
+		const errors: Error[] = [];
 		const id = await getMachineId(err => errors.push(err));
-		assert.ok(id);
-		assert.strictEqual(errors.length, 0);
+		assert.deepStrictEqual({ randomIdentifier: isUUID(id), stableInProcess: id === await getMachineId(err => errors.push(err)), errors }, { randomIdentifier: true, stableInProcess: true, errors: [] });
 	});
 
 	test('getSqmId', async function () {
-		const errors = [];
+		const errors: Error[] = [];
 		const id = await getSqmMachineId(err => errors.push(err));
-		assert.ok(typeof id === 'string');
+		assert.strictEqual(id, '');
 		assert.strictEqual(errors.length, 0);
 	});
 
 	test('getDevDeviceId', async function () {
-		const errors = [];
+		const errors: Error[] = [];
 		const id = await getDevDeviceId(err => errors.push(err));
-		assert.ok(typeof id === 'string');
+		assert.strictEqual(id, '');
 		assert.strictEqual(errors.length, 0);
 	});
 

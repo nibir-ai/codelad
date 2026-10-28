@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { disableAgentTelemetry } from '../../common/agentTelemetryPolicy.js';
 import { AiAgentEnvValue, AiAgentEnvVar } from '../../../chat/common/aiAgentEnv.js';
 import { CODEX_COPILOT_MODEL_PROVIDER } from '../../common/codexModelSelection.js';
 import type { IAgentHostNativeOTelConfig } from '../../common/otel/agentHostOTelService.js';
@@ -133,10 +134,7 @@ export function buildCodexLaunchConfig(
 	telemetry?: IAgentHostNativeOTelConfig,
 ): ICodexLaunchConfig {
 	const env: NodeJS.ProcessEnv = { ...inheritedEnv, [AiAgentEnvVar]: AiAgentEnvValue };
-	if (telemetry) {
-		delete env.OTEL_SERVICE_NAME;
-		env.OTEL_RESOURCE_ATTRIBUTES = serializeResourceAttributes(telemetry.resourceAttributes);
-	}
+	disableAgentTelemetry(env);
 	env.OPENAI_API_KEY = proxy.nonce;
 	const overrides = [
 		`model_providers.${CODEX_COPILOT_MODEL_PROVIDER}.name="VS Code Proxy"`,
@@ -163,52 +161,14 @@ export function buildCodexLaunchConfig(
 	};
 }
 
-export function codexTelemetryOverrides(config: IAgentHostNativeOTelConfig | undefined): string[] {
+/** Source-compatible overrides; exporter destinations and prompt capture have been removed. */
+export function codexTelemetryOverrides(_config?: IAgentHostNativeOTelConfig): string[] {
 	return [
-		// Codex analytics are independent from its OTel exporters and post to an
-		// OpenAI-owned endpoint. Keep them disabled even when the user configures
-		// Agent Host OTel, whose destinations are supplied explicitly below. Codex
-		// currently uses this same flag to gate its metrics exporter, so preventing
-		// product analytics also suppresses its otherwise user-directed metrics.
 		'analytics.enabled=false',
-		// Agent Host does not expose Codex's feedback flow. Disable its Sentry
-		// upload path rather than leaving an unused outbound channel available.
 		'feedback.enabled=false',
-		`otel.log_user_prompt=${config?.captureContent ?? false}`,
-		config?.traces ? `otel.trace_exporter=${codexExporter(config.traces)}` : 'otel.trace_exporter="none"',
-		config?.external ? `otel.exporter=${codexExporter({ ...config.external, endpoint: resolveSignalEndpoint(config.external.endpoint, 'logs', config.external.protocol) })}` : 'otel.exporter="none"',
-		config?.external ? `otel.metrics_exporter=${codexExporter({ ...config.external, endpoint: resolveSignalEndpoint(config.external.endpoint, 'metrics', config.external.protocol) })}` : 'otel.metrics_exporter="none"',
+		'otel.log_user_prompt=false',
+		'otel.trace_exporter="none"',
+		'otel.exporter="none"',
+		'otel.metrics_exporter="none"',
 	];
-}
-
-function codexExporter(config: { endpoint: string; protocol: 'http/json' | 'http/protobuf' | 'grpc'; headers?: Readonly<Record<string, string>> }): string {
-	const headers = config.headers && Object.keys(config.headers).length > 0
-		? `, headers = { ${Object.entries(config.headers).map(([key, value]) => `${JSON.stringify(key)} = ${JSON.stringify(value)}`).join(', ')} }`
-		: '';
-	if (config.protocol === 'grpc') {
-		return `{ otlp-grpc = { endpoint = ${JSON.stringify(config.endpoint)}${headers} } }`;
-	}
-	const protocol = config.protocol === 'http/json' ? 'json' : 'binary';
-	return `{ otlp-http = { endpoint = ${JSON.stringify(config.endpoint)}, protocol = ${JSON.stringify(protocol)}${headers} } }`;
-}
-
-function serializeResourceAttributes(attributes: Readonly<Record<string, string>>): string {
-	return Object.entries(attributes).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join(',');
-}
-
-function resolveSignalEndpoint(endpoint: string, signal: 'logs' | 'metrics', protocol: 'http/json' | 'http/protobuf' | 'grpc'): string {
-	if (protocol === 'grpc') {
-		return endpoint;
-	}
-	try {
-		const url = new URL(endpoint);
-		if (url.pathname === '' || url.pathname === '/') {
-			url.pathname = `/v1/${signal}`;
-		} else if (url.pathname.endsWith('/v1/traces')) {
-			url.pathname = `${url.pathname.slice(0, -'/v1/traces'.length)}/v1/${signal}`;
-		}
-		return url.toString().replace(/\/$/, '');
-	} catch {
-		return endpoint;
-	}
 }

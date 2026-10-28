@@ -80,56 +80,15 @@ suite('claudeSdkOptions / buildSubprocessEnv', () => {
 		});
 	});
 
-	test('maps Agent Host traces to loopback and logs/metrics to the external sink', () => {
-		const env = buildClaudeTelemetryEnv({
-			traces: { endpoint: 'http://127.0.0.1:4567/v1/traces', protocol: 'http/json' },
-			external: { endpoint: 'http://collector:4318', protocol: 'http/protobuf', headers: { authorization: 'Bearer test/token' } },
-			captureContent: false,
-			resourceAttributes: { 'service.namespace': 'vscode.agent-host', region: 'west us' },
-		}, {
-			traceId: '1'.repeat(32),
-			spanId: '2'.repeat(16),
-			traceparent: `00-${'1'.repeat(32)}-${'2'.repeat(16)}-01`,
+	test('injected telemetry configuration cannot enable export or prompt capture', () => {
+		const environment = buildClaudeTelemetryEnv({
+			traces: { endpoint: 'https://collector.invalid', protocol: 'http/json' },
+			external: { endpoint: 'https://collector.invalid', protocol: 'grpc' },
+			captureContent: true, resourceAttributes: { 'user.name': 'private-user' }
 		});
-
-		assert.deepStrictEqual(env, {
-			CLAUDE_CODE_ENABLE_TELEMETRY: '1',
-			OTEL_SERVICE_NAME: 'claude-code',
-			OTEL_RESOURCE_ATTRIBUTES: 'service.namespace=vscode.agent-host,region=west%20us',
-			CLAUDE_CODE_ENHANCED_TELEMETRY_BETA: '1',
-			OTEL_TRACES_EXPORTER: 'otlp',
-			OTEL_LOGS_EXPORTER: 'otlp',
-			OTEL_METRICS_EXPORTER: 'otlp',
-			OTEL_LOG_USER_PROMPTS: '0',
-			OTEL_LOG_ASSISTANT_RESPONSES: '0',
-			OTEL_LOG_TOOL_DETAILS: '0',
-			OTEL_LOG_TOOL_CONTENT: '0',
-			OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: 'http://127.0.0.1:4567/v1/traces',
-			OTEL_EXPORTER_OTLP_TRACES_PROTOCOL: 'http/json',
-			OTEL_EXPORTER_OTLP_LOGS_ENDPOINT: 'http://collector:4318/v1/logs',
-			OTEL_EXPORTER_OTLP_LOGS_PROTOCOL: 'http/protobuf',
-			OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: 'http://collector:4318/v1/metrics',
-			OTEL_EXPORTER_OTLP_METRICS_PROTOCOL: 'http/protobuf',
-			OTEL_EXPORTER_OTLP_HEADERS: 'authorization=Bearer%20test%2Ftoken',
-			TRACEPARENT: `00-${'1'.repeat(32)}-${'2'.repeat(16)}-01`,
-		});
-	});
-
-	test('keeps gRPC signal endpoints unchanged', () => {
-		const env = buildClaudeTelemetryEnv({
-			traces: { endpoint: 'https://collector:4317', protocol: 'grpc' },
-			external: { endpoint: 'https://collector:4317', protocol: 'grpc' },
-			captureContent: false,
-			resourceAttributes: {},
-		});
-		assert.deepStrictEqual({
-			trace: env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT,
-			logs: env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT,
-			metrics: env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT,
-		}, {
-			trace: 'https://collector:4317',
-			logs: 'https://collector:4317',
-			metrics: 'https://collector:4317',
+		assert.deepStrictEqual(environment, {
+			OTEL_SDK_DISABLED: 'true', OTEL_TRACES_EXPORTER: 'none', OTEL_METRICS_EXPORTER: 'none',
+			OTEL_LOGS_EXPORTER: 'none', COPILOT_OTEL_ENABLED: 'false', CLAUDE_CODE_ENABLE_TELEMETRY: '0'
 		});
 	});
 

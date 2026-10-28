@@ -1826,7 +1826,7 @@ suite('CopilotAgent', () => {
 		Object.assign(process.env, savedProxyEnvironment);
 	});
 
-	test('rejected managed OTel paths are cleared in the captured Copilot child options', async () => {
+	test('removed OTel ignores managed paths and clears inherited export configuration', async () => {
 		const rejectedPath = 'synthetic-customer-user-directory/';
 		const pathKeys = ['COPILOT_OTEL_FILE_EXPORTER_PATH', 'copilot_otel_file_exporter_path'] as const;
 		const previous = pathKeys.map(key => [key, process.env[key]] as const);
@@ -1854,13 +1854,7 @@ suite('CopilotAgent', () => {
 				pathEntries,
 				parentPath: process.env.COPILOT_OTEL_FILE_EXPORTER_PATH,
 			}, {
-				telemetry: {
-					exporterType: 'file',
-					filePath: '',
-					otlpEndpoint: undefined,
-					sourceName: undefined,
-					captureContent: undefined,
-				},
+				telemetry: undefined,
 				pathEntries: [],
 				parentPath: rejectedPath,
 			});

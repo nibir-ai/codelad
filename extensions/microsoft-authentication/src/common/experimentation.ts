@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import * as vscode from 'vscode';
-import { getExperimentationService, IExperimentationService, IExperimentationTelemetry, TargetPopulation } from 'vscode-tas-client';
+import { getExperimentationService, IExperimentationService, IExperimentationTelemetry, TargetPopulation } from '@codelad/no-telemetry';
 
 export async function createExperimentationService(
 	context: vscode.ExtensionContext,

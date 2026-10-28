@@ -37,6 +37,21 @@ import { IManagedSettingsResponse } from '../../browser/managedSettings.js';
 import { TestProductService } from '../../../../test/common/workbenchTestServices.js';
 import { AccountPolicyGateState, AccountPolicyService } from '../../../policies/common/accountPolicyService.js';
 
+suite('DefaultAccountService without a default chat agent', () => {
+	const disposables = ensureNoDisposablesAreLeakedInTestSuite();
+
+	test('offline account operations resolve without waiting for a cloud provider', async () => {
+		const service = disposables.add(new DefaultAccountService({ ...TestProductService, defaultChatAgent: undefined }));
+		assert.deepStrictEqual([
+			await service.getDefaultAccount(),
+			await service.refresh(),
+			await service.signIn(),
+			await service.signOut(),
+			service.currentDefaultAccount
+		], [null, null, null, undefined, null]);
+	});
+});
+
 suite('DefaultAccountProvider', () => {
 
 	const disposables = ensureNoDisposablesAreLeakedInTestSuite();

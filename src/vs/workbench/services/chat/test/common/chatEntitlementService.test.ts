@@ -4,8 +4,34 @@
  *--------------------------------------------------------------------------------------------*/
 
 import assert from 'assert';
+import { mock } from '../../../../../base/test/common/mock.js';
 import { ensureNoDisposablesAreLeakedInTestSuite } from '../../../../../base/test/common/utils.js';
-import { ChatEntitlement, chatRequiresSetup, IChatSetupRequirement } from '../../common/chatEntitlementService.js';
+import { TestConfigurationService } from '../../../../../platform/configuration/test/common/testConfigurationService.js';
+import { TestInstantiationService } from '../../../../../platform/instantiation/test/common/instantiationServiceMock.js';
+import { MockContextKeyService } from '../../../../../platform/keybinding/test/common/mockKeybindingService.js';
+import { NullLogService } from '../../../../../platform/log/common/log.js';
+import { IProductService } from '../../../../../platform/product/common/productService.js';
+import { InMemoryStorageService } from '../../../../../platform/storage/common/storage.js';
+import { NullTelemetryService } from '../../../../../platform/telemetry/common/telemetryUtils.js';
+import { IWorkbenchEnvironmentService } from '../../../environment/common/environmentService.js';
+import { ChatEntitlement, ChatEntitlementService, chatRequiresSetup, IChatSetupRequirement } from '../../common/chatEntitlementService.js';
+
+suite('ChatEntitlementService without a bundled provider', () => {
+	const store = ensureNoDisposablesAreLeakedInTestSuite();
+
+	test('clearing an account policy restriction does not reveal missing-provider UI', () => {
+		const service = store.add(new ChatEntitlementService(
+			store.add(new TestInstantiationService()),
+			new class extends mock<IProductService>() { override readonly defaultChatAgent = undefined; },
+			new class extends mock<IWorkbenchEnvironmentService>() { },
+			store.add(new MockContextKeyService()),
+			new TestConfigurationService(), NullTelemetryService, new NullLogService(), store.add(new InMemoryStorageService())
+		));
+		service.setForceHidden(true);
+		service.setForceHidden(false);
+		assert.deepStrictEqual({ hidden: service.sentiment.hidden, requests: service.requests }, { hidden: true, requests: undefined });
+	});
+});
 
 suite('chatRequiresSetup', () => {
 

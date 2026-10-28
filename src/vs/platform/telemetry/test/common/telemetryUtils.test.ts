@@ -6,12 +6,32 @@
 import assert from 'assert';
 import { ensureNoDisposablesAreLeakedInTestSuite } from '../../../../base/test/common/utils.js';
 import { TestConfigurationService } from '../../../configuration/test/common/testConfigurationService.js';
+import { mock } from '../../../../base/test/common/mock.js';
+import { IEnvironmentService } from '../../../environment/common/environment.js';
+import { IProductService } from '../../../product/common/productService.js';
 import { TelemetryConfiguration, TelemetryLevel } from '../../common/telemetry.js';
-import { cleanData, cleanRemoteAuthority, getTelemetryLevel } from '../../common/telemetryUtils.js';
+import { cleanData, cleanRemoteAuthority, getTelemetryLevel, supportsTelemetry } from '../../common/telemetryUtils.js';
 
 suite('TelemetryUtils', () => {
 
 	ensureNoDisposablesAreLeakedInTestSuite();
+
+	test('explicit product opt-out disables telemetry in development and built products', () => {
+		const results = [];
+		for (const isBuilt of [false, true]) {
+			for (const disableTelemetry of [false, true]) {
+				const environment = new class extends mock<IEnvironmentService>() {
+					override readonly isBuilt = isBuilt;
+					override readonly disableTelemetry = disableTelemetry;
+				};
+				const product = new class extends mock<IProductService>() {
+					override readonly enableTelemetry = false;
+				};
+				results.push(supportsTelemetry(product, environment));
+			}
+		}
+		assert.deepStrictEqual(results, [false, false, false, false]);
+	});
 
 	test('getTelemetryLevel fails closed for invalid configuration', () => {
 		assert.deepStrictEqual([
@@ -27,10 +47,10 @@ suite('TelemetryUtils', () => {
 				}
 			}()),
 		], [
-			TelemetryLevel.USAGE,
-			TelemetryLevel.USAGE,
-			TelemetryLevel.ERROR,
-			TelemetryLevel.CRASH,
+			TelemetryLevel.NONE,
+			TelemetryLevel.NONE,
+			TelemetryLevel.NONE,
+			TelemetryLevel.NONE,
 			TelemetryLevel.NONE,
 			TelemetryLevel.NONE,
 			TelemetryLevel.NONE,

@@ -218,10 +218,9 @@ export abstract class AbstractNativeEnvironmentService implements INativeEnviron
 
 	get skipBuiltinExtensions(): readonly string[] {
 		const value = env['VSCODE_SKIP_BUILTIN_EXTENSIONS'];
-		if (!value) {
-			return [];
-		}
-		return value.split(',').map(id => id.trim()).filter(id => id);
+		const productExtensions = this.productService.skipBuiltinExtensions ?? [];
+		const environmentExtensions = value?.split(',').map(id => id.trim()).filter(id => id) ?? [];
+		return [...productExtensions, ...environmentExtensions];
 	}
 
 	@memoize

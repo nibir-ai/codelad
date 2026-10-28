@@ -4,8 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AuthError, ClientAuthError } from '@azure/msal-node';
-import TelemetryReporter, { TelemetryEventProperties } from '@vscode/extension-telemetry';
-import { IExperimentationTelemetry } from 'vscode-tas-client';
+import TelemetryReporter, { TelemetryEventProperties, IExperimentationTelemetry } from '@codelad/no-telemetry';
 
 export const enum MicrosoftAccountType {
 	AAD = 'aad',

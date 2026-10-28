@@ -1,0 +1,1022 @@
+{
+	"scope": "Manifest inventory only. Does not establish license compliance, absence of networking, or which extensions a packaged artifact includes. Run again against the final packaged extensions folder.",
+	"extensions": [
+		{
+			"id": "GitHub.copilot-chat",
+			"version": "0.73.0",
+			"manifest": "copilot/package.json",
+			"declaredLicense": "SEE LICENSE IN LICENSE.txt",
+			"licenseFiles": [
+				"LICENSE.txt"
+			],
+			"telemetryDependencies": [
+				"@opentelemetry/api",
+				"@opentelemetry/api-logs",
+				"@opentelemetry/exporter-logs-otlp-grpc",
+				"@opentelemetry/exporter-logs-otlp-http",
+				"@opentelemetry/exporter-logs-otlp-proto",
+				"@opentelemetry/exporter-metrics-otlp-grpc",
+				"@opentelemetry/exporter-metrics-otlp-http",
+				"@opentelemetry/exporter-metrics-otlp-proto",
+				"@opentelemetry/exporter-trace-otlp-grpc",
+				"@opentelemetry/exporter-trace-otlp-http",
+				"@opentelemetry/exporter-trace-otlp-proto",
+				"@opentelemetry/resources",
+				"@opentelemetry/sdk-logs",
+				"@opentelemetry/sdk-metrics",
+				"@opentelemetry/sdk-trace-node",
+				"@opentelemetry/semantic-conventions",
+				"@vscode/extension-telemetry",
+				"applicationinsights",
+				"vscode-tas-client"
+			],
+			"explicitActivationEvents": [
+				"onStartupFinished",
+				"onLanguageModelChat:copilot",
+				"onUri",
+				"onCommand:_github.copilot.chat.reportModelFeedbackSurvey",
+				"onCommand:github.copilot.survey.signalUsage",
+				"onSpeech",
+				"onFileSystem:ccreq",
+				"onFileSystem:ccsettings"
+			]
+		},
+		{
+			"id": "vscode.bat",
+			"version": "10.0.0",
+			"manifest": "bat/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.builtin-notebook-renderers",
+			"version": "10.0.0",
+			"manifest": "notebook-renderers/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.clojure",
+			"version": "10.0.0",
+			"manifest": "clojure/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.coffeescript",
+			"version": "10.0.0",
+			"manifest": "coffeescript/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.configuration-editing",
+			"version": "10.0.0",
+			"manifest": "configuration-editing/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onProfile",
+				"onProfile:github",
+				"onLanguage:json",
+				"onLanguage:jsonc"
+			]
+		},
+		{
+			"id": "vscode.cpp",
+			"version": "10.0.0",
+			"manifest": "cpp/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.csharp",
+			"version": "10.0.0",
+			"manifest": "csharp/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.css",
+			"version": "10.0.0",
+			"manifest": "css/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.css-language-features",
+			"version": "10.0.0",
+			"manifest": "css-language-features/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onLanguage:css",
+				"onLanguage:less",
+				"onLanguage:scss"
+			]
+		},
+		{
+			"id": "vscode.dart",
+			"version": "10.0.0",
+			"manifest": "dart/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.debug-auto-launch",
+			"version": "10.0.0",
+			"manifest": "debug-auto-launch/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onStartupFinished"
+			]
+		},
+		{
+			"id": "vscode.debug-server-ready",
+			"version": "10.0.0",
+			"manifest": "debug-server-ready/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onDebugResolve"
+			]
+		},
+		{
+			"id": "vscode.diff",
+			"version": "10.0.0",
+			"manifest": "diff/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.docker",
+			"version": "10.0.0",
+			"manifest": "docker/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.dotenv",
+			"version": "10.0.0",
+			"manifest": "dotenv/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.emmet",
+			"version": "10.0.0",
+			"manifest": "emmet/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onCommand:emmet.expandAbbreviation",
+				"onLanguage"
+			]
+		},
+		{
+			"id": "vscode.extension-editing",
+			"version": "10.0.0",
+			"manifest": "extension-editing/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onLanguage:json",
+				"onLanguage:markdown"
+			]
+		},
+		{
+			"id": "vscode.fsharp",
+			"version": "10.0.0",
+			"manifest": "fsharp/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.git",
+			"version": "10.0.0",
+			"manifest": "git/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [
+				"@codelad/no-telemetry"
+			],
+			"explicitActivationEvents": [
+				"*",
+				"onEditSession:file",
+				"onFileSystem:git",
+				"onFileSystem:git-show"
+			]
+		},
+		{
+			"id": "vscode.git-base",
+			"version": "10.0.0",
+			"manifest": "git-base/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"*"
+			]
+		},
+		{
+			"id": "vscode.github",
+			"version": "0.0.1",
+			"manifest": "github/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [
+				"@codelad/no-telemetry"
+			],
+			"explicitActivationEvents": [
+				"*"
+			]
+		},
+		{
+			"id": "vscode.github-authentication",
+			"version": "0.0.2",
+			"manifest": "github-authentication/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [
+				"@codelad/no-telemetry"
+			],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.go",
+			"version": "10.0.0",
+			"manifest": "go/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.groovy",
+			"version": "10.0.0",
+			"manifest": "groovy/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.grunt",
+			"version": "10.0.0",
+			"manifest": "grunt/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onTaskType:grunt"
+			]
+		},
+		{
+			"id": "vscode.gulp",
+			"version": "10.0.0",
+			"manifest": "gulp/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onTaskType:gulp"
+			]
+		},
+		{
+			"id": "vscode.handlebars",
+			"version": "10.0.0",
+			"manifest": "handlebars/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.hlsl",
+			"version": "10.0.0",
+			"manifest": "hlsl/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.html",
+			"version": "10.0.0",
+			"manifest": "html/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.html-language-features",
+			"version": "10.0.0",
+			"manifest": "html-language-features/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [
+				"@codelad/no-telemetry"
+			],
+			"explicitActivationEvents": [
+				"onLanguage:html",
+				"onLanguage:handlebars"
+			]
+		},
+		{
+			"id": "vscode.ini",
+			"version": "10.0.0",
+			"manifest": "ini/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.ipynb",
+			"version": "10.0.0",
+			"manifest": "ipynb/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onNotebook:jupyter-notebook",
+				"onNotebookSerializer:interactive",
+				"onNotebookSerializer:repl"
+			]
+		},
+		{
+			"id": "vscode.jake",
+			"version": "10.0.0",
+			"manifest": "jake/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onTaskType:jake"
+			]
+		},
+		{
+			"id": "vscode.java",
+			"version": "10.0.0",
+			"manifest": "java/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.javascript",
+			"version": "10.0.0",
+			"manifest": "javascript/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.json",
+			"version": "10.0.0",
+			"manifest": "json/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.json-language-features",
+			"version": "10.0.0",
+			"manifest": "json-language-features/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [
+				"@codelad/no-telemetry"
+			],
+			"explicitActivationEvents": [
+				"onLanguage:json",
+				"onLanguage:jsonc",
+				"onLanguage:snippets",
+				"onCommand:json.validate"
+			]
+		},
+		{
+			"id": "vscode.julia",
+			"version": "10.0.0",
+			"manifest": "julia/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.latex",
+			"version": "10.0.0",
+			"manifest": "latex/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.less",
+			"version": "10.0.0",
+			"manifest": "less/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.log",
+			"version": "10.0.0",
+			"manifest": "log/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.lua",
+			"version": "10.0.0",
+			"manifest": "lua/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.make",
+			"version": "10.0.0",
+			"manifest": "make/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.markdown",
+			"version": "30.0.0",
+			"manifest": "markdown-basics/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.markdown-language-features",
+			"version": "10.0.0",
+			"manifest": "markdown-language-features/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [
+				"@codelad/no-telemetry"
+			],
+			"explicitActivationEvents": [
+				"onLanguage:markdown",
+				"onLanguage:prompt",
+				"onLanguage:instructions",
+				"onLanguage:chatagent",
+				"onLanguage:skill",
+				"onCommand:markdown.api.render",
+				"onCommand:markdown.api.reloadPlugins",
+				"onWebviewPanel:markdown.preview"
+			]
+		},
+		{
+			"id": "vscode.markdown-math",
+			"version": "10.0.0",
+			"manifest": "markdown-math/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.merge-conflict",
+			"version": "10.0.0",
+			"manifest": "merge-conflict/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [
+				"@codelad/no-telemetry"
+			],
+			"explicitActivationEvents": [
+				"onStartupFinished"
+			]
+		},
+		{
+			"id": "vscode.mermaid-markdown-features",
+			"version": "10.0.0",
+			"manifest": "mermaid-markdown-features/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [
+				"ThirdPartyNotices.txt"
+			],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onWebviewPanel:vscode.mermaid-markdown-features.preview"
+			]
+		},
+		{
+			"id": "vscode.microsoft-authentication",
+			"version": "0.0.1",
+			"manifest": "microsoft-authentication/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [
+				"@codelad/no-telemetry"
+			],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.npm",
+			"version": "10.0.0",
+			"manifest": "npm/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onTaskType:npm",
+				"onLanguage:json",
+				"workspaceContains:package.json"
+			]
+		},
+		{
+			"id": "vscode.objective-c",
+			"version": "10.0.0",
+			"manifest": "objective-c/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.perl",
+			"version": "10.0.0",
+			"manifest": "perl/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.php",
+			"version": "10.0.0",
+			"manifest": "php/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.php-language-features",
+			"version": "10.0.0",
+			"manifest": "php-language-features/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onLanguage:php"
+			]
+		},
+		{
+			"id": "vscode.powershell",
+			"version": "10.0.0",
+			"manifest": "powershell/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.prompt",
+			"version": "10.0.0",
+			"manifest": "prompt-basics/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.pug",
+			"version": "10.0.0",
+			"manifest": "pug/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.python",
+			"version": "10.0.0",
+			"manifest": "python/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.r",
+			"version": "10.0.0",
+			"manifest": "r/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.razor",
+			"version": "10.0.0",
+			"manifest": "razor/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.references-view",
+			"version": "10.0.0",
+			"manifest": "references-view/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onCommand:references-view.find",
+				"onCommand:editor.action.showReferences"
+			]
+		},
+		{
+			"id": "vscode.restructuredtext",
+			"version": "10.0.0",
+			"manifest": "restructuredtext/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.ruby",
+			"version": "10.0.0",
+			"manifest": "ruby/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.rust",
+			"version": "10.0.0",
+			"manifest": "rust/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.scss",
+			"version": "10.0.0",
+			"manifest": "scss/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.search-result",
+			"version": "10.0.0",
+			"manifest": "search-result/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onLanguage:search-result"
+			]
+		},
+		{
+			"id": "vscode.shaderlab",
+			"version": "10.0.0",
+			"manifest": "shaderlab/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.shellscript",
+			"version": "10.0.0",
+			"manifest": "shellscript/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.simple-browser",
+			"version": "10.0.0",
+			"manifest": "simple-browser/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [
+				"@codelad/no-telemetry"
+			],
+			"explicitActivationEvents": [
+				"onCommand:simpleBrowser.api.open",
+				"onOpenExternalUri:http",
+				"onOpenExternalUri:https",
+				"onWebviewPanel:simpleBrowser.view"
+			]
+		},
+		{
+			"id": "vscode.sql",
+			"version": "10.0.0",
+			"manifest": "sql/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.swift",
+			"version": "10.0.0",
+			"manifest": "swift/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.terminal-suggest",
+			"version": "1.0.1",
+			"manifest": "terminal-suggest/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [
+				"ThirdPartyNotices.txt"
+			],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onTerminalShellIntegration:*"
+			]
+		},
+		{
+			"id": "vscode.theme-abyss",
+			"version": "10.0.0",
+			"manifest": "theme-abyss/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.theme-defaults",
+			"version": "10.0.0",
+			"manifest": "theme-defaults/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.theme-kimbie-dark",
+			"version": "10.0.0",
+			"manifest": "theme-kimbie-dark/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.theme-monokai",
+			"version": "10.0.0",
+			"manifest": "theme-monokai/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.theme-monokai-dimmed",
+			"version": "10.0.0",
+			"manifest": "theme-monokai-dimmed/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.theme-quietlight",
+			"version": "10.0.0",
+			"manifest": "theme-quietlight/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.theme-red",
+			"version": "10.0.0",
+			"manifest": "theme-red/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.theme-solarized-dark",
+			"version": "10.0.0",
+			"manifest": "theme-solarized-dark/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.theme-solarized-light",
+			"version": "10.0.0",
+			"manifest": "theme-solarized-light/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.theme-tomorrow-night-blue",
+			"version": "10.0.0",
+			"manifest": "theme-tomorrow-night-blue/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.tunnel-forwarding",
+			"version": "10.0.0",
+			"manifest": "tunnel-forwarding/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onTunnel"
+			]
+		},
+		{
+			"id": "vscode.typescript",
+			"version": "10.0.0",
+			"manifest": "typescript-basics/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.typescript-language-features",
+			"version": "10.0.0",
+			"manifest": "typescript-language-features/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [
+				"@codelad/no-telemetry"
+			],
+			"explicitActivationEvents": [
+				"onLanguage:javascript",
+				"onLanguage:javascriptreact",
+				"onLanguage:typescript",
+				"onLanguage:typescriptreact",
+				"onLanguage:jsx-tags",
+				"onCommand:typescript.tsserverRequest",
+				"onCommand:_typescript.configurePlugin",
+				"onCommand:_typescript.learnMoreAboutRefactorings",
+				"onCommand:typescript.fileReferences",
+				"onTaskType:typescript",
+				"onLanguage:jsonc",
+				"onWalkthrough:nodejsWelcome"
+			]
+		},
+		{
+			"id": "vscode.vb",
+			"version": "10.0.0",
+			"manifest": "vb/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.vscode-api-tests",
+			"version": "0.0.1",
+			"manifest": "vscode-api-tests/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.vscode-colorize-perf-tests",
+			"version": "0.0.1",
+			"manifest": "vscode-colorize-perf-tests/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onLanguage:json"
+			]
+		},
+		{
+			"id": "vscode.vscode-colorize-tests",
+			"version": "0.0.1",
+			"manifest": "vscode-colorize-tests/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onLanguage:json"
+			]
+		},
+		{
+			"id": "vscode.vscode-modern-icons",
+			"version": "1.0.0",
+			"manifest": "theme-modern-icons/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.vscode-test-resolver",
+			"version": "0.0.1",
+			"manifest": "vscode-test-resolver/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": [
+				"onResolveRemoteAuthority:test",
+				"onCommand:vscode-testresolver.newWindow",
+				"onCommand:vscode-testresolver.currentWindow",
+				"onCommand:vscode-testresolver.newWindowWithError",
+				"onCommand:vscode-testresolver.showLog",
+				"onCommand:vscode-testresolver.openTunnel",
+				"onCommand:vscode-testresolver.startRemoteServer",
+				"onCommand:vscode-testresolver.toggleConnectionPause"
+			]
+		},
+		{
+			"id": "vscode.vscode-theme-seti",
+			"version": "10.0.0",
+			"manifest": "theme-seti/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [
+				"ThirdPartyNotices.txt"
+			],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.xml",
+			"version": "10.0.0",
+			"manifest": "xml/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		},
+		{
+			"id": "vscode.yaml",
+			"version": "10.0.0",
+			"manifest": "yaml/package.json",
+			"declaredLicense": "MIT",
+			"licenseFiles": [],
+			"telemetryDependencies": [],
+			"explicitActivationEvents": []
+		}
+	]
+}

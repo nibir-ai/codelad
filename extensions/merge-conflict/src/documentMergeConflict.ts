@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 import * as interfaces from './interfaces';
 import * as vscode from 'vscode';
-import type TelemetryReporter from '@vscode/extension-telemetry';
+import type TelemetryReporter from '@codelad/no-telemetry';
 
 export class DocumentMergeConflict implements interfaces.IDocumentMergeConflict {
 

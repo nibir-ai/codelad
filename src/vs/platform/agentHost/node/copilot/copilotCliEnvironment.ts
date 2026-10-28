@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { disableAgentTelemetry } from '../../common/agentTelemetryPolicy.js';
 import { AiAgentEnvValue, AiAgentEnvVar } from '../../../chat/common/aiAgentEnv.js';
 import { isWindows } from '../../../../base/common/platform.js';
 import { DEFAULT_COPILOT_EXECUTION_SUBAGENT_MODEL, DEFAULT_COPILOT_SKILL_CHAR_BUDGET } from '../../common/copilotCliConfig.js';
@@ -77,6 +78,7 @@ export function createCopilotCliEnvironment(environment: NodeJS.ProcessEnv = pro
 	for (const flag of RUNTIME_LOCAL_MODEL_FLAG_KEYS) {
 		env[flag] = 'false';
 	}
+	disableAgentTelemetry(env);
 	return env;
 }
 

@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { disableAgentTelemetry } from '../../common/agentTelemetryPolicy.js';
 import type { McpSdkServerConfigWithInstance, McpServerConfig, OnElicitation, Options, PreToolUseHookInput, Settings, SyncHookJSONOutput } from '@anthropic-ai/claude-agent-sdk';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { tmpdir } from 'os';
@@ -323,64 +324,10 @@ export function buildModelEnumerationOptions(): Options {
  *
  * Exported for unit testing as a pure function over `process.env`.
  */
-export function buildClaudeTelemetryEnv(config: IAgentHostNativeOTelConfig | undefined, traceContext?: IAgentHostTraceContext): Record<string, string> {
-	if (!config) {
-		return {};
-	}
-	const env: Record<string, string> = {
-		CLAUDE_CODE_ENABLE_TELEMETRY: '1',
-		OTEL_SERVICE_NAME: 'claude-code',
-		OTEL_RESOURCE_ATTRIBUTES: serializeResourceAttributes(config.resourceAttributes),
-		CLAUDE_CODE_ENHANCED_TELEMETRY_BETA: config.traces ? '1' : '0',
-		OTEL_TRACES_EXPORTER: config.traces ? 'otlp' : 'none',
-		OTEL_LOGS_EXPORTER: config.external ? 'otlp' : 'none',
-		OTEL_METRICS_EXPORTER: config.external ? 'otlp' : 'none',
-		OTEL_LOG_USER_PROMPTS: config.captureContent ? '1' : '0',
-		OTEL_LOG_ASSISTANT_RESPONSES: config.captureContent ? '1' : '0',
-		OTEL_LOG_TOOL_DETAILS: config.captureContent ? '1' : '0',
-		OTEL_LOG_TOOL_CONTENT: config.captureContent ? '1' : '0',
-	};
-	if (config.traces) {
-		env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT = config.traces.endpoint;
-		env.OTEL_EXPORTER_OTLP_TRACES_PROTOCOL = config.traces.protocol;
-	}
-	if (config.external) {
-		env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT = resolveSignalEndpoint(config.external.endpoint, 'logs', config.external.protocol);
-		env.OTEL_EXPORTER_OTLP_LOGS_PROTOCOL = config.external.protocol;
-		env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT = resolveSignalEndpoint(config.external.endpoint, 'metrics', config.external.protocol);
-		env.OTEL_EXPORTER_OTLP_METRICS_PROTOCOL = config.external.protocol;
-		if (config.external.headers && Object.keys(config.external.headers).length > 0) {
-			env.OTEL_EXPORTER_OTLP_HEADERS = Object.entries(config.external.headers).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join(',');
-		}
-	}
-	if (traceContext) {
-		env.TRACEPARENT = traceContext.traceparent;
-		if (traceContext.tracestate) {
-			env.TRACESTATE = traceContext.tracestate;
-		}
-	}
-	return env;
-}
-
-function serializeResourceAttributes(attributes: Readonly<Record<string, string>>): string {
-	return Object.entries(attributes).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join(',');
-}
-
-function resolveSignalEndpoint(endpoint: string, signal: 'logs' | 'metrics', protocol: 'http/json' | 'http/protobuf' | 'grpc'): string {
-	if (protocol === 'grpc') {
-		return endpoint;
-	}
-	try {
-		const url = new URL(endpoint);
-		if (url.pathname === '' || url.pathname === '/') {
-			url.pathname = `/v1/${signal}`;
-		} else if (url.pathname.endsWith('/v1/traces')) {
-			url.pathname = `${url.pathname.slice(0, -'/v1/traces'.length)}/v1/${signal}`;
-		}
-		return url.toString().replace(/\/$/, '');
-	} catch {
-		return endpoint;
-	}
+export function buildClaudeTelemetryEnv(_config: IAgentHostNativeOTelConfig | undefined, _traceContext?: IAgentHostTraceContext): Record<string, string> {
+	const environment: Record<string, string> = {};
+	disableAgentTelemetry(environment);
+	return environment;
 }
 
 export function buildSubprocessEnv(proxied: boolean = true): Record<string, string | undefined> {
@@ -408,5 +355,6 @@ export function buildSubprocessEnv(proxied: boolean = true): Record<string, stri
 			env[key] = undefined;
 		}
 	}
+	disableAgentTelemetry(env);
 	return env;
 }

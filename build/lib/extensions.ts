@@ -466,6 +466,10 @@ function doPackageLocalExtensionsStream(forWeb: boolean, native: boolean): Strea
  * but must be compiled from source and included in the build.
  */
 export function packageCopilotExtensionStream(): Stream {
+	const product = JSON.parse(fs.readFileSync(path.join(root, 'product.json'), 'utf8'));
+	if (!product.defaultChatAgent) {
+		return es.readArray([]);
+	}
 	const extensionPath = path.join(root, 'extensions', 'copilot');
 	if (!fs.existsSync(extensionPath)) {
 		return es.readArray([]);

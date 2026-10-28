@@ -10,7 +10,6 @@ import { Event } from '../../../../base/common/event.js';
 import { isWeb } from '../../../../base/common/platform.js';
 import { joinPath } from '../../../../base/common/resources.js';
 import { URI } from '../../../../base/common/uri.js';
-import { isUUID } from '../../../../base/common/uuid.js';
 import { IRequestContext, IRequestOptions } from '../../../../base/parts/request/common/request.js';
 import { mock } from '../../../../base/test/common/mock.js';
 import { ensureNoDisposablesAreLeakedInTestSuite } from '../../../../base/test/common/utils.js';
@@ -187,12 +186,30 @@ suite('Extension Gallery Service', () => {
 		return new ExtensionGalleryServiceWithNoStorageService(requestService, logService, environmentService, NullTelemetryService, fileService, productService, configurationService, allowedExtensionsService, manifestService);
 	}
 
-	test('marketplace machine id', async () => {
+	test('gallery search and control manifests work without a default chat agent', async () => {
+		productService = {
+			...productService,
+			enableTelemetry: false,
+			defaultChatAgent: undefined,
+			extensionsGallery: { serviceUrl: 'https://marketplace.test', controlUrl: 'https://marketplace.test/control', extensionUrlTemplate: '', resourceUrlTemplate: '', nlsBaseUrl: '' }
+		};
+		const requestService = new RecordingRequestService(options => requestContext(200, options.type === 'POST' ? galleryQueryResponse([rawLatestExtension()]) : { malicious: [] }));
+		const service = createExtensionGalleryService(requestService);
+		const results = await service.query({ text: 'extension' }, CancellationToken.None);
+		const control = await service.getExtensionsControlManifest();
 		const headers = await resolveMarketplaceHeaders(product.version, productService, environmentService, configurationService, fileService, storageService, NullTelemetryService);
-		assert.ok(headers['X-Market-User-Id']);
-		assert.ok(isUUID(headers['X-Market-User-Id']));
+		assert.deepStrictEqual({
+			extensions: results.firstPage.map(extension => extension.identifier.id),
+			deprecated: control.deprecated,
+			identifyingHeaders: [headers['X-Market-User-Id'], headers['VSCode-SessionId']]
+		}, { extensions: ['publisher.extension'], deprecated: {}, identifyingHeaders: [undefined, undefined] });
+	});
+
+	test('gallery requests never include a machine or session identifier', async () => {
+		const headers = await resolveMarketplaceHeaders(product.version, productService, environmentService, configurationService, fileService, storageService, NullTelemetryService);
 		const headers2 = await resolveMarketplaceHeaders(product.version, productService, environmentService, configurationService, fileService, storageService, NullTelemetryService);
-		assert.strictEqual(headers['X-Market-User-Id'], headers2['X-Market-User-Id']);
+		const expectedHeaders = { 'X-Market-Client-Id': `${productService.nameShort} ${product.version}`, 'User-Agent': `${productService.nameShort} ${product.version}` };
+		assert.deepStrictEqual([headers, headers2], [expectedHeaders, expectedHeaders]);
 	});
 
 	test('getExtensions uses query API for extension info without uuid', async () => {
@@ -271,8 +288,8 @@ suite('Extension Gallery Service', () => {
 			activityId: headers?.['X-Market-Search-Activity-Id'],
 			clientId: headers?.['X-Market-Client-Id'],
 		})), [
-			{ authorization: 'Bearer resource-token', activityId: 'activity-id', clientId: `VSCode ${productService.version}` },
-			{ authorization: undefined, activityId: 'activity-id', clientId: `VSCode ${productService.version}` },
+			{ authorization: 'Bearer resource-token', activityId: 'activity-id', clientId: `${productService.nameShort} ${productService.version}` },
+			{ authorization: undefined, activityId: 'activity-id', clientId: `${productService.nameShort} ${productService.version}` },
 		]);
 	});
 

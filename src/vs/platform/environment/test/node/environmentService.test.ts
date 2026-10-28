@@ -69,5 +69,10 @@ suite('EnvironmentService', () => {
 		assert.notStrictEqual(service1.userDataPath, service2.userDataPath);
 	});
 
+	test('distribution contributes built-in extension exclusions', () => {
+		const service = new NativeEnvironmentService(parseArgs([], OPTIONS), { _serviceBrand: undefined, ...product, skipBuiltinExtensions: ['vendor.optional-agent'] });
+		assert.strictEqual(service.skipBuiltinExtensions[0], 'vendor.optional-agent');
+	});
+
 	ensureNoDisposablesAreLeakedInTestSuite();
 });

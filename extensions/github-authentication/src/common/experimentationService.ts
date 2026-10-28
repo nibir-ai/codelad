@@ -4,8 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as vscode from 'vscode';
-import TelemetryReporter from '@vscode/extension-telemetry';
-import { getExperimentationService, IExperimentationService, IExperimentationTelemetry, TargetPopulation } from 'vscode-tas-client';
+import TelemetryReporter, { getExperimentationService, IExperimentationService, IExperimentationTelemetry, TargetPopulation } from '@codelad/no-telemetry';
 
 export class ExperimentationTelemetry implements IExperimentationTelemetry {
 	private sharedProperties: Record<string, string> = {};
@@ -44,6 +43,9 @@ export class ExperimentationTelemetry implements IExperimentationTelemetry {
 	 * @returns A promise that you shouldn't need to await because this is just telemetry.
 	 */
 	async sendTelemetryEvent(eventName: string, properties?: Record<string, string>, measurements?: Record<string, number>) {
+		if (!vscode.env.isTelemetryEnabled) {
+			return;
+		}
 		if (!this.experimentationServicePromise) {
 			this.experimentationServicePromise = this.createExperimentationService();
 		}
@@ -67,6 +69,9 @@ export class ExperimentationTelemetry implements IExperimentationTelemetry {
 		properties?: Record<string, string>,
 		_measurements?: Record<string, number>
 	) {
+		if (!vscode.env.isTelemetryEnabled) {
+			return;
+		}
 		if (!this.experimentationServicePromise) {
 			this.experimentationServicePromise = this.createExperimentationService();
 		}

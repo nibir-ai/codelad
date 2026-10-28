@@ -78,9 +78,6 @@ type OnboardingActionEvent = {
 
 type EnterpriseSignInUiState = 'options' | 'instance' | 'progress';
 
-assertDefined(product.defaultChatAgent, 'Onboarding requires a default chat agent product configuration.');
-const defaultChat = product.defaultChatAgent;
-
 /**
  * Variation A — Classic Wizard Modal
  *
@@ -165,11 +162,20 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 		this._detectInstalledEditors().then(ids => { this._detectedEditorIds = ids; });
 	}
 
+	private get defaultChat() {
+		const configuration = product.defaultChatAgent;
+		assertDefined(configuration, 'AI onboarding requires a configured chat provider.');
+		return configuration;
+	}
+
 	get isShowing(): boolean {
 		return this._isShowing;
 	}
 
 	show(): void {
+		if (!product.defaultChatAgent) {
+			return;
+		}
 		if (this.overlay) {
 			return;
 		}
@@ -520,12 +526,12 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 
 		// GitHub Copilot disclaimer
 		const copilotDisclaimer = append(disclaimerCol, $('.onboarding-a-signin-disclaimer'));
-		copilotDisclaimer.append(localize('onboarding.signIn.disclaimer.prefix', "By signing in, you agree to {0}'s ", defaultChat.provider.default.name));
-		this._createInlineLink(copilotDisclaimer, localize('onboarding.signIn.disclaimer.terms', "Terms"), defaultChat.termsStatementUrl);
+		copilotDisclaimer.append(localize('onboarding.signIn.disclaimer.prefix', "By signing in, you agree to {0}'s ", this.defaultChat.provider.default.name));
+		this._createInlineLink(copilotDisclaimer, localize('onboarding.signIn.disclaimer.terms', "Terms"), this.defaultChat.termsStatementUrl);
 		copilotDisclaimer.append(localize('onboarding.signIn.disclaimer.middle', " and "));
-		this._createInlineLink(copilotDisclaimer, localize('onboarding.signIn.disclaimer.privacy', "Privacy Statement"), defaultChat.privacyStatementUrl);
-		copilotDisclaimer.append(localize('onboarding.signIn.disclaimer.copilotPrefix', ". {0} Copilot may show ", defaultChat.provider.default.name));
-		this._createInlineLink(copilotDisclaimer, localize('onboarding.signIn.disclaimer.publicCode', "public code"), defaultChat.publicCodeMatchesUrl);
+		this._createInlineLink(copilotDisclaimer, localize('onboarding.signIn.disclaimer.privacy', "Privacy Statement"), this.defaultChat.privacyStatementUrl);
+		copilotDisclaimer.append(localize('onboarding.signIn.disclaimer.copilotPrefix', ". {0} Copilot may show ", this.defaultChat.provider.default.name));
+		this._createInlineLink(copilotDisclaimer, localize('onboarding.signIn.disclaimer.publicCode', "public code"), this.defaultChat.publicCodeMatchesUrl);
 		copilotDisclaimer.append(localize('onboarding.signIn.disclaimer.improveSuffix', " suggestions and use your data to improve the product."));
 		copilotDisclaimer.append(' ');
 		copilotDisclaimer.append(localize('onboarding.signIn.disclaimer.settingsPrefix', "You can change these "));
@@ -567,7 +573,7 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 		}));
 		this.stepDisposables.add(addDisposableListener(microsoftBtn, EventType.CLICK, () => {
 			this._logAction('signIn', undefined, 'microsoft');
-			this._handleSignIn(defaultChat.provider.microsoft.id);
+			this._handleSignIn(this.defaultChat.provider.microsoft.id);
 		}));
 		// Only offered once a linked Microsoft account is found, which can happen while this step shows.
 		this.microsoftSignInProbeService.notifySignInShown();
@@ -589,7 +595,7 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 
 	private _renderEnterpriseInstanceForm(actions: HTMLElement): void {
 		const enterprisePromptLabel = this._getEnterpriseInstancePromptLabel();
-		const replacedUri = getConfiguredGitHubEnterpriseUris(this.configurationService, this.workspaceTrustManagementService.isWorkspaceTrusted(), defaultChat.providerUriSetting).find(uri => !isValidGitHubEnterpriseUri(uri));
+		const replacedUri = getConfiguredGitHubEnterpriseUris(this.configurationService, this.workspaceTrustManagementService.isWorkspaceTrusted(), this.defaultChat.providerUriSetting).find(uri => !isValidGitHubEnterpriseUri(uri));
 
 		const container = append(actions, $('.onboarding-a-signin-ghe-input'));
 
@@ -682,11 +688,11 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 		spinner.classList.add(...ThemeIcon.asClassNameArray(Codicon.loading), 'codicon-modifier-spin');
 		spinner.setAttribute('aria-hidden', 'true');
 		const message = append(container, $('.onboarding-a-signin-ghe-progress-message'));
-		message.textContent = localize('onboarding.signIn.enterprise.progress', "Waiting for {0} sign-in to complete...", defaultChat.provider.enterprise.name);
+		message.textContent = localize('onboarding.signIn.enterprise.progress', "Waiting for {0} sign-in to complete...", this.defaultChat.provider.enterprise.name);
 	}
 
 	private _getEnterpriseInstancePromptLabel(): string {
-		return localize('onboarding.signIn.enterprise.prompt', "What is your {0} instance?", defaultChat.provider.enterprise.name);
+		return localize('onboarding.signIn.enterprise.prompt', "What is your {0} instance?", this.defaultChat.provider.enterprise.name);
 	}
 
 	private _setEnterpriseSignInUiState(state: EnterpriseSignInUiState): void {
@@ -760,7 +766,7 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 	private async _handleEnterpriseSignIn(): Promise<void> {
 		let uris: readonly string[];
 		try {
-			uris = getConfiguredGitHubEnterpriseUris(this.configurationService, this.workspaceTrustManagementService.isWorkspaceTrusted(), defaultChat.providerUriSetting);
+			uris = getConfiguredGitHubEnterpriseUris(this.configurationService, this.workspaceTrustManagementService.isWorkspaceTrusted(), this.defaultChat.providerUriSetting);
 		} catch {
 			this._notifyEnterpriseSignInError();
 			return;
@@ -779,7 +785,7 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 
 	private async _submitEnterpriseInstance(resolvedUri: string, replacedUri?: string): Promise<void> {
 		try {
-			await addGitHubEnterpriseUri(this.configurationService, resolvedUri, this.workspaceTrustManagementService.isWorkspaceTrusted(), defaultChat.providerUriSetting, replacedUri);
+			await addGitHubEnterpriseUri(this.configurationService, resolvedUri, this.workspaceTrustManagementService.isWorkspaceTrusted(), this.defaultChat.providerUriSetting, replacedUri);
 			this.enterpriseInstanceValue = resolvedUri;
 			await this._handleEnterpriseSignIn();
 		} catch {
@@ -791,7 +797,7 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 
 	private async _runEnterpriseSignInSetup(): Promise<void> {
 		const watch = this.enterpriseSignInWatch ?? StopWatch.create();
-		const provider = defaultChat.provider.enterprise.id;
+		const provider = this.defaultChat.provider.enterprise.id;
 		this._setEnterpriseSignInUiState('progress');
 
 		try {

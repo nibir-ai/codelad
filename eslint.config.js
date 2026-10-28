@@ -12,17 +12,25 @@ import tseslint from 'typescript-eslint';
 
 import stylistic from '@stylistic/eslint-plugin';
 import * as pluginLocal from './.eslint-plugin-local/index.ts';
-import * as pluginCopilotLocal from './extensions/copilot/.eslintplugin/index.ts';
+import product from './product.json' with { type: 'json' };
 import pluginImport from 'eslint-plugin-import';
 import pluginJsdoc from 'eslint-plugin-jsdoc';
 
 import pluginHeader from 'eslint-plugin-header';
 pluginHeader.rules.header.meta.schema = false;
 
+// Codelad does not build the bundled cloud assistant or require its tooling dependencies.
+const includesCopilot = 'defaultChatAgent' in product;
+const pluginCopilotLocal = includesCopilot ? await import('./extensions/copilot/.eslintplugin/index.ts') : { rules: {} };
+
 const ignores = fs.readFileSync(path.join(import.meta.dirname, '.eslint-ignore'), 'utf8')
 	.toString()
 	.split(/\r\n|\n/)
 	.filter(line => line && !line.startsWith('#'));
+
+if (!includesCopilot) {
+	ignores.push('extensions/copilot/**');
+}
 
 const allowedJavaScriptFiles = fs.readFileSync(path.join(import.meta.dirname, '.eslint-allowed-javascript-files'), 'utf8')
 	.toString()

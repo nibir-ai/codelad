@@ -10,6 +10,7 @@ import '../editor/editor.all.js';
 import './api/browser/extensionHost.contribution.js';
 import './browser/workbench.contribution.js';
 import './browser/workbench.zenMode.contribution.js';
+import './contrib/codelad/common/codelad.contribution.js';
 
 import './common/agentsColors.js';
 import './common/agentsSizes.js';

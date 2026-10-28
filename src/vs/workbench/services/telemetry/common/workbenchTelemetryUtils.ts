@@ -18,7 +18,8 @@ export function experimentsEnabled(
 	productService: IProductService,
 	environmentService: IWorkbenchEnvironmentService
 ): boolean {
-	return getTelemetryLevel(configurationService) === TelemetryLevel.USAGE &&
+	return productService.enableTelemetry !== false &&
+		getTelemetryLevel(configurationService) === TelemetryLevel.USAGE &&
 		!!productService.tasConfig &&
 		!environmentService.disableExperiments &&
 		!environmentService.extensionTestsLocationURI &&

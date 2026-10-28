@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as vscode from 'vscode';
-import * as tas from 'vscode-tas-client';
+import * as tas from '@codelad/no-telemetry';
 
 import { IExperimentationTelemetryReporter } from './experimentTelemetryReporter';
 
