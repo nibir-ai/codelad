@@ -1,0 +1,5 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+	<rect x="8" y="8" width="112" height="112" rx="24" fill="#18252b"/>
+	<path d="M88 40H58L40 58V70L58 88H88V76H63L52 65V63L63 52H88Z" fill="#9ae6bd"/>
+</svg>
