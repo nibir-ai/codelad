@@ -1,0 +1,17 @@
+{
+  "samples": 180,
+  "nonLoopbackConnections": 0,
+  "unparsedOwnedRows": 0,
+  "unreadableEntries": 0,
+  "captureErrors": 0,
+  "chromium": {
+    "coverage": "Chromium URL events only. Node, extension host, child processes, DNS and OS traffic require separate capture.",
+    "localRequests": 0,
+    "hosts": []
+  },
+  "capturedOn": "2026-10-29 Asia/Kolkata",
+  "artifact": "Minified Linux x64, 98b5fa8 plus this checkpoint source",
+  "profile": "Fresh disposable profile; built-ins enabled; no installed third-party extensions",
+  "scope": "First 180 seconds of process-tree snapshots; completed Chromium NetLog spans normal launch through normal quit. Search actions happened after socket sampling ended.",
+  "limitations": "Snapshots can miss short-lived sockets/processes, startup races, unconnected UDP/DNS or inaccessible owners; Chromium omits Node/native transports. No packet/payload audit or universal zero-network assertion."
+}

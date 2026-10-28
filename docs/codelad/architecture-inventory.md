@@ -1,5 +1,7 @@
 # Architecture inventory
 
+Historical Windows baseline, 2026-10-28. For the current Linux build, packaged desktop and runtime evidence, read [Linux continuation](linux-continuation.md) and [HANDOFF.md](HANDOFF.md). The initial-state findings below are preserved for comparison.
+
 ## Source and host
 
 Audit date: 2026-10-28. Upstream source commit: `ea8056df9f08fb7c452589213ec77fabbd3481b9` ("Keep compact/overflow menubar submenus in sync on updateMenu"). Repository remote: `https://github.com/nibir-ai/codelad.git`. Source version: 1.145.0; distro revision: `38ed30f01031ca05f59fb111be203efae74036c2`. Root license: MIT; preserve LICENSE.txt and ThirdPartyNotices.txt.

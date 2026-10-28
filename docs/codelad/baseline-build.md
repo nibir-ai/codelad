@@ -1,5 +1,7 @@
 # Baseline build and test evidence
 
+Historical Windows baseline, 2026-10-28. For the current Linux build, packaged desktop and runtime evidence, read [Linux continuation](linux-continuation.md) and [HANDOFF.md](HANDOFF.md). The initial-state findings below are preserved for comparison.
+
 Date: 2026-10-28. Initial revision: `ea8056df9f08fb7c452589213ec77fabbd3481b9`. These baseline commands were executed before implementation changes.
 
 | Command | Observed result |

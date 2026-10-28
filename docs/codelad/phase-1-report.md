@@ -1,8 +1,6 @@
 # Phase 1 report: telemetry removal and privacy foundation
 
-Updated 2026-10-28. In progress. The full Codelad product goal remains active; the user's latest instruction is to remove telemetry implementations, rather than retain collectors behind defaults.
-
-Linux continuation on 2026-10-28: downloaded-extension packaging now checks original manifest dependencies before stripping them. The known debugger collector dependency blocks packaging instead of being hidden by the manifest rewrite; rebuilding/auditing that bundle remains required. Eleven focused product/dependency/network-report tests pass on Linux, with a standalone strict type check of the extracted NetLog summarizer. No new desktop validation has run on Linux. The Windows results below are historical; the final Windows totals are recorded in HANDOFF.md. See [linux-continuation.md](linux-continuation.md).
+Updated 2026-10-29. **In progress**, with a built and exercised Linux distribution. This is not acceptance of the full product or of every platform/privacy scenario. Original requirements are preserved. Earlier Windows observations and totals remain in [historical handoff](handoff-windows-2026-10-28.md).
 
 ## Implementation
 
@@ -15,58 +13,44 @@ Linux continuation on 2026-10-28: downloaded-extension packaging now checks orig
 - Background app/extension updates, recommendations, npm hints, JS/TS automatic type acquisition and Git autofetch default off. Optional user-selected developer integrations remain available. No arbitrary extension firewall is claimed.
 - Product packaging checks reject telemetry/cloud bindings, identifying gallery headers and nonempty automatic built-in update lists. An explicit empty update list is required by the upstream extension scanner.
 
-## Executed validation
+- Downloaded JS Debug is now the source-built derivative 1.140.0-codelad.1, with an inert DAP reporter, local experiment defaults and bundler-input policy. Its source, original patch inputs, lockfile, bundler and notice VSIX are hash pinned. The ordinary built-in installer builds/verifies this artifact and never falls back to the upstream runtime bundle. See [recipe](js-debug-build.md).
+- Windows/Linux sessions disable native Hunspell and clear languages before dictionary fetches. Language extensions remain functional. This addresses observed Linux Google dictionary traffic; macOS was not changed or tested.
 
-| Check | Observed result and limits |
+## Executed Linux validation
+
+| Check | Result / limits |
 | --- | --- |
-| Client transpile | Full builds pass (latest 10,863 TS files, 2,362 resources); file-granular refreshes include the latest startup and ATA defaults. |
-| Root source types | Passed after agent policy, custom-endpoint removal and account-policy regression test; passed again after the chat registration and ATA defaults. |
-| Full built-in extension compile | Passed with zero extension type errors after CommonJS/ESM adapter repair. |
-| Build tooling types | Passed after fixing declaration resolution in the adapter-export test. |
-| ESLint | 88 changed/new TS/MTS files passed; 11 later provider/startup files passed. Final chat-registration and adapter-concurrency edits need their focused follow-up. |
-| Browser suites | 138 passed across telemetry, removed transport, assignment, gallery and default-account tests. Predates final chat registration changes. Runner printed a resource 404 but completed successfully. |
-| Core/agent Node suites | 11 passed covering identity, internal/restricted senders, removed OTel collector, local timing sanitization, custom endpoint and error sentinel. |
-| Provider launch suites | 27 Claude/Codex tests passed, preserving credential/MCP/resume/permission behavior while disabling telemetry. Focused Copilot inherited-export regression plus sentinel: 2 passed. |
-| Chat entitlement/setup | 11 passed, including clearing account restrictions without revealing missing-provider UI. |
-| Policy/adapter/network tools | 9 passed. Adapter-only 3 tests passed again after concurrent prepare output isolation. |
-| Live Open VSX API | Adapter query returned redhat.vscode-yaml on 2026-10-28. In-editor stable YAML installation completed in the fifth isolated profile: the installed manifest is redhat.vscode-yaml 2.0.0, MIT. The standard publisher trust prompt was preserved and accepted only in the disposable test profile. This is not a universal signature/compliance audit. |
-| Source extension inventory | 95 source manifests plus 3 pinned downloaded manifests recorded. The downloaded JS debugger still declares vscode-tas-client; its bundle audit/removal remains open. |
+| Dependency setup | Full install-fast succeeded using pinned Node 24.22.1/npm 11.19.1 after official Electron header endpoint repair. |
+| Client transpile | 10,863 TS files and 2,362 resources built. |
+| Built-in extension build | Passed after replacing markdown-math's undeclared fs-extra import with Node fs. |
+| Types / lint | Client, build-tool and source debugger checks passed; targeted changed-file lint passed. |
+| Renderer suites | 174 passing: telemetry, removed transports, assignment, gallery, default account and chat entitlement. |
+| Core/agent/provider Node suites | 71 passing: identity, inert collectors, local timing, OTel, custom endpoints, Claude/Codex launch and entitlement. |
+| Focused tests | 20 passing: product/dependencies, no-telemetry adapter, debugger replacements, collector bundle paths, NetLog redaction, Linux socket filtering. |
+| Downloaded extension integration | Source-built JS debugger installed through the normal built-in extension command. Its own TypeScript check passed. |
+| Minified Linux distribution | Built all minified bundles; initial package failed preparing an excluded Copilot shim. After its exclusion guard, packaging-ci passed. Product privacy check passed against the output. |
+| Packaged inventory | 93 manifests, no declared telemetry dependencies, no bundled Copilot; debugger derivative and legal notices present. This is not a universal binary/license compliance audit. |
 
-## Actual desktop observations
+The generated package is `/home/nibir/GitHub/VSCode-linux-x64`, built from 98b5fa8 plus the working changes in this checkpoint. Embedded commit metadata is not a clean release attestation. Builds and raw capture stay outside Git.
 
-The real `.build/electron/Codelad.exe` launches through the repository launch skill, with empty user/extensions/shared-data profiles and a disposable local fixture. Existing profiles and credentials were not copied.
+## Real desktop and offline evidence
 
-1. First launch, extensions disabled: screenshot was blank because onboarding asserted a default Copilot agent at module load. The assertion is now lazy, and AI onboarding is skipped without a provider.
-2. Second launch, built-ins enabled: workbench rendered, but scanner iteration failed on a missing automatic-update list and unwanted chat UI was shown. The product now supplies the required empty list.
-3. Third launch: Monaco opened and saved hello.js; the integrated PowerShell terminal ran node hello.js and displayed the expected output. Git detected the fixture repository and branch. Account-policy handling reset the no-provider hidden state; this is fixed and covered by an executed regression test. The source extension host temporarily became unresponsive, and a save-participant timeout was logged, although the file saved.
-4. Fourth launch: Copilot status/content disappeared after the account-policy fix, but initial chat construction/disposal caused a ChatViewPane error and left an empty sidebar. Chat registration now requires a configured default or a real contributed participant; the secondary sidebar defaults hidden. The fifth launch was visually inspected: no Copilot panel/status and no empty secondary sidebar remained. A final no-provider sentiment guard was added after that run to prevent output-channel registration during initialization; its runtime retest is still pending. Duplicate output-channel creation and development extension-host startup warnings also need investigation or packaged-build comparison.
+Fresh isolated Linux development profiles, with built-ins enabled, passed editor save, debugger breakpoint/resume and expected 42, terminal/npm task, and Git diff/stage/local commit. Normal Open VSX stable YAML 2.0.0 installation succeeded after the unchanged publisher trust prompt. The installed manifest is the version authority; gallery metadata showed the latest prerelease separately.
 
-Screenshots and raw captures remain under `.build/codelad/runtime-2026-10-28*`. They contain only the disposable fixture, but raw network logs are kept local and must be reviewed before publication.
+The minified packaged app was also launched in its own Linux user/network namespace, loopback enabled and no external routes. Editing/saving, JavaScript type hover, the debugger breakpoint/resume/output and real npm task all worked offline. Test-only namespace root required `--no-sandbox`; no shipping sandbox default was changed. Normal quit flushed an empty-host Chromium NetLog. The final Linux sampler ran ten one-second snapshots there, only automation loopback sockets, no unreadable entries or unparsed owned rows. This is selected local functionality, not all offline or language-server scenarios. Namespace DBus/KWallet and root warnings are environmental and remain in raw local logs.
 
-## Outbound finding
+One development extension-host `Unexpected SIGPIPE` occurred after a debuggee exit despite successful debugging. It was not reproduced in the packaged offline run. Historical Windows output-channel diagnostics remain open; do not equate successful UI actions with all diagnostics resolved.
 
-All four completed Chromium NetLogs contained no HTTP(S)/WebSocket URL hosts. TCP sampling of the initial faulty startups saw only loopback; this is limited evidence and does not establish zero network behavior.
+## Observed network activity
 
-After JS/terminal activity in the third run, a short-lived Node child connected to external HTTPS. The improved fourth capture established this chain: TypeScript server -> automatic-type-acquisition worker -> command shells -> npm, with npm contacting external port 443. The unified JS/TS migration reader ignores default-only unified values and falls back to its legacy setting. Codelad now supplies both the unified opt-out and the legacy compatibility default. The fifth fresh profile recorded no automatic-type-acquisition process during the 600-second sample, including JavaScript open and terminal activity. A later npm child was explicitly launched through the Run Task UI, rather than the type-acquisition chain.
+A pre-fix Linux run contacted `redirector.gvt1.com` and `rr2---sn-bu2a3jc2a-jj06.gvt1.com` for a native dictionary. Disabling workbench spellcheck alone had not prevented the session fetch. After disabling native sessions and clearing language lists, the next fresh profile had no Chromium URL hosts and zero nonloopback socket observations before explicit extension browsing: **207 one-second samples**, over two minutes idle. See Electron's [spellchecker documentation](https://www.electronjs.org/docs/latest/tutorial/spellchecker/) for its Windows/Linux dictionary mechanism.
 
-Process capture now records editor-owned parent IDs and coarse known roles without persisting command lines, arguments or private paths. Sampling can miss startup/short-lived connections and UDP/DNS; Chromium logs omit Node/extension-host transports. No universal zero-network or phase acceptance claim is made.
+After explicit YAML browsing/install, that completed run listed only `open-vsx.org`, `openvsx.eclipsecontent.org`, `img.shields.io` and `raw.githubusercontent.com`, classified as registry and extension README/image content. There were 393 later samples containing external connections, not 393 new requests. No payload audit or universal zero-network claim is made. Historical unsolicited Windows registry traffic was not reproduced or precisely attributed on Linux.
 
-## Fifth-run evidence
-
-Monaco and terminal worked again. The command palette discovered the real package.json `npm: check` task, displayed its `node hello.js` command, and the task completed with expected output. The normal Open VSX search and stable extension installation succeeded without changing trust/signature policies. Installed YAML 2.0.0 was confirmed from its on-disk manifest; the gallery pane continued showing latest pre-release metadata (2.1 daily), so the screenshot alone is not the installed-version authority.
-
-The finished Chromium capture lists open-vsx.org, openvsx.eclipsecontent.org, img.shields.io and raw.githubusercontent.com. Open VSX discovery/icon requests occurred before explicit extension browsing; that startup trigger remains to be traced. Explicit browsing/install fetched YAML assets and its README badges/images. These are recorded as registry/content traffic, not silently accepted as telemetry-free. No telemetry collector hostname was seen in the captured flows; that observation does not prove all future or vendor behavior.
-
-The registry header helper now has no code path for machine/session IDs. It identifies the client as Codelad. A live query using the freshly compiled helper returned HTTP 200 and redhat.vscode-yaml with no user/session headers.
-
-Safe screenshots are in [validation](validation/README.md). Raw captures remain ignored/local. Product packaging now also checks direct runtime dependencies across root/server/web and included built-ins against the removed collector SDKs; this is narrower than a full transitive binary audit.
-
-## Downloaded debugger boundary
-
-The three pinned downloaded extensions declare MIT licenses. The downloaded `ms-vscode.js-debug` 1.140.0 manifest still declares `vscode-tas-client`, and its compiled extension bundle requires a separate transport/experiment audit and derivative rebuild if collector code is included. Packaging now checks downloaded manifests before deleting dependency declarations, rejecting this known artifact. This guard does not sanitize bundles or establish the absence of undeclared embedded SDKs. Do not claim all shipped collector SDKs removed or Phase 1 accepted until this boundary is resolved while preserving debugging. See [downloaded extension inventory](downloaded-extension-inventory.json).
+The new Linux helper samples TCP/UDP via ss for the editor process tree, including task-thread descendants and PID-start-time checks. Raw process names/arguments are not stored; unreadable entries and unparsed owned rows are reported. The 600-sample development capture predates the final unparsed-row field; the final schema additionally passed the offline ten-sample check. Snapshot coverage can miss short-lived connections, DNS/unconnected UDP or inaccessible processes. Chromium NetLog excludes Node/native transports. Packet/DNS/payload capture is still required for stronger acceptance.
 
 ## Remaining acceptance
 
-Verify the repaired clean startup and ATA opt-out; test real language features, tasks, debugging, Git actions, an Open VSX installation and offline operation. Audit explicit local crash dumps, shutdown, downloaded debugger bundles and final packaged product/dependencies/extensions. Compare source-only test extensions and development diagnostics against packaged behavior. Complete Codelad icon/packaging branding.
+Local native dump, task-trust cancellation and portable argv startup-guard checks ran; see the Linux report for truncated crash NetLog and native-recovery limitations. Complete recovery/shutdown and stronger upload evidence; reproduce Windows startup registry/output diagnostics and investigate development SIGPIPE. The rebuilt branded package also passed non-ASCII paths, TypeScript rename/save/diagnostics, file watching, local search and restart restoration, with empty-host completed Chromium logs. Its first 180 socket samples contained only loopback with no coverage errors; search happened later. Continue richer language scenarios, native resizing, additional Git operations, extension activation and remaining privacy scenarios across supported platforms. App/title-bar/web/installer icon assets now derive from Codelad SVG; finish native platform/installer validation and remaining branding audit, review final dependencies and licenses, and produce release provenance from a clean revision. Native glass and the later full product phases remain pending.
 
-The full objective also includes native glass, rebuilt workbench, source graph, Git workspace, command center, developer integrations and persistent keyboard-first layouts. Reference images are absent, so visual fidelity cannot currently be verified.
+See [current handoff](HANDOFF.md), [Linux report](linux-continuation.md) and [safe screenshots](validation/README.md). Raw captures/logs/dumps remain local under ignored `.build/codelad/`; never publish them without review.
