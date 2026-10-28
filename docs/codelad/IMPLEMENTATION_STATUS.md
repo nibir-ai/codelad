@@ -4,6 +4,12 @@ Updated: 2026-10-28. Working branch: `codex/codelad-privacy-foundation`.
 
 The supplied brief is the full product objective. Work proceeds in order: audit, privacy, native glass proof of concept, workbench, source graph, Git, command center, integrations, ergonomics. No phase is complete until its runtime acceptance criteria have evidence.
 
+## Linux resumption
+
+On 2026-10-28 the user explicitly requested continued implementation and authorized pushing as `nibir-ai`. The clean clone at `/home/nibir/GitHub/codelad` has been switched from `main` to `codex/codelad-privacy-foundation`. The earlier handoff-only restriction below is historical and superseded by this request.
+
+Downloaded extension packaging now checks original manifests for prohibited direct telemetry dependencies before removing dependency declarations. The recorded JS debugger is rejected by this policy; it still needs an audited derivative build. The NetLog summarizer is extracted and tested directly, including malformed input and secret-redaction cases, so its policy tests no longer depend on child-process availability. Eleven focused policy/network tests, the source product check and a standalone strict type check of the summarizer pass on this host. Full build, packaged/runtime acceptance and startup registry attribution remain pending. See [Linux continuation](linux-continuation.md) for environment limits and exact checks.
+
 ## Immediate handoff request
 
 The user subsequently said "no time bro handoff and push". This supersedes waiting for the usage threshold. The current turn is limited to writing HANDOFF.md, reviewing, committing and pushing the checkpoint. The full product is unfinished; resume implementation only after a new instruction.

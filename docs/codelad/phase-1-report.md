@@ -2,6 +2,8 @@
 
 Updated 2026-10-28. In progress. The full Codelad product goal remains active; the user's latest instruction is to remove telemetry implementations, rather than retain collectors behind defaults.
 
+Linux continuation on 2026-10-28: downloaded-extension packaging now checks original manifest dependencies before stripping them. The known debugger collector dependency blocks packaging instead of being hidden by the manifest rewrite; rebuilding/auditing that bundle remains required. Eleven focused product/dependency/network-report tests pass on Linux, with a standalone strict type check of the extracted NetLog summarizer. No new desktop validation has run on Linux. The Windows results below are historical; the final Windows totals are recorded in HANDOFF.md. See [linux-continuation.md](linux-continuation.md).
+
 ## Implementation
 
 - Core `TelemetryService` and 1DS appenders are inert compatibility APIs: no SDK initialization, buffers, timers, payload processing or telemetry identifiers. Telemetry level always returns NONE regardless of configuration. Settings expose only off.
@@ -61,7 +63,7 @@ Safe screenshots are in [validation](validation/README.md). Raw captures remain 
 
 ## Downloaded debugger boundary
 
-The three pinned downloaded extensions declare MIT licenses. The downloaded `ms-vscode.js-debug` 1.140.0 manifest still declares `vscode-tas-client`, and its compiled extension bundle requires a separate transport/experiment audit and derivative rebuild if collector code is included. The new dependency guard covers source manifests; it does not yet sanitize these precompiled downloaded artifacts. Do not claim all shipped collector SDKs removed or Phase 1 accepted until this boundary is resolved while preserving debugging. See [downloaded extension inventory](downloaded-extension-inventory.json).
+The three pinned downloaded extensions declare MIT licenses. The downloaded `ms-vscode.js-debug` 1.140.0 manifest still declares `vscode-tas-client`, and its compiled extension bundle requires a separate transport/experiment audit and derivative rebuild if collector code is included. Packaging now checks downloaded manifests before deleting dependency declarations, rejecting this known artifact. This guard does not sanitize bundles or establish the absence of undeclared embedded SDKs. Do not claim all shipped collector SDKs removed or Phase 1 accepted until this boundary is resolved while preserving debugging. See [downloaded extension inventory](downloaded-extension-inventory.json).
 
 ## Remaining acceptance
 

@@ -28,6 +28,19 @@ test('direct runtime collector dependencies are rejected without inspecting vers
 	}
 });
 
+test('recorded downloaded debugger is rejected while the other pinned extension inventories pass', () => {
+	const inventory: { extensions: { id: string; telemetryDependencies: string[] }[] } = JSON.parse(readFileSync(new URL('../../docs/codelad/downloaded-extension-inventory.json', import.meta.url), 'utf8'));
+	const rejected: string[] = [];
+	for (const extension of inventory.extensions) {
+		try {
+			assertNoTelemetryDependencies({ dependencies: Object.fromEntries(extension.telemetryDependencies.map(name => [name, 'inventory-only'])) });
+		} catch {
+			rejected.push(extension.id);
+		}
+	}
+	assert.deepStrictEqual(rejected, ['ms-vscode.js-debug']);
+});
+
 test('distribution mixins cannot enable collectors, experiments, updates or cloud bindings', () => {
 	for (const key of ['aiConfig', 'appCenter', 'tasConfig', 'voiceWsUrl', 'defaultChatAgent', 'settingsSearchUrl', 'surveys', 'updateUrl', 'webviewContentExternalBaseUrlTemplate', 'configurationSync.store']) {
 		assert.throws(() => assertCodeladPrivacy({ ...product, [key]: {} }), /privacy configuration rejected/);

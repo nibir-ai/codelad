@@ -8,11 +8,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { parseArgs } from 'node:util';
 import { fileURLToPath } from 'node:url';
-
-interface INetLog {
-	readonly events: readonly { readonly params?: { readonly url?: string } }[];
-	readonly constants?: { readonly logEventTypes?: Record<string, number> };
-}
+import { summarizeNetLog } from '../../build/codelad/networkAudit.ts';
 
 const { values } = parseArgs({ options: {
 	executable: { type: 'string' },
@@ -23,40 +19,13 @@ const { values } = parseArgs({ options: {
 } });
 
 if (values.summarize) {
-	let log: INetLog;
+	let contents: string;
 	try {
-		log = JSON.parse(readFileSync(resolve(values.summarize), 'utf8'));
+		contents = readFileSync(resolve(values.summarize), 'utf8');
 	} catch {
 		throw new Error('Could not read a completed NetLog. Review it locally before sharing.');
 	}
-	if (!Array.isArray(log.events) || !log.constants?.logEventTypes) {
-		throw new Error('Expected a completed Chromium NetLog with events and constants.');
-	}
-	const hosts = new Map<string, number>();
-	let localRequests = 0;
-	for (const event of log.events) {
-		const rawUrl = event.params?.url;
-		if (typeof rawUrl !== 'string') {
-			continue;
-		}
-		try {
-			const url = new URL(rawUrl);
-			if (['http:', 'https:', 'ws:', 'wss:'].includes(url.protocol)) {
-				const host = url.hostname.toLowerCase();
-				hosts.set(host, (hosts.get(host) ?? 0) + 1);
-			} else {
-				localRequests++;
-			}
-		} catch {
-			throw new Error('Unparseable request URL in NetLog; review the raw log locally.');
-		}
-	}
-	const allowed = new Set(values['allow-host'].map(host => host.toLowerCase()));
-	const report = {
-		coverage: 'Chromium URL events only. Node, extension host, child processes, DNS and OS traffic require separate capture.',
-		localRequests,
-		hosts: [...hosts].sort(([a], [b]) => a.localeCompare(b)).map(([host, urlEvents]) => ({ host, urlEvents, expectedForThisAction: allowed.has(host) }))
-	};
+	const report = summarizeNetLog(contents, values['allow-host']);
 	console.log(JSON.stringify(report, null, 2));
 	if (report.hosts.some(entry => !entry.expectedForThisAction)) {
 		process.exitCode = 1;

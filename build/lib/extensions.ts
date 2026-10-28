@@ -22,6 +22,7 @@ import { type IExtensionDefinition, getExtensionStream } from './builtInExtensio
 import { fetchUrls, fetchGithub } from './fetch.ts';
 import { createTsgoStream, spawnTsgo } from './tsgo.ts';
 import watcher from './watch/index.ts';
+import { assertNoTelemetryDependencies } from '../codelad/dependencies.ts';
 
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
@@ -502,6 +503,8 @@ export function packageMarketplaceExtensionsStream(forWeb: boolean): Stream {
 				.map(extension => {
 					const src = getExtensionStream(extension).pipe(rename(p => p.dirname = `extensions/${p.dirname}`));
 					return updateExtensionPackageJSON(src, (data: any) => {
+						// Validate downloaded artifacts before their dependency declarations are stripped.
+						assertNoTelemetryDependencies(data);
 						delete data.scripts;
 						delete data.dependencies;
 						delete data.devDependencies;

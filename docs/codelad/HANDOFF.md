@@ -1,5 +1,7 @@
 # Codelad handoff
 
+**Resumed on Linux, 2026-10-28:** the user has since authorized continued implementation and pushing as `nibir-ai`. The Windows checkpoint below remains historical evidence. Read [linux-continuation.md](linux-continuation.md) for the current checkout, new checks and outstanding environment blockers; no Windows dependency installation, executable or raw runtime capture is present in the Linux clone.
+
 2026-10-28. The user requested **immediate handoff and push**, superseding the earlier instruction to wait until approximately 5% of the five-hour allowance remained. This is a checkpoint of unfinished work, not completion of the full product goal. Do not start more implementation as part of this handoff.
 
 ## Repository and objective
