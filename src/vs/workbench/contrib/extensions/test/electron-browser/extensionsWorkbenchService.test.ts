@@ -12,7 +12,7 @@ import { ExtensionState, AutoCheckUpdatesConfigurationKey, AutoUpdateConfigurati
 import { ExtensionsWorkbenchService } from '../../browser/extensionsWorkbenchService.js';
 import '../../browser/extensions.contribution.js';
 import {
-	IExtensionManagementService, IExtensionGalleryService, ILocalExtension, IGalleryExtension,
+	IExtensionManagementService, IExtensionGalleryService, ILocalExtension, IGalleryExtension, IExtensionInfo,
 	DidUninstallExtensionEvent, InstallExtensionEvent, IGalleryExtensionAssets, InstallOperation, IExtensionTipsService, InstallExtensionResult, getTargetPlatform, IExtensionsControlManifest, UninstallExtensionEvent, Metadata
 } from '../../../../../platform/extensionManagement/common/extensionManagement.js';
 import { IWorkbenchExtensionEnablementService, EnablementState, IExtensionManagementServerService, IExtensionManagementServer, IProfileAwareExtensionManagementService, IWorkbenchExtensionManagementService } from '../../../../services/extensionManagement/common/extensionManagement.js';
@@ -36,7 +36,7 @@ import { INotificationService } from '../../../../../platform/notification/commo
 import { NativeURLService } from '../../../../../platform/url/common/urlService.js';
 import { URI } from '../../../../../base/common/uri.js';
 import { CancellationToken } from '../../../../../base/common/cancellation.js';
-import { ExtensionType, ExtensionIdentifier } from '../../../../../platform/extensions/common/extensions.js';
+import { ExtensionType, ExtensionIdentifier, IExtensionDescription } from '../../../../../platform/extensions/common/extensions.js';
 import { ExtensionKind } from '../../../../../platform/environment/common/environment.js';
 import { IRemoteAgentService } from '../../../../services/remote/common/remoteAgentService.js';
 import { RemoteAgentService } from '../../../../services/remote/electron-browser/remoteAgentService.js';
@@ -1162,6 +1162,44 @@ suite('ExtensionsWorkbenchServiceTest', () => {
 		// Extension should have no reload action required when disabling
 		await testObject.setEnablement(extension, EnablementState.DisabledGlobally);
 		assert.strictEqual(extension.runtimeState, undefined);
+	});
+
+	test('development extension startup and changes do not query the gallery, while explicit lookups still work', async () => {
+		stubConfiguration(false, false);
+		const local = aLocalExtension('private-development-extension');
+		const development: IExtensionDescription = {
+			...local.manifest,
+			identifier: new ExtensionIdentifier(local.identifier.id),
+			extensionLocation: local.location,
+			isBuiltin: false,
+			isUserBuiltin: false,
+			isUnderDevelopment: true,
+			targetPlatform: getTargetPlatform(platform, arch),
+			preRelease: false
+		};
+		const changes = disposableStore.add(new Emitter<{ added: IExtensionDescription[]; removed: IExtensionDescription[] }>());
+		instantiationService.stub(IExtensionService, {
+			onDidChangeExtensions: changes.event,
+			extensions: [development],
+			canAddExtension() { return false; },
+			canRemoveExtension() { return false; },
+			async whenInstalledExtensionsRegistered() { return true; }
+		});
+		const queries: string[][] = [];
+		instantiationService.stub(IExtensionGalleryService, 'getExtensions', async (infos: IExtensionInfo[]) => {
+			queries.push(infos.map(info => info.id));
+			return [];
+		});
+		testObject = await aWorkbenchService();
+		await timeout(0);
+		changes.fire({ added: [development], removed: [] });
+		await timeout(0);
+		changes.fire({ added: [], removed: [development] });
+		await timeout(0);
+		assert.deepStrictEqual(queries, []);
+
+		await testObject.getExtensions([{ id: local.identifier.id }], CancellationToken.None);
+		assert.deepStrictEqual(queries, [[local.identifier.id]]);
 	});
 
 	test('test enable extension with dependencies enable all', async () => {

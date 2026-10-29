@@ -1328,12 +1328,17 @@ export class ExtensionsWorkbenchService extends Disposable implements IExtension
 			const extension = this.installed.find(e => areSameExtensions({ id: desc.identifier.value, uuid: desc.uuid }, e.identifier));
 			if (extension) {
 				changedExtensions.push(extension);
-			} else {
+			} else if (!desc.isUnderDevelopment) {
 				extensionsToFetch.push(desc);
 			}
 		}
 		const workspaceExtensions: IExtensionDescription[] = [];
 		for (const desc of removed) {
+			// A local development extension need not exist in the registry. Do not
+			// disclose its identifier through automatic gallery metadata lookups.
+			if (desc.isUnderDevelopment) {
+				continue;
+			}
 			if (this.workspaceContextService.isInsideWorkspace(desc.extensionLocation)) {
 				workspaceExtensions.push(desc);
 			} else {
