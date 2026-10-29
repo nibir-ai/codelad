@@ -1,5 +1,13 @@
 # Codelad handoff
 
+## Usage checkpoint and requested pause
+
+Checkpoint preparation began on 2026-10-29 with the five-hour meter at **93% used / 7% remaining**, approaching the user's approximate 5%-remaining threshold. The requested behavior is to finish the handoff, push and pause; do not start another runtime/build batch during this checkpoint. Resume only when the user resumes the goal. The complete product objective remains unfinished; this checkpoint does not accept Phase 1 or narrow the original scope.
+
+Revalidation found a clean `dev` checkout at `61950b582788e746e3f37b6cf1930a4510332356`, exactly matching `origin/dev`; GitHub's default HEAD is `dev`. Its [privacy-policy CI run](https://github.com/nibir-ai/codelad/actions/runs/40863730836) completed successfully. `stable` remains the protected bootstrap checkpoint `936dd77b0b00dbd56b40d2879c8df7eddb163967`. Both Windows artifacts below still exist and no Codelad editor/setup process was running. No implementation source changed in this checkpoint; inspect the remote HEAD for the subsequent documentation commit.
+
+On resumption, continue the actual privacy matrix rather than repeatedly asking for an internet disconnect without proving control over this execution host. Remote Markdown/resources and deliberately selected provider workflows still have independent capture work available here. Windows OS isolation/packet-DNS validation requires a suitable controllable environment; the previous two attempts retained an external route and did not execute the offline workload. macOS, the remaining Linux crash/platform cases and full native install/uninstall/signing acceptance remain open. Preserve the earlier Linux offline evidence at its recorded scope. After the privacy gate is satisfied, the original native-glass proof, real workbench/graph, Git workspace, command center, integrations, layouts and accessibility requirements still remain. The supplied assets are approved source inputs for identity work, not a replacement for the missing UI reference image or proof of those features.
+
 ## Latest continuation: independent branches and supplied artwork
 
 The user resumed the goal on 2026-10-29, requested the remaining privacy checks, supplied replacement artwork in `assets/`, and requested Codelad-owned `dev` and `stable` branches. This supersedes the previous stop/pause instructions below. The five-hour checkpoint remains approximately **5% remaining**, followed by a handoff, push and user-requested pause.
