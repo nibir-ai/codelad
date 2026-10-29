@@ -1,76 +1,49 @@
-# Visual Studio Code - Open Source ("Code - OSS")
-[![Feature Requests](https://img.shields.io/github/issues/microsoft/vscode/feature-request.svg)](https://github.com/microsoft/vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
-[![Bugs](https://img.shields.io/github/issues/microsoft/vscode/bug.svg)](https://github.com/microsoft/vscode/issues?utf8=✓&q=is%3Aissue+is%3Aopen+label%3Abug)
+# Codelad
 
-## The Repository
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/codeLad-lockup-dark-transparent-2400.png">
+  <img alt="Codelad" src="assets/codeLad-lockup-light-transparent-2400.png" width="480">
+</picture>
 
-This repository ("`Code - OSS`") is where we (Microsoft) develop the [Visual Studio Code](https://code.visualstudio.com) product together with the community. Not only do we work on code and issues here, but we also publish our [roadmap](https://github.com/microsoft/vscode/wiki/Roadmap), [monthly iteration plans](https://github.com/microsoft/vscode/wiki/Iteration-Plans), and our [endgame plans](https://github.com/microsoft/vscode/wiki/Running-the-Endgame). This source code is available to everyone under the standard [MIT license](https://github.com/microsoft/vscode/blob/main/LICENSE.txt).
+Codelad is an independently developed, open-source desktop code editor based on VS Code OSS. It preserves the real editor, terminal, debugger, Git tools and extension host while removing first-party telemetry and unnecessary cloud dependencies.
 
-## Visual Studio Code
+The project is under development. There is no production release yet. Native glass, the code graph and the redesigned developer workspace are planned work; see the [implementation status](docs/codelad/IMPLEMENTATION_STATUS.md) for what actually works and has been tested.
 
-<p align="center">
-  <img alt="VS Code in action" src="https://github.com/user-attachments/assets/56af271c-949d-454c-a3ea-16188c063414">
-</p>
+## Branches
 
-[Visual Studio Code](https://code.visualstudio.com) is a distribution of the `Code - OSS` repository with Microsoft-specific customizations released under a traditional [Microsoft product license](https://code.visualstudio.com/License/).
+- **[`dev`](https://github.com/nibir-ai/codelad/tree/dev)**: ongoing Codelad development. Start changes and open development pull requests here.
+- **[`stable`](https://github.com/nibir-ai/codelad/tree/stable)**: reviewed checkpoints promoted from `dev` after their required checks. The initial branch is a bootstrap checkpoint, not a production release.
+- `main`: retained upstream starting point. It is not the Codelad development or release branch.
 
-[Visual Studio Code](https://code.visualstudio.com) combines the simplicity of a code editor with what developers need for their core edit-build-debug cycle. It provides comprehensive code editing, navigation, and understanding support along with lightweight debugging, a rich extensibility model, and lightweight integration with existing tools.
+The GitHub fork relationship records our origins. Codelad has its own product decisions and release process. Upstream changes are evaluated and merged deliberately; they are not automatically synchronized. See the [branch and release workflow](docs/codelad/branches.md).
 
-Visual Studio Code is updated monthly with new features and bug fixes. You can download it for Windows, macOS, and Linux on the [Visual Studio Code website](https://code.visualstudio.com/Download). To get the latest releases every day, install the [Insiders build](https://code.visualstudio.com/insiders).
+## Privacy
 
-## Contributing
+Core telemetry, automatic crash uploads and remote experimentation are disabled. Open VSX is the default extension registry. Automatic updates, Git autofetch, automatic JS/TS type acquisition and remote JSON schema downloads default off. Codelad uses its own profile directories and does not require sign-in.
 
-There are many ways in which you can participate in this project, for example:
+User-selected extensions, Git remotes, package managers and external integrations can use the network. Codelad is not an extension firewall. Read the [privacy policy and network inventory](docs/codelad/privacy.md) and [executed validation](docs/codelad/HANDOFF.md) for the exact scope and outstanding checks.
 
-* [Submit bugs and feature requests](https://github.com/microsoft/vscode/issues), and help us verify them as they are checked in
-* Review [source code changes](https://github.com/microsoft/vscode/pulls)
-* Review the [documentation](https://github.com/microsoft/vscode-docs) and make pull requests for anything from typos to new content.
+## Build and contribute
 
-If you are interested in fixing issues and contributing directly to the codebase, please see the document [How to Contribute](https://github.com/microsoft/vscode/wiki/How-to-Contribute), which covers the following:
+Use the Node version in [`.nvmrc`](.nvmrc) and the platform prerequisites in the [upstream build guide](https://github.com/microsoft/vscode/wiki/How-to-Contribute). From a clone of this repository:
 
-* [How to build and run from source](https://github.com/microsoft/vscode/wiki/How-to-Contribute)
-* [The development workflow, including debugging and running tests](https://github.com/microsoft/vscode/wiki/How-to-Contribute#debugging)
-* [Coding guidelines](https://github.com/microsoft/vscode/wiki/Coding-Guidelines)
-* [Submitting pull requests](https://github.com/microsoft/vscode/wiki/How-to-Contribute#pull-requests)
-* [Finding an issue to work on](https://github.com/microsoft/vscode/wiki/How-to-Contribute#where-to-contribute)
-* [Contributing to translations](https://aka.ms/vscodeloc)
+```sh
+git switch dev
+npm run install-fast
+npm run compile
+```
 
-## Feedback
+Launch with `scripts/code.bat` on Windows or `scripts/code.sh` on Linux/macOS. For isolated development and validation, use the [repository launch skill](.agents/skills/launch/SKILL.md). Report Codelad issues in [this repository](https://github.com/nibir-ai/codelad/issues).
 
-* Ask a question on [Stack Overflow](https://stackoverflow.com/questions/tagged/vscode)
-* [Request a new feature](CONTRIBUTING.md)
-* Upvote [popular feature requests](https://github.com/microsoft/vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
-* [File an issue](https://github.com/microsoft/vscode/issues)
-* Connect with the extension author community on [GitHub Discussions](https://github.com/microsoft/vscode-discussions/discussions) or [Slack](https://aka.ms/vscode-dev-community)
-* Follow [@code](https://x.com/code) and let us know what you think!
+Focused source-policy checks do not require a full editor build:
 
-See our [wiki](https://github.com/microsoft/vscode/wiki/Feedback-Channels) for a description of each of these channels and information on some other available community-driven channels.
+```sh
+node build/codelad/check-privacy.ts
+node --test build/codelad/privacy.test.ts build/codelad/networkAudit.test.ts build/codelad/linuxConnections.test.ts
+```
 
-## Related Projects
+These checks inspect configuration, dependency declarations and capture parsers. They do not establish runtime privacy or release readiness.
 
-Many of the core components and extensions to VS Code live in their own repositories on GitHub. For example, the [node debug adapter](https://github.com/microsoft/vscode-node-debug) and the [mono debug adapter](https://github.com/microsoft/vscode-mono-debug) repositories are separate from each other. For a complete list, please visit the [Related Projects](https://github.com/microsoft/vscode/wiki/Related-Projects) page on our [wiki](https://github.com/microsoft/vscode/wiki).
+## License and origins
 
-## Bundled Extensions
-
-VS Code includes a set of built-in extensions located in the [extensions](extensions) folder, including grammars and snippets for many languages. Extensions that provide rich language support (inline suggestions, Go to Definition) for a language have the suffix `language-features`. For example, the `json` extension provides coloring for `JSON` and the `json-language-features` extension provides rich language support for `JSON`.
-
-## Development Container
-
-This repository includes a Visual Studio Code Dev Containers / GitHub Codespaces development container.
-
-* For [Dev Containers](https://aka.ms/vscode-remote/download/containers), use the **Dev Containers: Clone Repository in Container Volume...** command, which creates a Docker volume for better disk I/O on macOS and Windows.
-  * If you already have VS Code and Docker installed, you can also click [here](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode) to get started. This will cause VS Code to automatically install the Dev Containers extension if needed, clone the source code into a container volume, and spin up a dev container for use.
-
-* For Codespaces, install the [GitHub Codespaces](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces) extension in VS Code, and use the **Codespaces: Create New Codespace** command.
-
-Docker / the Codespace should have at least **4 cores and 6 GB of RAM (8 GB recommended)** to run a full build. See the [development container README](.devcontainer/README.md) for more information.
-
-## Code of Conduct
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-## License
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-Licensed under the [MIT](LICENSE.txt) license.
+Licensed under [MIT](LICENSE.txt). Codelad derives from Microsoft's VS Code OSS source; upstream copyright notices, licenses and third-party notices are retained. Codelad is an independent product and is not an official Microsoft distribution. Included extensions retain their respective licenses and publisher identifiers.

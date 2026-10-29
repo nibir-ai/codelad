@@ -6,8 +6,8 @@
 	"sharedDataFolderName": ".codelad-shared",
 	"win32MutexName": "codelad",
 	"licenseName": "MIT",
-	"licenseUrl": "https://github.com/microsoft/vscode/blob/main/LICENSE.txt",
-	"serverLicenseUrl": "https://github.com/microsoft/vscode/blob/main/LICENSE.txt",
+	"licenseUrl": "https://github.com/nibir-ai/codelad/blob/stable/LICENSE.txt",
+	"serverLicenseUrl": "https://github.com/nibir-ai/codelad/blob/stable/LICENSE.txt",
 	"serverGreeting": [],
 	"serverLicense": [],
 	"serverLicensePrompt": "",
@@ -165,7 +165,7 @@
 		}
 	],
 	"sessionsWindowAllowedExtensions": [],
-	"privacyStatementUrl": "https://github.com/nibir-ai/codelad/blob/main/docs/codelad/privacy.md",
+	"privacyStatementUrl": "https://github.com/nibir-ai/codelad/blob/dev/docs/codelad/privacy.md",
 	"enableTelemetry": false,
 	"enabledTelemetryLevels": {
 		"error": false,

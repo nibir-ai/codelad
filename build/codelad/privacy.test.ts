@@ -16,6 +16,11 @@ test('source product satisfies the distribution privacy policy', () => {
 	assert.doesNotThrow(() => assertCodeladPrivacy(product));
 });
 
+test('remote JSON schema downloads require opt-in in the shipped configuration', () => {
+	const manifest = JSON.parse(readFileSync(new URL('../../extensions/json-language-features/package.json', import.meta.url), 'utf8'));
+	assert.strictEqual(manifest.contributes.configuration.properties['json.schemaDownload.enable'].default, false);
+});
+
 test('desktop, server, web and included built-ins do not depend on the removed telemetry SDKs', () => {
 	assertCodeladDependencyManifests(fileURLToPath(new URL('../../', import.meta.url)), product.skipBuiltinExtensions);
 });
