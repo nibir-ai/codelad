@@ -102,7 +102,9 @@ export async function createSchemaClient(transport: 'browser' | 'node', options:
 	const subscriptions: Disposable[] = [];
 	const disposable = () => new Disposable();
 	const statusItem = () => ({ dispose() { }, update() { } });
-	const log = { info() { }, trace() { }, error() { }, dispose() { } };
+	let logDisposed = false;
+	const writeLog = () => assert.strictEqual(logDisposed, false, 'Language client logged to a disposed output channel');
+	const log = { info: writeLog, trace: writeLog, error: writeLog, dispose() { logDisposed = true; } };
 	const schema = '{"type":"object"}';
 
 	class LanguageClient {
@@ -112,7 +114,10 @@ export async function createSchemaClient(transport: 'browser' | 'node', options:
 			return disposable();
 		}
 		async start() { }
-		async stop() { }
+		async stop() {
+			await Promise.resolve();
+			log.info();
+		}
 		async sendNotification(type: MessageType, value: string | string[]) {
 			if (type.method === 'json/schemaContent') {
 				schemaNotifications.push(typeof value === 'string' ? [value] : [...value]);
@@ -263,8 +268,10 @@ export async function createSchemaClient(transport: 'browser' | 'node', options:
 		},
 		async dispose() {
 			try {
-				await main.deactivate();
+				const deactivation = main.deactivate();
+				// The extension host disposes subscriptions while async deactivation is pending.
 				subscriptions.forEach(subscription => subscription.dispose());
+				await deactivation;
 			} finally {
 				if (cacheDirectory) {
 					await fs.rm(cacheDirectory, { recursive: true, force: true });

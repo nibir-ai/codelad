@@ -13,6 +13,7 @@ import { xhr, XHRResponse, getErrorStatusDescription, Headers } from 'request-li
 
 import TelemetryReporter from '@codelad/no-telemetry';
 import { JSONSchemaCache } from './schemaCache';
+import { ClientLifecycle } from '../utils/clientLifecycle';
 
 let client: AsyncDisposable | undefined;
 
@@ -21,9 +22,6 @@ export async function activate(context: ExtensionContext) {
 	const clientPackageJSON = await getPackageInfo(context);
 	const telemetry = new TelemetryReporter(clientPackageJSON.aiKey);
 	context.subscriptions.push(telemetry);
-
-	const logOutputChannel = window.createOutputChannel(languageServerDescription, { log: true });
-	context.subscriptions.push(logOutputChannel);
 
 	const serverMain = `./server/${clientPackageJSON.main.indexOf('/dist/') !== -1 ? 'dist' : 'out'}/node/jsonServerMain`;
 	const serverModule = context.asAbsolutePath(serverMain);
@@ -52,9 +50,14 @@ export async function activate(context: ExtensionContext) {
 	// pass the location of the localization bundle to the server
 	process.env['VSCODE_L10N_BUNDLE_LOCATION'] = l10n.uri?.toString() ?? '';
 
-	const schemaRequests = await getSchemaRequestService(context, logOutputChannel);
-
-	client = await startClient(context, newLanguageClient, { schemaRequests, telemetry, timer, logOutputChannel });
+	const logOutputChannel = window.createOutputChannel(languageServerDescription, { log: true });
+	const lifecycle = new ClientLifecycle(logOutputChannel, async () => {
+		const schemaRequests = await getSchemaRequestService(context, logOutputChannel);
+		return startClient(context, newLanguageClient, { schemaRequests, telemetry, timer, logOutputChannel });
+	});
+	context.subscriptions.push(lifecycle);
+	client = lifecycle;
+	await lifecycle.ready;
 }
 
 export async function deactivate(): Promise<any> {

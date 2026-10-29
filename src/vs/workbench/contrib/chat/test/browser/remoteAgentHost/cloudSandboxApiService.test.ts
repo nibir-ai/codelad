@@ -132,6 +132,7 @@ function createService(store: Pick<{ add<T extends { dispose(): void }>(t: T): T
 	readonly onRequest?: (url: URL, token: CancellationToken, options: IRequestOptions) => IRequestContext | undefined | Promise<IRequestContext | undefined>;
 	readonly discoveryDate?: () => string;
 	readonly authenticationSessions?: (scopes?: readonly string[]) => Promise<readonly AuthenticationSession[]>;
+	readonly productService?: IProductService;
 }): ITestSetup {
 	const requestedUrls: string[] = [];
 	const provisioningOutcomes: ProvisioningOutcome[] = [];
@@ -227,7 +228,7 @@ function createService(store: Pick<{ add<T extends { dispose(): void }>(t: T): T
 		override readonly onDidRegisterAuthenticationProvider = providerRegistered.event;
 		override readonly onDidUnregisterAuthenticationProvider = providerUnregistered.event;
 	}());
-	instantiationService.stub(IProductService, { defaultChatAgent: undefined } as unknown as IProductService);
+	instantiationService.stub(IProductService, options.productService ?? { defaultChatAgent: undefined } as unknown as IProductService);
 	instantiationService.stub(ILogService, options.logService ?? new NullLogService());
 	instantiationService.stub(ICloudSandboxTelemetryService, new class extends mock<ICloudSandboxTelemetryService>() {
 		override readonly lifecycle = new CloudSandboxLifecycleTelemetry(new class extends mock<ITelemetryService>() {
@@ -297,6 +298,62 @@ function createService(store: Pick<{ add<T extends { dispose(): void }>(t: T): T
 		},
 	};
 }
+
+suite('CloudSandboxApiService dormant authentication', () => {
+	const store = ensureNoDisposablesAreLeakedInTestSuite();
+
+	test('an unconfigured unused client does not probe credentials on provider or session events', async () => {
+		let lookups = 0;
+		const accounts: (string | undefined)[] = [];
+		const { service, requestedUrls, changeAuthentication } = createService(store, {
+			tasks: [], repositories: new Map(),
+			authenticationSessions: async () => {
+				lookups++;
+				throw new Error('Passive cloud client must not read credentials');
+			},
+		});
+		store.add(service.onDidChangeAccount(account => accounts.push(account)));
+		for (const kind of ['register', 'sessions', 'unregister'] as const) {
+			changeAuthentication(kind);
+		}
+		await timeout(0);
+		assert.deepStrictEqual({ lookups, requestedUrls, accounts }, { lookups: 0, requestedUrls: [], accounts: [] });
+	});
+
+	test('explicit account use enables account changes without requiring a default chat provider', async () => {
+		let lookups = 0;
+		const { service, changeAuthentication } = createService(store, {
+			tasks: [], repositories: new Map(),
+			authenticationSessions: async () => {
+				lookups++;
+				return [{ accessToken: 'token', id: 'session', account: { id: 'account', label: 'Account' }, scopes: [] }];
+			},
+		});
+		const initial = await service.getAccountKey();
+		const changed = Event.toPromise(service.onDidChangeAccount);
+		changeAuthentication();
+		assert.deepStrictEqual({ initial, changed: await changed, lookups }, {
+			initial: '["github","account"]', changed: '["github","account"]', lookups: 2,
+		});
+	});
+
+	test('a configured product retains authentication-provider registration notifications', async () => {
+		let lookups = 0;
+		const productService = new class extends mock<IProductService>() {
+			override readonly defaultChatAgent = new class extends mock<NonNullable<IProductService['defaultChatAgent']>>() { }();
+		}();
+		const { service, changeAuthentication } = createService(store, {
+			tasks: [], repositories: new Map(), productService,
+			authenticationSessions: async () => {
+				lookups++;
+				return [{ accessToken: 'token', id: 'session', account: { id: 'account', label: 'Account' }, scopes: [] }];
+			},
+		});
+		const changed = Event.toPromise(service.onDidChangeAccount);
+		changeAuthentication('register');
+		assert.deepStrictEqual({ changed: await changed, lookups }, { changed: '["github","account"]', lookups: 1 });
+	});
+});
 
 suite('CloudSandboxApiService identity credentials', () => {
 	const store = ensureNoDisposablesAreLeakedInTestSuite();
@@ -2865,13 +2922,16 @@ suite('CloudSandboxApiService discovery account', () => {
 	});
 
 	test('announces sign-out after authentication changes', async () => {
+		let sessions: readonly AuthenticationSession[] = [{ accessToken: 'token', id: 'session', account: { id: 'account', label: 'Account' }, scopes: [] }];
 		const { service, changeAuthentication } = createService(store, {
-			tasks: [], repositories: new Map(), authenticationSessions: async () => [],
+			tasks: [], repositories: new Map(), authenticationSessions: async () => sessions,
 		});
+		const initial = await service.getAccountKey();
+		sessions = [];
 		const changed = Event.toPromise(service.onDidChangeAccount);
 		changeAuthentication();
 
-		assert.deepStrictEqual([await service.getAccountKey(), await changed], [undefined, undefined]);
+		assert.deepStrictEqual([initial, await service.getAccountKey(), await changed], ['["github","account"]', undefined, undefined]);
 	});
 
 	test('does not mistake a failed authentication lookup for signing out', async () => {
@@ -2881,8 +2941,9 @@ suite('CloudSandboxApiService discovery account', () => {
 		});
 		const changes: (string | undefined)[] = [];
 		store.add(service.onDidChangeAccount(account => changes.push(account)));
-		changeAuthentication();
 		await assert.rejects(service.getAccountKey(), /requires a signed-in GitHub account/);
+		changeAuthentication();
+		await timeout(0);
 
 		assert.deepStrictEqual(changes, []);
 	});

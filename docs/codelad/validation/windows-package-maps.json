@@ -1,0 +1,23 @@
+{
+  "core": {
+    "files": 34,
+    "linkedMaps": 33,
+    "microsoftCdn": 0,
+    "missingLocalMaps": 0,
+    "remoteHosts": {}
+  },
+  "dependencies": {
+    "files": 2404,
+    "linkedMaps": 549,
+    "microsoftCdn": 0,
+    "missingLocalMaps": 18,
+    "remoteHosts": {}
+  },
+  "extensions": {
+    "files": 475,
+    "linkedMaps": 84,
+    "microsoftCdn": 0,
+    "missingLocalMaps": 15,
+    "remoteHosts": {}
+  }
+}

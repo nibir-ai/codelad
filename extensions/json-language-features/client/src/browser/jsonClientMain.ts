@@ -7,6 +7,7 @@ import { Disposable, ExtensionContext, Uri, l10n, window } from 'vscode';
 import { LanguageClientOptions } from 'vscode-languageclient';
 import { startClient, LanguageClientConstructor, SchemaRequestService, AsyncDisposable, languageServerDescription } from '../jsonClient';
 import { LanguageClient } from 'vscode-languageclient/browser';
+import { ClientLifecycle } from '../utils/clientLifecycle';
 
 let client: AsyncDisposable | undefined;
 
@@ -38,9 +39,10 @@ export async function activate(context: ExtensionContext) {
 		};
 
 		const logOutputChannel = window.createOutputChannel(languageServerDescription, { log: true });
-		context.subscriptions.push(logOutputChannel);
-
-		client = await startClient(context, newLanguageClient, { schemaRequests, timer, logOutputChannel });
+		const lifecycle = new ClientLifecycle(logOutputChannel, () => startClient(context, newLanguageClient, { schemaRequests, timer, logOutputChannel }));
+		context.subscriptions.push(lifecycle);
+		client = lifecycle;
+		await lifecycle.ready;
 
 	} catch (e) {
 		console.log(e);

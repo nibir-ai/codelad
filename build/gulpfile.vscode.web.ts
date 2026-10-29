@@ -7,7 +7,6 @@ import { gulp, rename, filter, jsonEditor } from './lib/gulp/facade.ts';
 import * as path from 'path';
 import es from 'event-stream';
 import * as util from './lib/util.ts';
-import { getVersion } from './lib/getVersion.ts';
 import * as task from './lib/gulp/task.ts';
 import { writeISODate } from './lib/date.ts';
 import product from '../product.json' with { type: 'json' };
@@ -22,13 +21,11 @@ const REPO_ROOT = path.dirname(import.meta.dirname);
 const BUILD_ROOT = path.dirname(REPO_ROOT);
 const WEB_FOLDER = path.join(REPO_ROOT, 'remote', 'web');
 
-const commit = getVersion(REPO_ROOT);
 const quality = (product as { quality?: string }).quality;
 const version = (quality && quality !== 'stable') ? `${packageJson.version}-${quality}` : packageJson.version;
 
-const sourceMappingURLBase = `https://main.vscode-cdn.net/sourcemaps/${commit}`;
 const esbuildBundleVSCodeWebTask = task.define('esbuild-vscode-web', () => runEsbuildBundle('out-vscode-web', false, true, 'web'));
-const esbuildBundleVSCodeWebMinTask = task.define('esbuild-vscode-web-min', () => runEsbuildBundle('out-vscode-web-min', true, true, 'web', `${sourceMappingURLBase}/core`));
+const esbuildBundleVSCodeWebMinTask = task.define('esbuild-vscode-web-min', () => runEsbuildBundle('out-vscode-web-min', true, true, 'web'));
 
 function packageTask(sourceFolderName: string, destinationFolderName: string) {
 	const destination = path.join(BUILD_ROOT, destinationFolderName);
@@ -39,8 +36,7 @@ function packageTask(sourceFolderName: string, destinationFolderName: string) {
 
 		const extensions = gulp.src('.build/web/extensions/**', { base: '.build/web', dot: true });
 
-		const sources = es.merge(src, extensions)
-			.pipe(filter(['**', '!**/*.{js,css}.map'], { dot: true }));
+		const sources = es.merge(src, extensions);
 
 		const name = product.nameShort;
 		const packageJsonStream = gulp.src(['remote/web/package.json'], { base: 'remote/web' })

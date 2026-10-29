@@ -11,6 +11,7 @@ Codelad's product policy disables core usage/error telemetry, automatic crash su
 - Windows/Linux native spellchecker languages are cleared and spellchecking disabled on session creation, preventing automatic Hunspell dictionary downloads observed on Linux. macOS uses its native mechanism and remains untested. Language extensions are preserved.
 - Git autofetch, npm online package hints and JS/TS automatic type acquisition default off. Users can enable these independently when needed.
 - The default Copilot agent, voice service, implicit auth allowlist and Microsoft-hosted webview asset base are removed. Authentication providers remain optional for user-selected integrations; the editor does not require sign-in.
+- An unconfigured, unused cloud-sandbox client does not probe GitHub sessions on passive provider/session events. Explicit API use still resolves authentication and enables subsequent account refresh; configured products retain their existing behavior. This is scoped to that cloud client, not a guarantee that every integration avoids credential reads.
 - No existing VS Code or Code OSS profile is migrated. Codelad has separate application, profile, installer and protocol identities; development data uses a `-dev` suffix.
 
 ## Network inventory
@@ -41,5 +42,7 @@ Editing, local files, local search, local Git, configured local tasks and instal
 The policy protects against accidental core telemetry activation and prohibited product mixins. It does not sandbox arbitrary installed extensions, local project commands, external tools, operating-system services, a modified binary, or a compromised dependency. A random local compatibility UUID still serves storage/remote API functions. MAC hashing and Windows SQM/device-ID collection are removed; telemetry IDs are empty and registry requests omit identifying headers. Arbitrary user-selected extension networking remains outside this guarantee.
 
 ## Verification
+
+Packaging now retains generated source maps locally instead of rewriting links to Microsoft's CDN. The Windows artifact's inspected directive comments contain no HTTP(S) map hosts; vendor map-file gaps are documented separately. See [source-map report](packaging-source-maps.md). These developer-tool resources are a separate network surface from telemetry collectors.
 
 See [network audit recipe](network-audit.md) for isolated profiles, outbound capture, action-by-action allowlists and evidence limits. Static product checks and service unit tests are necessary but cannot prove the full running application's network behavior.

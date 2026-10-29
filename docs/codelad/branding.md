@@ -1,5 +1,7 @@
 # Codelad identity assets
 
+The user rejected the current asset design on 2026-10-29 and will supply a replacement logo. Treat the checked-in mark and generated exports as temporary development assets, not approved branding. Do not redesign or regenerate them while awaiting that source artwork. Native Windows/macOS validation of the final branding must use the replacement.
+
 The app mark is an angular C/code-bracket in mint on a dark tile, authored as [SVG](../../resources/codelad/icon.svg). It distinguishes the fork in launcher/task-switcher/title-bar contexts while keeping document content visually primary. It is an independent geometric asset, with no external images/fonts or Microsoft logo reused. Existing source/license notices are retained.
 
 App/title-bar, Linux launcher, Windows executable/tile, web/PWA/favicon, macOS ICNS and Windows installer bitmaps are exported from the same source. Existing code.* resource filenames are preserved because upstream packaging references them; displayed application/profile/protocol names remain Codelad. The welcome walkthrough title uses product.nameShort. This does not rename extension README content, upstream legal notices or documentation links.

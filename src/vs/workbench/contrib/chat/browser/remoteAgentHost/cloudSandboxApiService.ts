@@ -235,6 +235,7 @@ export class CloudSandboxApiService extends Disposable implements ICloudSandboxA
 	private _discoverySince: string | undefined;
 	private _discoveryGeneration = 0;
 	private _accountGeneration = 0;
+	private _authenticationRequested = false;
 	private _historyRequestId = 0;
 	private readonly _historyCache = this._register(new CloudSandboxHistoryCache());
 	private _environments: { readonly generation: number; readonly fetchedAt: number; readonly values: readonly IMissionControlEnvironment[] } | undefined;
@@ -484,6 +485,10 @@ export class CloudSandboxApiService extends Disposable implements ICloudSandboxA
 		this._discoverySince = undefined;
 		this._discoveredTasks.clear();
 		this._repositoryNames.clear();
+		// An unconfigured product must not probe unrelated GitHub credentials on startup.
+		if (!this._productService.defaultChatAgent && !this._authenticationRequested) {
+			return;
+		}
 		try {
 			const accountKey = await this.getAccountKey();
 			if (generation === this._accountGeneration && !this._store.isDisposed) {
@@ -1593,6 +1598,7 @@ export class CloudSandboxApiService extends Disposable implements ICloudSandboxA
 
 	/** A GitHub session carrying at least the configured chat provider scopes. */
 	private async _resolveGitHubSession(): Promise<AuthenticationSession | undefined> {
+		this._authenticationRequested = true;
 		const providerId = this._authenticationProviderId;
 		const scopes = this._productService.defaultChatAgent?.providerScopes?.[0] ?? FALLBACK_SCOPES;
 

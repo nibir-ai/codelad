@@ -15,7 +15,6 @@ import { gulp, filter, plumber, sourcemaps } from './lib/gulp/facade.ts';
 import * as path from 'path';
 import * as nodeUtil from 'util';
 import * as ext from './lib/extensions.ts';
-import { getVersion } from './lib/getVersion.ts';
 import { createReporter } from './lib/reporter.ts';
 import * as task from './lib/gulp/task.ts';
 import * as tsb from './lib/tsb/index.ts';
@@ -26,7 +25,6 @@ import watcher from './lib/watch/index.ts';
 import { BuildLifecycle } from './lib/buildEvents.ts';
 
 const root = path.dirname(import.meta.dirname);
-const commit = getVersion(root);
 
 // Tracks active extension compilations to emit aggregate
 // "Starting compilation" / "Finished compilation" messages
@@ -87,20 +85,6 @@ const compilations = [
 	'.vscode/extensions/vscode-pr-pinger/tsconfig.json',
 ];
 
-const getBaseUrl = (out: string) => `https://main.vscode-cdn.net/sourcemaps/${commit}/${out}`;
-
-function rewriteTsgoSourceMappingUrlsIfNeeded(build: boolean, out: string, baseUrl: string): Promise<void> {
-	if (!build) {
-		return Promise.resolve();
-	}
-
-	return util.streamToPromise(
-		gulp.src(path.join(out, '**', '*.js'), { base: out })
-			.pipe(util.rewriteSourceMappingURL(baseUrl))
-			.pipe(gulp.dest(out))
-	);
-}
-
 export function createExtensionTasks(tsconfigFile: string, repoRoot = root) {
 	const absolutePath = path.join(repoRoot, tsconfigFile);
 	const relativeDirname = path.dirname(tsconfigFile.replace(/^(.*\/)?extensions\//i, ''));
@@ -116,7 +100,6 @@ export function createExtensionTasks(tsconfigFile: string, repoRoot = root) {
 	const srcOpts = { cwd: repoRoot, base: srcBase, dot: true };
 
 	const out = getCompilerOptionsFromTsConfig(absolutePath).outDir ?? path.join(repoRoot, srcRoot, 'out');
-	const baseUrl = getBaseUrl(path.relative(repoRoot, out));
 
 	function createPipeline(build: boolean, emitError?: boolean, transpileOnly?: boolean) {
 		const reporter = createReporter('extensions');
@@ -142,7 +125,6 @@ export function createExtensionTasks(tsconfigFile: string, repoRoot = root) {
 				.pipe(compilation())
 				.pipe(build ? util.stripSourceMappingURL() : es.through())
 				.pipe(sourcemaps.write('.', {
-					sourceMappingURL: !build ? undefined : f => `${baseUrl}/${f.relative}.map`,
 					addComment: !!build,
 					includeContent: !!build,
 					// note: trailing slash is important, else the source URLs in V8's file coverage are incorrect
@@ -181,7 +163,7 @@ export function createExtensionTasks(tsconfigFile: string, repoRoot = root) {
 	const compileTask = task.define(`compile-extension:${name}`, task.series(cleanTask, async () => {
 		const nonts = gulp.src(src, srcOpts).pipe(filter(['**', '!**/*.{ts,mts,cts}'], { dot: true }));
 		const copyNonTs = util.streamToPromise(nonts.pipe(gulp.dest(out)));
-		const tsgo = spawnTsgo(absolutePath, { taskName: 'extensions' }, () => rewriteTsgoSourceMappingUrlsIfNeeded(false, out, baseUrl));
+		const tsgo = spawnTsgo(absolutePath, { taskName: 'extensions' });
 
 		await Promise.all([copyNonTs, tsgo]);
 	}));
@@ -192,7 +174,7 @@ export function createExtensionTasks(tsconfigFile: string, repoRoot = root) {
 		const watchNonTs = watchInput.pipe(filter(['**', '!**/*.{ts,mts,cts}'], { dot: true })).pipe(gulp.dest(out));
 		const tsgoStream = watchInput.pipe(util.debounce(() => {
 			const onExtensionCompilationEnd = extensionCompilation.start();
-			const stream = createTsgoStream(absolutePath, { taskName: 'extensions' }, () => rewriteTsgoSourceMappingUrlsIfNeeded(false, out, baseUrl));
+			const stream = createTsgoStream(absolutePath, { taskName: 'extensions' });
 			// Wrap in a result stream that always emits 'end' (even on
 			// error) so the debounce resets to idle and can process future
 			// file changes. Errors from tsgo (e.g. type errors causing a

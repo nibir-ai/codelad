@@ -18,6 +18,10 @@ Offline checks used a separate user/network namespace with no external routes. T
 
 ## Historical Windows evidence
 
+Current Windows continuation (2026-10-29): [npm task after debugger validation](windows-continuation-task.png) shows the refreshed real development build, saved fixture under a Bengali directory name and completed `npm run check` output. The source-built debugger was separately exercised through stop/resume/output in the same run. The visible mark is a temporary asset rejected by the user. See [Windows report](../windows-continuation.md) for completed network captures and remaining diagnostics.
+
+The Windows report also records a successful minified package, packaged argv guard, local renderer dump/native Reopen recovery and normal shutdown. [Safe source-map counts](windows-package-maps.json) describe direct artifact inspection after removing Microsoft CDN map rewrites; [packaged inventory](../packaged-extension-inventory-windows.json) records 93 manifests. Native recovery screenshots were inspected in the tool session; raw captures, portable profiles and memory dumps remain ignored/local and are not included here.
+
 Captured on Windows 2026-10-28 with the actual Electron 43.8.3 Codelad development executable, an empty isolated profile and a disposable local fixture. These are privacy-foundation screenshots, not glass or reference-fidelity acceptance. The source revision is ea8056df9f08fb7c452589213ec77fabbd3481b9 plus the uncommitted Codelad changes on codex/codelad-privacy-foundation.
 
 - [Startup](privacy-startup.png): real workbench, local Git modification, no Copilot panel/status or empty auxiliary pane.

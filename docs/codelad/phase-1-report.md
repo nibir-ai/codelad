@@ -2,6 +2,10 @@
 
 Updated 2026-10-29. **In progress**, with a built and exercised Linux distribution. This is not acceptance of the full product or of every platform/privacy scenario. Original requirements are preserved. Earlier Windows observations and totals remain in [historical handoff](handoff-windows-2026-10-28.md).
 
+Windows continuation now also builds a minified development package. It exposed and removed packaging's Microsoft CDN source-map rewrites, and exercised the packaged crash argv guard, explicit local renderer dump, native Reopen recovery and normal shutdown. Uploads remained disabled; completed Chromium logs contained no URL hosts within the documented capture scope. See [Windows report](windows-continuation.md), [source maps](packaging-source-maps.md) and [93-manifest Windows inventory](packaged-extension-inventory-windows.json). This does not complete offline, installer, payload/DNS or cross-platform acceptance. The user rejected the current mark and will supply its replacement.
+
+The Windows JSON deactivation failure was also fixed by retaining its output channel through async client shutdown. A corrected cleanup-order fixture and focused lifecycle tests pass (43 total); both development and refreshed packaged runs exercised syntax diagnostics and clean LSP shutdown without the old failure. The Windows report preserves earlier failing evidence and the later successful checks.
+
 ## Implementation
 
 - Core `TelemetryService` and 1DS appenders are inert compatibility APIs: no SDK initialization, buffers, timers, payload processing or telemetry identifiers. Telemetry level always returns NONE regardless of configuration. Settings expose only off.

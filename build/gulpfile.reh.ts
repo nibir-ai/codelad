@@ -262,8 +262,7 @@ function packageTask(type: string, platform: string, arch: string, sourceFolderN
 	return () => {
 		const src = gulp.src(sourceFolderName + '/**', { base: '.' })
 			.pipe(rename(function (path) { path.dirname = path.dirname!.replace(new RegExp('^' + sourceFolderName), 'out'); }))
-			.pipe(util.setExecutableBit(['**/*.sh']))
-			.pipe(filter(['**', '!**/*.{js,css}.map']));
+			.pipe(util.setExecutableBit(['**/*.sh']));
 
 		const workspaceExtensionPoints = ['debuggers', 'jsonValidation'];
 		const isUIExtension = (manifest: { extensionKind?: string; main?: string; contributes?: Record<string, unknown> }) => {
@@ -304,8 +303,7 @@ function packageTask(type: string, platform: string, arch: string, sourceFolderN
 
 		const extensions = gulp.src(extensionPaths, { base: '.build', dot: true });
 		const extensionsCommonDependencies = gulp.src('.build/extensions/node_modules/**', { base: '.build', dot: true });
-		const sources = es.merge(src, extensions, extensionsCommonDependencies)
-			.pipe(filter(['**', '!**/*.{js,css}.map'], { dot: true }));
+		const sources = es.merge(src, extensions, extensionsCommonDependencies);
 
 		let version = packageJson.version;
 		const quality = (product as typeof product & { quality?: string }).quality;
@@ -533,7 +531,7 @@ function prepareCopilotRipgrepShimTaskREH(platform: string, arch: string, destin
 ['reh', 'reh-web'].forEach(type => {
 	const target = type === 'reh' ? 'server' : 'server-web';
 	const esbuildBundleTask = task.define(`esbuild-vscode-${type}`, () => runEsbuildBundle(`out-vscode-${type}`, false, true, target));
-	const esbuildBundleMinTask = task.define(`esbuild-vscode-${type}-min`, () => runEsbuildBundle(`out-vscode-${type}-min`, true, true, target, `https://main.vscode-cdn.net/sourcemaps/${commit}/core`));
+	const esbuildBundleMinTask = task.define(`esbuild-vscode-${type}-min`, () => runEsbuildBundle(`out-vscode-${type}-min`, true, true, target));
 
 	BUILD_TARGETS.forEach(buildTarget => {
 		const dashed = (str: string) => (str ? `-${str}` : ``);
