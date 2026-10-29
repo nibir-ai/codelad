@@ -1,0 +1,68 @@
+{
+  "sourceCommit": "557b296eae2b55e85852fd60f8b5a3c0d64d1027",
+  "date": "2026-10-29",
+  "platform": "Windows 11",
+  "electron": "43.8.3",
+  "version": "1.145.0",
+  "tests": {
+    "sourceAdapterDebuggerAndCapture": 21,
+    "jsonLifecycleAndSchema": 43,
+    "extensionWorkbenchElectron": 95,
+    "githubSourcePolicySubset": 14
+  },
+  "finalStartup": {
+    "packaged": true,
+    "crashUploads": false,
+    "chromiumUrlHosts": [],
+    "tcpSeconds": 128.77,
+    "tcpConnectionStates": 2,
+    "tcpNonLoopbackStates": 0,
+    "shutdown": "normal"
+  },
+  "selectedExtension": {
+    "id": "redhat.vscode-yaml",
+    "version": "2.0.0",
+    "vsixSha256": "4bba62ccda962b720dcb0829e85cf4109c94e86653dcd39fd7500c3687ad8c60",
+    "bundledWithProduct": false,
+    "diagnostics": "passed",
+    "coreTelemetry": false,
+    "extensionTelemetrySetting": null,
+    "schemaStoreEnabled": true,
+    "chromiumUrlHosts": [],
+    "tcpSeconds": 144.83,
+    "tcpConnectionStates": 2,
+    "tcpNonLoopbackStates": 0,
+    "postSubscriptionNodeHttpObservations": "one controlled loopback schema GET",
+    "shutdown": "normal"
+  },
+  "schemaControl": {
+    "requestsWhileDisabled": 0,
+    "requestsAfterExplicitOptIn": 1,
+    "method": "GET",
+    "bodyBytes": 0,
+    "headerNames": ["accept-encoding", "user-agent", "host", "connection"]
+  },
+  "nativeWindowSizes": [[900, 650], [1380, 900]],
+  "installer": {
+    "file": "CodeladSetup.exe",
+    "signatureStatus": "NotSigned",
+    "bytes": 249884098,
+    "sha256": "71d2a409ae49b727cdecff79c264bea805032f8382c84a0c45be4e9d5738c4b7",
+    "nativeWizard": "supplied artwork inspected; cancelled before installation",
+    "fullInstallUninstall": "not executed"
+  },
+  "windowsOffline": {
+    "status": "not validated",
+    "attempts": 2,
+    "reason": "Execution host retained a connected Ethernet default route and external TCP connectivity despite the disconnect messages.",
+    "offlineWorkloadExecuted": false
+  },
+  "universalPhaseOneAcceptance": false,
+  "coverageLimits": [
+    "TCP sampling can miss short-lived connections, UDP, DNS and startup races.",
+    "Chromium logs exclude Node and native transports.",
+    "The test-only Node HTTP observer excludes pre-subscription startup, other children and other transports.",
+    "Controlled local payload inspection is not a universal packet/payload audit.",
+    "Windows packet/DNS, remaining macOS/Linux matrix and release acceptance are pending."
+  ]
+}

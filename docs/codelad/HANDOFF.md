@@ -1,5 +1,23 @@
 # Codelad handoff
 
+## Latest continuation: independent branches and supplied artwork
+
+The user resumed the goal on 2026-10-29, requested the remaining privacy checks, supplied replacement artwork in `assets/`, and requested Codelad-owned `dev` and `stable` branches. This supersedes the previous stop/pause instructions below. The five-hour checkpoint remains approximately **5% remaining**, followed by a handoff, push and user-requested pause.
+
+The active checkout is `D:/codelad`, branch **`dev`**, tracking `origin/dev`. `dev` is GitHub's default branch and local `origin/HEAD` matches. `stable` is a protected bootstrap checkpoint at `936dd77b0b0`, with PR + passing **Source privacy policy** + up-to-date requirements, including for administrators; force pushes/deletion are blocked. It is not a production release. `main` was reported unprotected and retained. There is no automatic upstream synchronization. See [branch workflow](branches.md).
+
+Pushed implementation commits: `0b1b1db534e` adopts the user's artwork, Codelad repository identity and opt-in remote JSON schemas; `557b296eae2` prevents automatic disclosure of development-extension IDs to the registry and corrects native installer publisher/support labels. Read Git HEAD/remote for later validation-document commits. Do not regenerate or redesign the supplied logo.
+
+New evidence and precise limits are in [privacy continuation](privacy-continuation-2026-10-29.md). The source/adapter/debugger/parser selection passes **21 tests**, JSON lifecycle/schema fixtures **43**, and affected extension-workbench Electron tests **95**; client types and targeted lint pass. GitHub's lightweight **14-test** source-policy workflow passes. Real packaged language/schema/Git/Unicode and native resize checks pass, and the native Codelad installer wizard was inspected and cancelled before installation. The initial packaged cloud guard recheck passed with uploads off, no CloudSandbox entries, an empty-host completed Chromium log and a loopback-only 130.50-second TCP sample.
+
+The pre-fix development fixture revealed an automatic registry lookup, traced with Chromium async initiator stacks to the running-extension UI. The guarded final package now identifies `557b296eae2`; all 26 bundles and final packaging/product policy pass. Fresh startup and a selected YAML 2.0.0 activation run both closed normally with empty-host completed Chromium logs and loopback-only TCP samples (**128.77 / 144.83 seconds**). The development-ID query did not recur. A longer pre-fix fixture capture also contains external Extensions browsing/search activity not initiated by the automation; treat it as mixed activity, not idle evidence. The final unsigned user installer was rebuilt from the refreshed app, and version metadata identifies Codelad Contributors. See the report for exact limits.
+
+Windows packet/DNS capture remains unavailable in this non-elevated session. The genuine disconnected-network attempts did **not** reach offline conditions: after the user's disconnect messages, this execution host still reported an alive, connected Ethernet default route and a successful external TCP connection. The first waiting test window was closed normally after no route change occurred; its helper exited nonzero because the page closed. A fresh retry after the user selected disconnecting Ethernet again retained one external route and correctly failed its isolation assertion, then closed normally. No offline API checks or pass were recorded. Coordinate the actual execution host's network isolation before retrying; disconnecting a different client connection does not establish isolation here. The earlier Linux namespace-offline evidence remains separate. macOS and the remaining cross-platform/release matrix remain pending. Full Phase 1 acceptance is not claimed.
+
+All test editor/installer windows, samplers and builds from this continuation are closed. Raw captures, profiles, controlled fixture repositories and the validation VSIX remain ignored/local. Temporary execution helpers were removed. The latest final app is `D:/VSCode-win32-x64/Codelad.exe`; the unsigned user installer is `D:/codelad/.build/win32-x64/user-setup/CodeladSetup.exe` (**249,884,098 bytes**). Neither artifact is a signed production release. Next work is actual Windows OS isolation/packet-DNS coverage and the remaining platform matrix, not another logo redesign or an unsupported Phase 1 acceptance claim.
+
+## Previous checkpoint (historical)
+
 ## Windows continuation, 2026-10-29
 
 ### Current checkpoint and pause request

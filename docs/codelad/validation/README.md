@@ -1,5 +1,18 @@
 # Desktop privacy validation evidence
 
+## Supplied artwork and independent branches, 2026-10-29
+
+The user-supplied blue artwork replaces the previously rejected mark. These are actual packaged/native screenshots, not glass or reference-image acceptance.
+
+- [GitHub default branch](github-dev-default.png): saved owner settings confirm `dev` is the default.
+- [Stable protection](github-stable-protection.png): saved requirements include pull requests, the actual passing source-policy status, an up-to-date branch and administrator enforcement.
+- [Packaged language/Git fixture](windows-supplied-logo-language-git.png): real local-schema correction, Bengali-path file and Git branch in the workbench with the supplied flat title-bar mark.
+- [Compact native resize](windows-supplied-logo-compact.png): same working workbench after BrowserWindow resize to 900×650.
+- [Native installer](windows-codelad-installer.png): supplied Windows icon and retained MIT notice. The wizard was inspected and cancelled before installation.
+- [Safe validation summary](windows-privacy-summary-2026-10-29.json): final source revision, scoped test/capture counts, installer hash and explicit offline/platform limitations.
+
+The packaged fixture passed the real API checks recorded in [privacy continuation](../privacy-continuation-2026-10-29.md). Its pre-fix network log includes the development-extension metadata lookup and separate Extensions browsing/search activity that the test did not initiate. It is not idle/empty-network evidence. Raw profiles/captures remain ignored/local.
+
 ## Linux, 2026-10-29
 
 Actual Electron 43.8.3 development and minified packaged Codelad, based on 98b5fa8 plus checkpoint working changes. Fresh disposable profiles/fixtures; no copied credentials. The offline/Git/Open VSX/trust images predate the final icon replacement; the packaged branding/diagnostics images show the rebuilt Codelad mark. These are privacy/IDE evidence, not glass or reference-fidelity acceptance.

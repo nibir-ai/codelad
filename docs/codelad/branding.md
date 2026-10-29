@@ -12,7 +12,7 @@ node scripts/codelad/generate-icons.mts
 # Or pass --sharp-path <absolute-path-to-sharp-entrypoint> without adding it to the editor.
 ```
 
-Normal installs/builds use checked-in assets and need no image-authoring library. The generator resizes the supplied PNG, retains alpha, writes PNG-backed ICNS representations and preserves all fourteen installer BMP dimensions using a 24-bit BMP encoder. It uses no temporary directories. Outputs were regenerated on Windows with the bundled sharp runtime; Windows ICO and both vector destinations match the source hashes. Native installer and macOS rendering still require validation on the relevant platform.
+Normal installs/builds use checked-in assets and need no image-authoring library. The generator resizes the supplied PNG, retains alpha, writes PNG-backed ICNS representations and preserves all fourteen installer BMP dimensions using a 24-bit BMP encoder. It uses no temporary directories. Outputs were regenerated on Windows with the bundled sharp runtime; Windows ICO and both vector destinations match the source hashes. The Windows native installer wizard now builds and displays the supplied icon correctly; it was cancelled before installation. macOS rendering and full native install/uninstall behavior remain untested.
 
 Executable metadata identifies Codelad Contributors, with upstream Microsoft copyright attribution retained. The macOS help-book name follows the product name. The AppX template uses `CN=Codelad` and Codelad Contributors instead of Microsoft's publisher identity; a future signed AppX requires a deliberately configured certificate with a matching subject. No signing certificate or production package identity was provisioned here.
 
