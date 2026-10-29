@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import assert from 'assert';
-import { timeout } from '../../../../common/async.js';
+import { DeferredPromise, timeout } from '../../../../common/async.js';
 import { VSBuffer } from '../../../../common/buffer.js';
 import { CancellationToken, CancellationTokenSource } from '../../../../common/cancellation.js';
 import { canceled } from '../../../../common/errors.js';
@@ -248,6 +248,37 @@ suite('Base IPC', function () {
 		assert.strictEqual(b1, b2);
 		assert.strictEqual(b3, b4);
 	});
+
+	for (const reject of [false, true]) {
+		test(`disposed channel server drops a late ${reject ? 'rejected' : 'resolved'} response`, async () => {
+			const incoming = store.add(new Emitter<VSBuffer>());
+			const result = new DeferredPromise<string>();
+			const called = new DeferredPromise<void>();
+			const sent: VSBuffer[] = [];
+			const server = store.add(new ChannelServer({ onMessage: incoming.event, send: message => sent.push(message) }, 'client'));
+			server.registerChannel('test', {
+				listen: () => Event.None,
+				call: <T>() => { void called.complete(); return result.p as Promise<T>; }
+			});
+			const writer = new BufferWriter();
+			try {
+				serialize(writer, [100, 1, 'test', 'wait']);
+				serialize(writer, undefined);
+				incoming.fire(writer.buffer);
+			} finally {
+				writer.dispose();
+			}
+			await called.p;
+			server.dispose();
+			if (reject) {
+				await result.error(new Error('Late failure'));
+			} else {
+				await result.complete('Late result');
+			}
+			await timeout(0);
+			assert.deepStrictEqual(sent.map(message => deserialize(new BufferReader(message))), [[200]]);
+		});
+	}
 
 	suite('one to one', function () {
 		let server: IPCServer;

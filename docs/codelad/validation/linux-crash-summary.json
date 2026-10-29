@@ -1,0 +1,82 @@
+{
+  "scope": "Four fresh packaged Linux profiles with explicit local dumps and normal process-tree exit. First two test native dismissal; last two verify native Reopen in an isolated KWin virtual/Xwayland desktop. Final run includes disconnect, reconnect and late-response fixes. All four completed Chromium NetLogs list no URL hosts.",
+  "runs": [
+    {
+      "run": "crash-recovery",
+      "samples": 163,
+      "nonLoopbackObservations": 0,
+      "unreadableEntries": 0,
+      "unparsedOwnedRows": 0,
+      "dumpBytes": [
+        229536
+      ],
+      "completion": {
+        "at": "2026-10-29T17:20:41.001Z",
+        "finished": true,
+        "reason": "process-tree-exited",
+        "remainingProcessCount": 0,
+        "incomplete": false
+      },
+      "reopenVerified": false
+    },
+    {
+      "run": "crash-reopen",
+      "samples": 45,
+      "nonLoopbackObservations": 0,
+      "unreadableEntries": 0,
+      "unparsedOwnedRows": 0,
+      "dumpBytes": [
+        225184
+      ],
+      "completion": {
+        "at": "2026-10-29T17:22:12.526Z",
+        "finished": true,
+        "reason": "process-tree-exited",
+        "remainingProcessCount": 0,
+        "incomplete": false
+      },
+      "reopenVerified": false
+    },
+    {
+      "run": "crash-isolated",
+      "samples": 476,
+      "nonLoopbackObservations": 0,
+      "unreadableEntries": 0,
+      "unparsedOwnedRows": 0,
+      "dumpBytes": [
+        231760
+      ],
+      "completion": {
+        "at": "2026-10-29T17:40:52.768Z",
+        "finished": true,
+        "reason": "process-tree-exited",
+        "remainingProcessCount": 0,
+        "incomplete": false
+      },
+      "reopenVerified": true,
+      "lateFrameSendErrors": 1,
+      "environment": "Isolated KWin virtual desktop; Xwayland; private config and DBus; normal app sandbox defaults"
+    },
+    {
+      "run": "crash-isolated-final",
+      "samples": 95,
+      "nonLoopbackObservations": 0,
+      "unreadableEntries": 0,
+      "unparsedOwnedRows": 0,
+      "dumpBytes": [
+        231712
+      ],
+      "completion": {
+        "at": "2026-10-29T17:44:21.042Z",
+        "finished": true,
+        "reason": "process-tree-exited",
+        "remainingProcessCount": 0,
+        "incomplete": false
+      },
+      "reopenVerified": true,
+      "lateFrameSendErrors": 0,
+      "environment": "Isolated KWin virtual desktop; Xwayland; private config and DBus; normal app sandbox defaults"
+    }
+  ],
+  "limitations": "One-second editor socket samples and Chromium URLs do not cover all DNS/UDP/payloads or separate OS/DBus services. Native Wayland repetition and broader upload/platform acceptance remain open. Environment/KWallet/VSync warnings and intended renderer-crash diagnostics remain; final run has zero stale-frame send errors. Dumps remain ignored/local."
+}

@@ -352,6 +352,9 @@ export class ChannelServer<TContext = string> implements IChannelServer<TContext
 	}
 
 	private sendResponse(response: IRawResponse): void {
+		if (!this.protocolListener) {
+			return;
+		}
 		switch (response.type) {
 			case ResponseType.Initialize: {
 				const msgLength = this.send([response.type]);

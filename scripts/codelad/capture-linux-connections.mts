@@ -21,6 +21,9 @@ function readProcess(pid: number): { parentPid: number; startedAt: string } | un
 	try {
 		const stat = readFileSync(`/proc/${pid}/stat`, 'utf8');
 		const fields = stat.slice(stat.lastIndexOf(')') + 2).split(' ');
+		if (fields[0] === 'Z' || fields[0] === 'X') {
+			return undefined;
+		}
 		return { parentPid: Number(fields[1]), startedAt: fields[19] };
 	} catch {
 		return undefined;
@@ -32,7 +35,6 @@ if (!root) {
 	throw new Error('The editor root process is not running.');
 }
 const known = new Map([[rootPid, root.startedAt]]);
-const rootStartedAt = root.startedAt;
 const output = openSync(values.output, 'wx', 0o600);
 writeSync(output, JSON.stringify({
 	coverage: 'Linux process-tree TCP/UDP snapshots via ss. Sampling can miss short-lived sockets, unconnected UDP/DNS and unreadable processes; this is not packet capture.',
@@ -41,21 +43,18 @@ writeSync(output, JSON.stringify({
 let finished = false;
 let incomplete = false;
 
-function finish(code = 0): void {
+function finish(reason: 'process-tree-exited' | 'duration-limit' | 'interrupted' | 'capture-error', code = 0): void {
 	if (!finished) {
 		finished = true;
 		clearInterval(interval);
 		clearTimeout(deadline);
+		writeSync(output, JSON.stringify({ at: new Date().toISOString(), finished: true, reason, remainingProcessCount: known.size, incomplete }) + '\n');
 		closeSync(output);
 		process.exitCode = code || (incomplete ? 1 : 0);
 	}
 }
 
 function sample(): void {
-	if (readProcess(rootPid)?.startedAt !== rootStartedAt) {
-		finish();
-		return;
-	}
 	let unreadableProcessEntries = 0;
 	const queue = [...known.keys()];
 	const current = new Set<number>();
@@ -83,19 +82,27 @@ function sample(): void {
 			unreadableProcessEntries++;
 		}
 	}
+	if (!current.size) {
+		finish('process-tree-exited');
+		return;
+	}
 	const result = spawnSync('ss', ['-Htanup'], { encoding: 'utf8', timeout: 5000, maxBuffer: 8 * 1024 * 1024 });
 	if (result.error || result.status !== 0) {
 		writeSync(output, JSON.stringify({ at: new Date().toISOString(), error: 'Socket capture failed; coverage is incomplete.' }) + '\n');
-		finish(1);
+		incomplete = true;
+		finish('capture-error', 1);
 		return;
 	}
 	const parsed = filterLinuxConnections(result.stdout, current);
-	incomplete ||= parsed.unparsedOwnedRows > 0;
+	incomplete ||= unreadableProcessEntries > 0 || parsed.unparsedOwnedRows > 0;
 	writeSync(output, JSON.stringify({ at: new Date().toISOString(), processCount: current.size, unreadableProcessEntries, ...parsed }) + '\n');
 }
 
 const interval = setInterval(sample, 1000);
-const deadline = setTimeout(finish, duration * 1000);
-process.on('SIGTERM', () => finish());
-process.on('SIGINT', () => finish());
+const deadline = setTimeout(() => {
+	sample();
+	finish('duration-limit');
+}, duration * 1000);
+process.on('SIGTERM', () => { incomplete = true; finish('interrupted', 1); });
+process.on('SIGINT', () => { incomplete = true; finish('interrupted', 1); });
 sample();

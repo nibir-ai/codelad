@@ -39,20 +39,25 @@ export class Server extends IPCServer {
 
 			client?.dispose();
 
-			const onDidClientReconnect = new Emitter<void>();
+			const onDidClientReconnect = new Emitter<void>({
+				onDidRemoveLastListener: () => onDidClientReconnect.dispose()
+			});
 			const reconnectDisposable = toDisposable(() => {
 				onDidClientReconnect.fire();
 			});
 			Server.Clients.set(id, reconnectDisposable);
 
 			const onMessage = createScopedOnMessageEvent(id, 'vscode:message') as Event<VSBuffer>;
-			const onDidClientDisconnect = Event.any(Event.signal(createScopedOnMessageEvent(id, 'vscode:disconnect')), onDidClientReconnect.event);
+			const onDidClientDisconnect = Event.any(
+				Event.signal(createScopedOnMessageEvent(id, 'vscode:disconnect')),
+				onDidClientReconnect.event,
+				Event.fromNodeEventEmitter<void>(webContents, 'render-process-gone'),
+				Event.fromNodeEventEmitter<void>(webContents, 'destroyed')
+			);
 			Event.once(onDidClientDisconnect)(() => {
 				if (Server.Clients.get(id) === reconnectDisposable) {
 					Server.Clients.delete(id);
 				}
-
-				onDidClientReconnect.dispose();
 			});
 			const protocol = new ElectronProtocol(webContents, onMessage);
 

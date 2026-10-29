@@ -1,0 +1,39 @@
+{
+  "capturedOn": "2026-10-29 Asia/Kolkata",
+  "scope": "Fresh packaged Linux x64 profiles; built-ins enabled; no third-party installs; startup, local actions and normal quit. First run uses preceding Linux artifact; second uses rebuilt 936dd77b0b0 artifact. Chromium completed logs in both runs have no URL hosts.",
+  "runs": [
+    {
+      "run": "lifecycle",
+      "samples": 124,
+      "first": "2026-10-29T16:48:28.816Z",
+      "last": "2026-10-29T16:50:31.987Z",
+      "nonLoopbackObservations": 0,
+      "unreadableProcessEntries": 0,
+      "unparsedOwnedRows": 0,
+      "final": {
+        "at": "2026-10-29T16:50:32.977Z",
+        "finished": true,
+        "reason": "process-tree-exited",
+        "remainingProcessCount": 0,
+        "incomplete": false
+      }
+    },
+    {
+      "run": "lifecycle-current",
+      "samples": 127,
+      "first": "2026-10-29T16:53:12.656Z",
+      "last": "2026-10-29T16:55:18.839Z",
+      "nonLoopbackObservations": 0,
+      "unreadableProcessEntries": 0,
+      "unparsedOwnedRows": 0,
+      "final": {
+        "at": "2026-10-29T16:55:19.832Z",
+        "finished": true,
+        "reason": "process-tree-exited",
+        "remainingProcessCount": 0,
+        "incomplete": false
+      }
+    }
+  ],
+  "limitations": "One-second socket snapshots of discovered processes can miss startup races, short-lived processes/sockets and DNS/unconnected UDP. Chromium omits Node/native transports. This is not packet or payload capture, nor proof of universal zero traffic."
+}

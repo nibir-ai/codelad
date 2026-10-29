@@ -1,0 +1,94 @@
+{
+  "capturedOn": "2026-10-30 Asia/Kolkata; UTC intervals begin 2026-10-29",
+  "scope": "Prepared Linux package, fresh profiles and private virtual desktop; only loopback in disposable user/network/PID/mount namespaces. Positive DNS/TCP controls precede app startup; two-minute idle and edit/save, with search/normal quit successful in the final run. Final Chromium NetLog lists no URL hosts.",
+  "runs": [
+    {
+      "run": "packet-desktop-2026-10-29",
+      "captureComplete": false,
+      "reason": "duration-limit",
+      "commandExitCode": 1,
+      "packetSocketDrops": 0,
+      "truncatedFrames": 0,
+      "bytesWritten": 934242,
+      "remainingProcessCount": 0,
+      "pcapSha256": "34c9e558fc973f89a2e5395e728f5e2868c85fe10b51741302f0dba9e4d67e79",
+      "libpcapValidated": true,
+      "counts": {
+        "frames": 3374,
+        "ipv4": 3370,
+        "ipv6": 4,
+        "tcp": 3366,
+        "udp": 8,
+        "icmp": 0,
+        "other": 0,
+        "unclassifiedFrames": 0,
+        "nonLoopbackIpFrames": 0,
+        "dnsControlQueries": 4,
+        "dnsControlResponses": 4,
+        "otherPort53Frames": 0,
+        "tcpControlFrames": 2
+      },
+      "actions": [
+        "controls-start",
+        "controls-finished",
+        "idle-start",
+        "idle-finished",
+        "saved",
+        "scenario-failed"
+      ],
+      "socketSamples": 165,
+      "socketCompletion": {
+        "at": "2026-10-29T18:28:52.508Z",
+        "finished": true,
+        "reason": "process-tree-exited",
+        "remainingProcessCount": 0,
+        "incomplete": false
+      }
+    },
+    {
+      "run": "packet-desktop-2026-10-30",
+      "captureComplete": true,
+      "reason": "process-tree-exited",
+      "commandExitCode": 0,
+      "packetSocketDrops": 0,
+      "truncatedFrames": 0,
+      "bytesWritten": 698416,
+      "remainingProcessCount": 0,
+      "pcapSha256": "7afe05fd282c430ada7441b98393bd50f7167cbdcff963070626c2db6fe13c5b",
+      "libpcapValidated": true,
+      "counts": {
+        "frames": 2518,
+        "ipv4": 2514,
+        "ipv6": 4,
+        "tcp": 2510,
+        "udp": 8,
+        "icmp": 0,
+        "other": 0,
+        "unclassifiedFrames": 0,
+        "nonLoopbackIpFrames": 0,
+        "dnsControlQueries": 4,
+        "dnsControlResponses": 4,
+        "otherPort53Frames": 0,
+        "tcpControlFrames": 2
+      },
+      "actions": [
+        "controls-start",
+        "controls-finished",
+        "idle-start",
+        "idle-finished",
+        "saved",
+        "search-finished",
+        "desktop-exited"
+      ],
+      "socketSamples": 139,
+      "socketCompletion": {
+        "at": "2026-10-29T18:33:53.502Z",
+        "finished": true,
+        "reason": "process-tree-exited",
+        "remainingProcessCount": 0,
+        "incomplete": false
+      }
+    }
+  ],
+  "limitations": "Offline loopback capture includes outgoing/incoming copies and automation, so frame counts are not requests. Classic DNS controls do not certify other DNS transports. Blocked attempts, services outside the namespace and online behavior are outside scope. No payloads, request URLs or raw packet files are published."
+}
