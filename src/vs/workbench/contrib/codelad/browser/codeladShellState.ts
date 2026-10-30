@@ -30,7 +30,7 @@ export function defaultCodeladLayout(context: CodeladContext): ICodeladLayout {
 		panel: context === 'operate',
 		auxiliary: false,
 		sidebarId: context === 'review' ? 'workbench.view.scm' : 'workbench.view.explorer',
-		panelId: 'workbench.panel.terminal'
+		panelId: 'terminal'
 	};
 }
 

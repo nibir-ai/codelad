@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RunOnceScheduler, Sequencer } from '../../../../base/common/async.js';
+import { RunOnceScheduler, Sequencer, timeout } from '../../../../base/common/async.js';
 import { Emitter } from '../../../../base/common/event.js';
 import { Disposable, IDisposable, MutableDisposable, toDisposable } from '../../../../base/common/lifecycle.js';
 import { autorun } from '../../../../base/common/observable.js';
@@ -170,16 +170,25 @@ export class CodeladShellService extends Disposable implements ICodeladShellServ
 		this.applying = true;
 		this.saveScheduler.cancel();
 		try {
+			// A picker can restore terminal focus asynchronously. Let that settle
+			// before hiding panes, otherwise it can reopen the panel afterwards.
+			await timeout(0);
 			const sidebar = layout.sidebar || (honorPins && this.state.pinSidebar);
 			const panel = layout.panel || (honorPins && this.state.pinPanel);
-			this.layoutService.setPartHidden(!sidebar, Parts.SIDEBAR_PART);
-			this.layoutService.setPartHidden(!panel, Parts.PANEL_PART);
-			this.layoutService.setPartHidden(!layout.auxiliary, Parts.AUXILIARYBAR_PART);
-			if (sidebar && layout.sidebarId) {
-				await this.viewsService.openViewContainer(layout.sidebarId, false);
+			// Opening through the views service awaits the composite and prevents the
+			// layout service's fire-and-forget open from later restoring tool focus.
+			if (!sidebar) {
+				this.layoutService.setPartHidden(true, Parts.SIDEBAR_PART);
 			}
-			if (panel && layout.panelId) {
-				await this.viewsService.openViewContainer(layout.panelId, false);
+			if (!panel) {
+				this.layoutService.setPartHidden(true, Parts.PANEL_PART);
+			}
+			this.layoutService.setPartHidden(!layout.auxiliary, Parts.AUXILIARYBAR_PART);
+			if (sidebar) {
+				await this.viewsService.openViewContainer(layout.sidebarId ?? 'workbench.view.explorer', false);
+			}
+			if (panel) {
+				await this.viewsService.openViewContainer(layout.panelId ?? 'terminal', false);
 			}
 			if (sidebar && layout.sidebarWidth) {
 				this.layoutService.setSize(Parts.SIDEBAR_PART, { ...this.layoutService.getSize(Parts.SIDEBAR_PART), width: layout.sidebarWidth });
@@ -261,6 +270,8 @@ export class CodeladShellService extends Disposable implements ICodeladShellServ
 
 	async showPins(): Promise<void> {
 		await this.lifecycleService.when(LifecyclePhase.Restored);
+		// Preserve the composition before the picker restores focus to a tool area.
+		this.saveCurrentLayout();
 		const picks = await this.quickInputService.pick([
 			{ label: localize('codelad.pinSidebar', "Keep Sidebar Visible"), part: 'sidebar', picked: this.state.pinSidebar },
 			{ label: localize('codelad.pinPanel', "Keep Panel Visible"), part: 'panel', picked: this.state.pinPanel }
@@ -268,7 +279,6 @@ export class CodeladShellService extends Disposable implements ICodeladShellServ
 		if (!picks) {
 			return;
 		}
-		this.saveCurrentLayout();
 		this.state.pinSidebar = picks.some(item => item.part === 'sidebar');
 		this.state.pinPanel = picks.some(item => item.part === 'panel');
 		await this.queue.queue(() => this.apply(this.state.layouts[this.activeContext] ?? defaultCodeladLayout(this.activeContext), true));
