@@ -1462,9 +1462,9 @@
         "properties": {
           "markdown.experimental.richLinks.enabled": {
             "type": "boolean",
-            "default": true,
+            "default": false,
             "description": "%configuration.markdown.experimental.richLinks.enabled%",
-            "scope": "window",
+            "scope": "application",
             "tags": [
               "experimental",
               "onExP"
@@ -1807,6 +1807,12 @@
             "default": false,
             "description": "%markdown.preview.typographer%",
             "scope": "resource"
+          },
+          "markdown.preview.allowRemoteContent": {
+            "type": "boolean",
+            "default": false,
+            "scope": "application",
+            "markdownDescription": "%markdown.preview.allowRemoteContent%"
           },
           "markdown.preview.fontFamily": {
             "type": "string",

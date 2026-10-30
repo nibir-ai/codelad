@@ -1,5 +1,11 @@
 # Codelad handoff
 
+## Resumed on 2026-10-30
+
+The user requested a pull and continued work. `git pull --ff-only origin dev` succeeded, already up to date at `3da323c722b`, with a clean starting checkout. This supersedes the historical pause below. Continue on `dev`; `stable` remains the protected bootstrap checkpoint. The approximately 5%-remaining **five-hour** handoff/push/pause preference still applies.
+
+The current batch makes remote Markdown content and live link metadata user opt-ins, defaults both off, narrows the Markdown webview resource wildcard and preserves local content. See [Markdown privacy continuation](markdown-privacy-2026-10-30.md) for executed tests and scope. All nine real development-workbench rendering/toggle cases pass across the standard preview, preview editor and rich editor; the focused privacy selection passes 22 tests and CSP regression selection passes three. Extension types, Node/browser bundles and targeted lint pass. Remaining Windows OS isolation/packet-DNS, platform/release gates and the full product phases are still open. Inspect later sections/report updates for subsequent packaging evidence; do not assume the older installer includes this batch.
+
 ## Usage checkpoint and requested pause
 
 Checkpoint preparation began on 2026-10-29 with the five-hour meter at **93% used / 7% remaining**, approaching the user's approximate 5%-remaining threshold. The requested behavior is to finish the handoff, push and pause; do not start another runtime/build batch during this checkpoint. Resume only when the user resumes the goal. The complete product objective remains unfinished; this checkpoint does not accept Phase 1 or narrow the original scope.

@@ -12,7 +12,8 @@ import { escapeAttribute } from '../util/dom';
 import { WebviewResourceProvider } from '../util/resources';
 import { generateUuid } from '../util/uuid';
 import { MarkdownPreviewConfiguration, MarkdownPreviewConfigurationManager } from './previewConfig';
-import { ContentSecurityPolicyArbiter, MarkdownPreviewSecurityLevel } from './security';
+import { ContentSecurityPolicyArbiter } from './security';
+import { getPreviewContentSecurityPolicy } from './contentSecurityPolicy';
 import type { DiffScrollSyncData, MarkdownPreviewInnerChange, MarkdownPreviewLineChanges } from '../../types/previewMessaging';
 
 
@@ -25,7 +26,7 @@ import type { DiffScrollSyncData, MarkdownPreviewInnerChange, MarkdownPreviewLin
 const previewStrings = {
 	cspAlertMessageText: vscode.l10n.t("Some content has been disabled in this document"),
 
-	cspAlertMessageTitle: vscode.l10n.t("Potentially unsafe or insecure content has been disabled in the Markdown preview. Change the Markdown preview security setting to allow insecure content or enable scripts"),
+	cspAlertMessageTitle: vscode.l10n.t("Some content has been disabled in the Markdown preview. Review Markdown: Preview Allow Remote Content in user settings and the preview security settings to control remote resources and scripts"),
 
 	cspAlertMessageLabel: vscode.l10n.t("Content Disabled Security Warning"),
 };
@@ -101,7 +102,7 @@ export class MdDocumentRenderer {
 
 		// Content Security Policy
 		const nonce = generateUuid();
-		const csp = this.#getCsp(resourceProvider, sourceUri, nonce);
+		const csp = getPreviewContentSecurityPolicy(resourceProvider.cspSource, nonce, this.#cspArbiter.getSecurityLevelForResource(sourceUri), config.allowRemoteContent);
 
 		const body = await this.renderBody(markdownDocument, resourceProvider, lineChanges);
 		if (token.isCancellationRequested) {
@@ -252,28 +253,6 @@ export class MdDocumentRenderer {
 				charset="UTF-8"></script>`);
 		}
 		return out.join('\n');
-	}
-
-	#getCsp(
-		provider: WebviewResourceProvider,
-		resource: vscode.Uri,
-		nonce: string
-	): string {
-		const rule = provider.cspSource.split(';')[0];
-		switch (this.#cspArbiter.getSecurityLevelForResource(resource)) {
-			case MarkdownPreviewSecurityLevel.AllowInsecureContent:
-				return `default-src 'none'; img-src 'self' ${rule} http: https: data:; media-src 'self' ${rule} http: https: data:; script-src 'nonce-${nonce}'; style-src 'self' ${rule} 'unsafe-inline' http: https: data:; font-src 'self' ${rule} http: https: data:;`;
-
-			case MarkdownPreviewSecurityLevel.AllowInsecureLocalContent:
-				return `default-src 'none'; img-src 'self' ${rule} https: data: http://localhost:* http://127.0.0.1:*; media-src 'self' ${rule} https: data: http://localhost:* http://127.0.0.1:*; script-src 'nonce-${nonce}'; style-src 'self' ${rule} 'unsafe-inline' https: data: http://localhost:* http://127.0.0.1:*; font-src 'self' ${rule} https: data: http://localhost:* http://127.0.0.1:*;`;
-
-			case MarkdownPreviewSecurityLevel.AllowScriptsAndAllContent:
-				return ``;
-
-			case MarkdownPreviewSecurityLevel.Strict:
-			default:
-				return `default-src 'none'; img-src 'self' ${rule} https: data:; media-src 'self' ${rule} https: data:; script-src 'nonce-${nonce}'; style-src 'self' ${rule} 'unsafe-inline' https: data:; font-src 'self' ${rule} https: data:;`;
-		}
 	}
 }
 

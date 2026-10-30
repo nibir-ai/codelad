@@ -12,6 +12,7 @@ import { areUrisEqual, getMarkdownLocalResourceRoots } from '../util/resources';
 import { ChangedLineRange, MarkdownPreviewLineDiffProvider } from './lineDiff';
 import { RecoveringTaskQueue } from './recoveringTaskQueue';
 import { encodeWebviewInitialState } from './webviewInitialState';
+import { getEditorContentSecurityPolicy } from './contentSecurityPolicy';
 import type { ILogger } from '../logging';
 import type { ResolvedDocumentLinkTarget } from '../client/protocol';
 import {
@@ -730,7 +731,8 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 			event.files.flatMap(file => [file.oldUri, file.newUri])));
 		const onDidChangeViewState = webviewPanel.onDidChangeViewState(() => this.#updateEditorFocusContext());
 		const onDidChangeConfiguration = vscode.workspace.onDidChangeConfiguration(event => {
-			if (event.affectsConfiguration('markdown.experimental.richLinks.enabled', document.uri)) {
+			if (event.affectsConfiguration('markdown.experimental.richLinks.enabled', document.uri)
+				|| event.affectsConfiguration('markdown.preview.allowRemoteContent', document.uri)) {
 				reloadWebview();
 			}
 			if (event.affectsConfiguration('markdown.editor.highlightActiveBlock', document.uri) && editorWebview.ready) {
@@ -1153,6 +1155,7 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 		const styleUri = webview.asWebviewUri(vscode.Uri.joinPath(this.#mediaRoot, 'editor.css'));
 		const baseUri = webview.asWebviewUri(document.uri);
 		const nonce = getNonce();
+		const allowRemoteContent = vscode.workspace.getConfiguration('markdown').get<boolean>('preview.allowRemoteContent', false);
 		const initialState = encodeWebviewInitialState({
 			...this.#getEditorConfiguration(document.uri),
 			taskProgressLabels: {
@@ -1164,7 +1167,7 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 			documentVersion: document.version,
 			editEpoch,
 			readonly: this.#globalState.get(MarkdownEditorProvider.#readonlyStateKey, true),
-			richLinksEnabled: vscode.workspace.getConfiguration('markdown').get<boolean>('experimental.richLinks.enabled', true),
+			richLinksEnabled: vscode.workspace.getConfiguration('markdown').get<boolean>('experimental.richLinks.enabled', false),
 			linkPresentationRules: vscode.window.linkPresentationRules.map(rule => ({
 				id: rule.id,
 				source: rule.uriPattern.source,
@@ -1182,7 +1185,7 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Security-Policy"
-		content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; font-src ${webview.cspSource}; img-src ${webview.cspSource} https: data:; media-src ${webview.cspSource} https: data:; script-src 'nonce-${nonce}' ${webview.cspSource}; worker-src ${webview.cspSource} blob:; connect-src ${webview.cspSource}; frame-src 'self';" />
+		content="${getEditorContentSecurityPolicy(webview.cspSource, nonce, allowRemoteContent)}" />
 	<meta name="vscode-markdown-editor-script-nonce" content="${nonce}" />
 	<meta name="vscode-markdown-editor-message-secret" content="${messageSecret}" />
 	<meta id="vscode-markdown-editor-initial-state" content="${initialState}" />

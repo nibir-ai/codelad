@@ -1,0 +1,31 @@
+# Markdown privacy continuation, 2026-10-30
+
+The user resumed work and requested a pull. `git pull --ff-only origin dev` succeeded with **Already up to date** at `3da323c722b`; the checkout was clean before this continuation. The prior pause is historical. The full product objective and remaining privacy/platform gates are still open.
+
+## Behavior
+
+Opening Markdown previews previously permitted arbitrary HTTPS images, media, styles and fonts. The rich Markdown editor also permitted HTTPS images/media, and live link presentations defaulted on, potentially requesting authenticated provider metadata. Document rendering therefore had network effects beyond explicit link navigation.
+
+`markdown.preview.allowRemoteContent` now defaults to `false` and has application scope: only user settings can opt in. Standard previews and the preview editor retain local/embedded resources while blocking remote content. The rich editor retains its local resources, workers and highlighting while blocking remote media. Changing the setting refreshes open surfaces. With opt-in, the existing preview transport/script security levels still apply; the rich editor permits HTTPS media. The preview security picker shows whether remote content is blocked/enabled and links to the setting. Disabling script security alone does not bypass the remote-content opt-in.
+
+`markdown.experimental.richLinks.enabled` now also defaults off, uses application scope and keeps its explicit provider-network disclosure. Its renderer fallback matches the new default. This remains a separate opt-in from remote media.
+
+The local-resource CSP source is narrowed from the generic `https://*.vscode-cdn.net` wildcard to `https://*.vscode-resource.vscode-cdn.net`, matching the resource authority intercepted by the workbench webview service worker. These virtual resource URLs are used for local/remote-workspace file resolution; they are not a newly configured CDN service. Other hosts under the broader wildcard are no longer implicitly permitted by these Markdown policies.
+
+## Executed validation
+
+- Markdown extension TypeScript compilation passes. Production Node and browser extension bundles build successfully.
+- The focused core/build/adapter/debugger/network selection passes **22 tests**, including a new manifest check for both user-only opt-ins. The three Markdown CSP regression tests pass, covering all four preview security levels, existing opt-in transport behavior and rich-editor local workers/HTTPS media. Targeted lint and `git diff --check` pass.
+- The actual Electron 43.8.3 development workbench ran with a fresh empty user profile, empty extensions/shared data and a temporary local validation extension. No authenticated profile was copied. Workspace trust was true in the empty window; no trust-policy bypass was passed.
+- A controlled loopback HTTPS server supplied an image and stylesheet. Only the fixture certificate's public-key hash was excepted for certificate validation in the disposable test process; no OS trust store, security preference or product setting was changed. This exception allows a positive control rather than mistaking a certificate failure for privacy enforcement.
+- **Nine runtime cases pass**: default-off, opt-in and opt-out for the standard preview, preview editor and rich Markdown editor. Every surface displayed its local image while the server received zero requests by default and after opt-out. Opt-in produced the expected GETs: image plus stylesheet for each preview, and image for the rich editor. Local preview CSS continued to apply. The open surfaces updated after each setting change without restarting the editor.
+- Both profile defaults were observed false at runtime; core telemetry was false. Request capture retained header names only; the controlled GETs had no authorization, cookie or Codelad identity header names. This is a controlled media/style test, not a universal provider payload audit.
+- The completed Chromium log lists only `127.0.0.1` (**20 URL events**) for the final fixture. The process-tree TCP sample completed in **22.70 seconds**, observed three connection states and no nonloopback endpoint. Sampling omits UDP/DNS and may miss short-lived sockets; Chromium excludes Node/native transports. This is action-specific evidence, not a two-minute idle or disconnected-network test.
+
+Raw profiles, TLS fixture key/certificate, request captures and logs remain ignored under `.build/codelad/markdown-privacy-2026-10-30/`. An initial run opened the command palette before the development extension was ready and timed out; it closed normally. A subsequent exploratory run exercised both preview variants before the rich-editor view type was corrected. The final run explicitly checked each surface's CSP and passed all nine cases. No early run is presented as rich-editor evidence.
+
+## Remaining limits
+
+Notebook Markdown/output, arbitrary extensions, explicitly opened links, remote workspaces and provider integrations have separate network behavior. This setting is not an extension firewall. Font/media transport and script-level combinations have policy coverage; the controlled runtime positive controls here specifically exercise images and preview styles. Rich-link defaults were observed, but authenticated provider opt-in payloads were not exercised in this batch.
+
+Windows offline/packet-DNS validation remains blocked on controlling the execution host's networking; the earlier disconnect attempts did not establish isolation. macOS, remaining Linux crash/compositor cases, install/uninstall/signing and the broader privacy matrix remain open. Native glass and the later workbench/graph/Git/command-center/integration/layout phases remain unfinished. Do not promote `stable` or claim full Phase 1 acceptance from these checks.

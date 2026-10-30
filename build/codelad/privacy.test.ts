@@ -21,6 +21,15 @@ test('remote JSON schema downloads require opt-in in the shipped configuration',
 	assert.strictEqual(manifest.contributes.configuration.properties['json.schemaDownload.enable'].default, false);
 });
 
+test('Markdown remote resources and live link metadata require user opt-in', () => {
+	const manifest = JSON.parse(readFileSync(new URL('../../extensions/markdown-language-features/package.json', import.meta.url), 'utf8'));
+	const properties = Object.assign({}, ...manifest.contributes.configuration.map((section: { properties: object }) => section.properties));
+	assert.deepStrictEqual(['markdown.preview.allowRemoteContent', 'markdown.experimental.richLinks.enabled'].map(key => ({
+		default: properties[key].default,
+		scope: properties[key].scope,
+	})), [{ default: false, scope: 'application' }, { default: false, scope: 'application' }]);
+});
+
 test('desktop, server, web and included built-ins do not depend on the removed telemetry SDKs', () => {
 	assertCodeladDependencyManifests(fileURLToPath(new URL('../../', import.meta.url)), product.skipBuiltinExtensions);
 });

@@ -5,14 +5,9 @@
 
 import * as vscode from 'vscode';
 import { MarkdownPreviewManager } from './previewManager';
+import { MarkdownPreviewSecurityLevel } from './contentSecurityPolicy';
 
-
-export const enum MarkdownPreviewSecurityLevel {
-	Strict = 0,
-	AllowInsecureContent = 1,
-	AllowScriptsAndAllContent = 2,
-	AllowInsecureLocalContent = 3
-}
+export { MarkdownPreviewSecurityLevel } from './contentSecurityPolicy';
 
 export interface ContentSecurityPolicyArbiter {
 	getSecurityLevelForResource(resource: vscode.Uri): MarkdownPreviewSecurityLevel;
@@ -104,7 +99,7 @@ export class PreviewSecuritySelector {
 
 	public async showSecuritySelectorForResource(resource: vscode.Uri): Promise<void> {
 		interface PreviewSecurityPickItem extends vscode.QuickPickItem {
-			readonly type: 'moreinfo' | 'toggle' | MarkdownPreviewSecurityLevel;
+			readonly type: 'moreinfo' | 'toggle' | 'remotecontent' | MarkdownPreviewSecurityLevel;
 		}
 
 		function markActiveWhen(when: boolean): string {
@@ -112,6 +107,7 @@ export class PreviewSecuritySelector {
 		}
 
 		const currentSecurityLevel = this.#cspArbiter.getSecurityLevelForResource(resource);
+		const allowRemoteContent = vscode.workspace.getConfiguration('markdown').get<boolean>('preview.allowRemoteContent', false);
 		const selection = await vscode.window.showQuickPick<PreviewSecurityPickItem>(
 			[
 				{
@@ -129,7 +125,11 @@ export class PreviewSecuritySelector {
 				}, {
 					type: MarkdownPreviewSecurityLevel.AllowScriptsAndAllContent,
 					label: markActiveWhen(currentSecurityLevel === MarkdownPreviewSecurityLevel.AllowScriptsAndAllContent) + vscode.l10n.t("Disable"),
-					description: vscode.l10n.t("Allow all content and script execution. Not recommended"),
+					description: vscode.l10n.t("Allow all content and script execution when remote content is enabled. Not recommended"),
+				}, {
+					type: 'remotecontent',
+					label: allowRemoteContent ? vscode.l10n.t("Remote Content Enabled") : vscode.l10n.t("Remote Content Blocked"),
+					description: vscode.l10n.t("Configure Markdown: Preview Allow Remote Content in user settings"),
 				}, {
 					type: 'moreinfo',
 					label: vscode.l10n.t("More Information"),
@@ -145,6 +145,11 @@ export class PreviewSecuritySelector {
 			placeHolder: vscode.l10n.t("Select security settings for Markdown previews in this workspace"),
 		});
 		if (!selection) {
+			return;
+		}
+
+		if (selection.type === 'remotecontent') {
+			await vscode.commands.executeCommand('workbench.action.openSettings', 'markdown.preview.allowRemoteContent');
 			return;
 		}
 

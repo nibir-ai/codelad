@@ -1,0 +1,218 @@
+{
+  "date": "2026-10-30",
+  "platform": "win32-x64",
+  "build": "Electron development workbench; source 3da323c722b plus the Markdown changes",
+  "passed": true,
+  "defaults": {
+    "telemetry": false,
+    "trusted": true,
+    "remote": false,
+    "richLinks": false
+  },
+  "cases": [
+    {
+      "surface": "preview",
+      "phase": "default",
+      "localImageRendered": true,
+      "remoteImageRendered": false,
+      "localStyle": "loaded",
+      "remoteStyle": "",
+      "requestCount": 0
+    },
+    {
+      "surface": "preview",
+      "phase": "opt-in",
+      "localImageRendered": true,
+      "remoteImageRendered": true,
+      "localStyle": "loaded",
+      "remoteStyle": "loaded",
+      "requestCount": 2,
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/remote.css",
+          "headerNames": [
+            "accept",
+            "accept-encoding",
+            "accept-language",
+            "connection",
+            "host",
+            "sec-ch-ua",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-platform",
+            "sec-fetch-dest",
+            "sec-fetch-mode",
+            "sec-fetch-site",
+            "sec-fetch-storage-access",
+            "user-agent"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/preview.svg",
+          "headerNames": [
+            "accept",
+            "accept-encoding",
+            "accept-language",
+            "connection",
+            "host",
+            "sec-ch-ua",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-platform",
+            "sec-fetch-dest",
+            "sec-fetch-mode",
+            "sec-fetch-site",
+            "sec-fetch-storage-access",
+            "user-agent"
+          ]
+        }
+      ]
+    },
+    {
+      "surface": "preview",
+      "phase": "opt-out",
+      "localImageRendered": true,
+      "remoteImageRendered": false,
+      "localStyle": "loaded",
+      "remoteStyle": "",
+      "requestCount": 0
+    },
+    {
+      "surface": "preview-editor",
+      "phase": "default",
+      "localImageRendered": true,
+      "remoteImageRendered": false,
+      "localStyle": "loaded",
+      "remoteStyle": "",
+      "requestCount": 0
+    },
+    {
+      "surface": "preview-editor",
+      "phase": "opt-in",
+      "localImageRendered": true,
+      "remoteImageRendered": true,
+      "localStyle": "loaded",
+      "remoteStyle": "loaded",
+      "requestCount": 2,
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/remote.css",
+          "headerNames": [
+            "accept",
+            "accept-encoding",
+            "accept-language",
+            "connection",
+            "host",
+            "sec-ch-ua",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-platform",
+            "sec-fetch-dest",
+            "sec-fetch-mode",
+            "sec-fetch-site",
+            "sec-fetch-storage-access",
+            "user-agent"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/preview-editor.svg",
+          "headerNames": [
+            "accept",
+            "accept-encoding",
+            "accept-language",
+            "connection",
+            "host",
+            "sec-ch-ua",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-platform",
+            "sec-fetch-dest",
+            "sec-fetch-mode",
+            "sec-fetch-site",
+            "sec-fetch-storage-access",
+            "user-agent"
+          ]
+        }
+      ]
+    },
+    {
+      "surface": "preview-editor",
+      "phase": "opt-out",
+      "localImageRendered": true,
+      "remoteImageRendered": false,
+      "localStyle": "loaded",
+      "remoteStyle": "",
+      "requestCount": 0
+    },
+    {
+      "surface": "editor",
+      "phase": "default",
+      "localImageRendered": true,
+      "remoteImageRendered": false,
+      "localStyle": "",
+      "remoteStyle": "",
+      "requestCount": 0
+    },
+    {
+      "surface": "editor",
+      "phase": "opt-in",
+      "localImageRendered": true,
+      "remoteImageRendered": true,
+      "localStyle": "",
+      "remoteStyle": "",
+      "requestCount": 1,
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/editor.svg",
+          "headerNames": [
+            "accept",
+            "accept-encoding",
+            "accept-language",
+            "connection",
+            "host",
+            "sec-ch-ua",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-platform",
+            "sec-fetch-dest",
+            "sec-fetch-mode",
+            "sec-fetch-site",
+            "sec-fetch-storage-access",
+            "user-agent"
+          ]
+        }
+      ]
+    },
+    {
+      "surface": "editor",
+      "phase": "opt-out",
+      "localImageRendered": true,
+      "remoteImageRendered": false,
+      "localStyle": "",
+      "remoteStyle": "",
+      "requestCount": 0
+    }
+  ],
+  "chromium": {
+    "hosts": [
+      {
+        "host": "127.0.0.1",
+        "urlEvents": 20,
+        "expectedForAction": true
+      }
+    ],
+    "coverage": "Chromium URL events only; excludes Node/native/DNS."
+  },
+  "tcp": {
+    "elapsedSeconds": 22.7,
+    "connectionStatesObserved": 3,
+    "nonloopbackObserved": 0,
+    "coverage": "Process-tree TCP sampling; may miss short-lived connections; excludes UDP/DNS."
+  },
+  "limits": [
+    "Controlled HTTPS images and preview styles, not universal payload/provider coverage.",
+    "Test process excepted only the fixture certificate public-key hash; no OS trust changes.",
+    "Not a disconnected-network test or two-minute idle check.",
+    "No macOS/Linux/runtime or installer acceptance from this batch."
+  ]
+}
