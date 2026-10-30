@@ -1,0 +1,31 @@
+
+
+[0m[0m
+[0m  Tests are using suiteSetup and setup correctly[0m
+  [32m  +[0m[90m assertCleanState - check that registries are clean at the start of test running[0m
+
+[0m  Codelad window material policy[0m
+  [32m  +[0m[90m solid is the default and unsupported hosts stay opaque[0m
+  [32m  +[0m[90m selects platform materials without confusing Mica with live desktop blur[0m
+  [32m  +[0m[90m accessibility preferences take precedence and opacity is bounded[0m
+
+[0m  Codelad native material application[0m
+  [32m  +[0m[90m theme updates retain transparency only while the native material is active[0m
+  [32m  +[0m[90m failed native APIs restore solid surfaces even when native cleanup also fails[0m
+
+[0m  Codelad workspace context state[0m
+  [32m  +[0m[90m invalid or future storage falls back without accepting command-shaped state[0m
+  [32m  +[0m[90m restores only valid bounded view/layout fields[0m
+  [32m  +[0m[90m temporary pins do not turn Focus into a permanently open tool composition[0m
+  [32m  +[0m[90m keeps distinct saved contexts and preserves user resize choices through serialization[0m
+
+[0m  WorkbenchThemeService[0m
+  [32m  +[0m[90m restores only for preferred color scheme changes[0m
+[0m    migrateThemeSettingsId[0m
+    [32m  +[0m[90m migrates Default-prefixed theme IDs[0m
+    [32m  +[0m[90m migrates Experimental theme IDs to VS Code themes[0m
+    [32m  +[0m[90m returns unknown IDs unchanged[0m
+
+
+[92m [0m[32m 14 passing[0m[90m (27ms)[0m
+

@@ -1,6 +1,6 @@
 # Codelad design direction
 
-The user authorized a **native glass proof of concept on 2026-10-30**, with unavailable privacy checks retained in the delivery record. This authorizes testing window materials while those checks remain open, not acceptance of the complete privacy matrix or implementation of the entire redesign in this step.
+The user authorized the **Quiet Shell UI on 2026-10-30**, and confirmed it should become the default on `dev`. The first implementation adds real context compositions, configured project actions, a repository HUD and the Graphite theme. Unavailable privacy checks remain open; `stable` is unchanged. See the [implementation contract](quiet-shell-direction.md) and [UI validation](../quiet-shell-ui-2026-10-30.md).
 
 ## Supplied research
 
@@ -16,4 +16,4 @@ Use the proposed Smoke / Graphite / Ice hierarchy as a hypothesis: native materi
 
 ## Current scope
 
-The proof of concept adds a disabled-by-default native-material adapter, user-only settings, platform/accessibility fallbacks and a real Windows compositor check. It preserves the current workbench composition. No context strip, graph, HUD, task capsule, utility system or new layout preset is claimed here. Record runtime evidence in [the glass report](../native-glass-poc.md), current engineering state in [implementation status](../IMPLEMENTATION_STATUS.md), and unrun privacy cases in [open privacy checks](../privacy-open-checks.md). Use lowercase `docs/codelad`; do not create a case-only `docs/codeLad` documentation tree.
+Quiet Shell now replaces the custom main-window command-center area with Focus / Explore / Review / Operate, preserving the actual shared editor groups. Panes remember workspace-local compositions; visibility pins keep tool areas available. Project actions discover actual tasks on invocation and use the existing runner. The HUD observes actual SCM state. Full semantic Atlas, the Scrollspace canvas and the utility system remain future work. The independently validated native-material adapter remains opt-in with solid defaults. Record unrun privacy cases in [open privacy checks](../privacy-open-checks.md). Use lowercase `docs/codelad`; do not create a case-only `docs/codeLad` documentation tree.

@@ -1,5 +1,7 @@
 # Codelad implementation status
 
+Quiet Shell implementation `269a9bf6fbe` is the user-confirmed default on `dev`: real shared-editor context compositions, workspace-local pane state, visibility pins, configured task capsule, live SCM HUD and Codelad Graphite. Independent visual review returned `ship` at this first prototype's scope. [UI report and evidence](quiet-shell-ui-2026-10-30.md) record the tests and current package status. Full Atlas, Scrollspace and utility integration remain future work; [privacy gates](privacy-open-checks.md) stay open and `stable` is unchanged. This supersedes older statements that all workbench/context implementation is pending.
+
 Windows native visual continuation: fix `1600ef9e0f0` removes the opaque outer floating-grid layer. [Native capture evidence](native-glass-visual-2026-10-30.md) verifies Acrylic changes through structural chrome while code stays opaque; Mica, solid/accessibility, theme/focus/palette and application-zoom checks have bounded evidence. Current packaging/runtime results are in the [trial report](native-glass-trial-2026-10-30.md). Full DPI, performance, privacy/platform and release acceptance remain open. Earlier capture-blocked and source-only artifact claims below are historical.
 
 The refreshed `1600ef9e0f0` package also passes native capture comparisons at chrome opacity 0.85 and local edit/save, split/terminal/diff/webview smoke checks, then exits normally with a strictly parsed empty-host Chromium log. See [current trial artifacts](native-glass-trial-2026-10-30.md). This supersedes the earlier source-only/capture-blocked artifact status; broader physical-DPI, performance, privacy/platform and release gates remain open.
@@ -43,10 +45,10 @@ The five-hour checkpoint is **5% remaining**, not 5% used. At that threshold upd
 | 0: Repository audit | In progress | Source entrypoints/inventories inspected; native dependencies and pinned runtime installed. Client, built-ins and Linux minified package built. Cross-platform distribution acceptance remains. |
 | 1: Privacy and OSS | In progress | Core/extension telemetry collectors, identities and experiments removed; downloaded debugger rebuilt from pinned source. Real editor/debug/task/Git/Open VSX checks pass. Packaged local coding works with no external network route. Windows startup attribution, native crash recovery, remaining IDE matrix, native installer/branding validation and stronger network coverage remain. |
 | 2: Native glass | Proof of concept implemented; acceptance in progress | Opt-in adapter and Windows DWM/runtime checks exist. Native visual, DPI, resource/performance and macOS validation remain; Linux uses solid fallback. See the current glass report. |
-| 3: Workbench | Pending | Full redesign must preserve real editor, terminal, SCM, accessibility and extension APIs. |
-| 4: Graph and command center | Pending | Must use actual source relationships and configured tasks. |
+| 3: Workbench | First Quiet Shell prototype | Context strip, real pane compositions, visibility pins and Graphite implemented; full spatial redesign remains. |
+| 4: Graph and command center | Task capsule implemented; graph pending | Existing configured tasks use the normal runner; semantic source relationships remain future work. |
 | 5: Developer integrations | Pending | Real API/database/container/environment/test workflows required. |
-| 6: Ergonomics | Pending | Persistent layouts and keyboard workflows required. |
+| 6: Ergonomics | Initial workspace compositions | Machine-local pane persistence and keyboard context navigation implemented; broader ergonomics remain. |
 
 Current Linux validation: 174 renderer tests, 71 core/agent/provider Node tests and 20 focused privacy/build-tool tests pass. Client/build/debugger types and targeted lint pass. The packaged inventory contains 93 extension manifests, no declared telemetry dependencies and the source-built JS debugger. A manifest check is narrower than auditing all embedded code. See [Phase 1 report](phase-1-report.md) for observed network activity and evidence limits.
 

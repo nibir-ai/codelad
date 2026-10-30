@@ -1,0 +1,32 @@
+✔ built compatibility adapter loads in ESM and CommonJS extension hosts (118.3737ms)
+✔ built-in compatibility reporter never inspects event or error payloads (1.4827ms)
+✔ removed extension experiments never read state or call their telemetry hooks (2.3229ms)
+✔ debugger reporter never reads payloads, emits DAP output or flushes collection callbacks (560.7323ms)
+✔ debugger experiments keep both enabled and disabled local defaults without importing TAS (21.6809ms)
+✔ bundler audit rejects nested and Windows collector paths without exposing private directories (0.6005ms)
+✔ product selects the reviewed source derivative and cannot relabel its inputs (0.6398ms)
+✔ Linux capture keeps owned IPv4, IPv6 and UDP endpoints without retaining process details (4.795ms)
+✔ Linux capture does not retain unknown endpoints, malformed rows or unrelated sockets (0.4351ms)
+✔ network audit reports unexpected hosts without exposing request secrets (46.0858ms)
+✔ network audit counts URL events and normalizes hosts without treating metadata as requests (0.3124ms)
+✔ unfinished and malformed captures are rejected without printing private raw contents (0.489ms)
+✔ invalid request URLs are rejected without exposing their contents (0.1575ms)
+✔ empty WebSocket lifecycle metadata is counted separately without weakening invalid URL checks (0.3199ms)
+✔ source product satisfies the distribution privacy policy (0.802ms)
+✔ remote JSON schema downloads require opt-in in the shipped configuration (36.4899ms)
+✔ Markdown remote resources and live link metadata require user opt-in (59.0298ms)
+✔ GitHub history avatar lookups require user opt-in (43.5705ms)
+✔ desktop, server, web and included built-ins do not depend on the removed telemetry SDKs (1519.5882ms)
+✔ direct runtime collector dependencies are rejected without inspecting version strings (0.8067ms)
+✔ historical upstream downloaded debugger is rejected while the other pinned extension inventories pass (39.6823ms)
+✔ distribution mixins cannot enable collectors, experiments, updates or cloud bindings (0.5185ms)
+✔ distribution mixins cannot re-enable telemetry or identifying gallery headers (0.3039ms)
+✔ gallery overrides cannot redirect to another origin or leak credentials in errors (0.5062ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2056.859

@@ -1,0 +1,110 @@
+{
+  "results": [
+    {
+      "case": "explore",
+      "context": "explore",
+      "sidebar": true,
+      "panel": false,
+      "auxiliary": false,
+      "width": 170,
+      "groups": 1,
+      "hud": "ui-check, 4 pending changes. Open Source Control",
+      "editor": {
+        "uri": "file:///d%3A/codelad/.build/codelad/quiet-shell-2026-10-30/workspace/src/charCode.ts",
+        "line": 80,
+        "column": 4,
+        "visibleLine": 65,
+        "dirty": false
+      }
+    },
+    {
+      "case": "focus",
+      "context": "focus",
+      "sidebar": false,
+      "panel": false,
+      "auxiliary": false,
+      "width": 0,
+      "groups": 1,
+      "hud": "ui-check, 4 pending changes. Open Source Control",
+      "editor": {
+        "uri": "file:///d%3A/codelad/.build/codelad/quiet-shell-2026-10-30/workspace/src/charCode.ts",
+        "line": 80,
+        "column": 4,
+        "visibleLine": 65,
+        "dirty": false
+      }
+    },
+    {
+      "case": "review",
+      "context": "review",
+      "sidebar": true,
+      "panel": false,
+      "auxiliary": false,
+      "width": 300,
+      "groups": 1,
+      "hud": "ui-check, 4 pending changes. Open Source Control",
+      "editor": {
+        "uri": "file:///d%3A/codelad/.build/codelad/quiet-shell-2026-10-30/workspace/src/charCode.ts",
+        "line": 80,
+        "column": 4,
+        "visibleLine": 65,
+        "dirty": false
+      }
+    },
+    {
+      "case": "operate",
+      "context": "operate",
+      "sidebar": false,
+      "panel": true,
+      "auxiliary": false,
+      "width": 0,
+      "groups": 1,
+      "hud": "ui-check, 4 pending changes. Open Source Control",
+      "editor": {
+        "uri": "file:///d%3A/codelad/.build/codelad/quiet-shell-2026-10-30/workspace/src/charCode.ts",
+        "line": 80,
+        "column": 4,
+        "visibleLine": 65,
+        "dirty": false
+      }
+    },
+    {
+      "case": "explore",
+      "context": "explore",
+      "sidebar": true,
+      "panel": false,
+      "auxiliary": false,
+      "width": 170,
+      "groups": 1,
+      "hud": "ui-check, 4 pending changes. Open Source Control",
+      "editor": {
+        "uri": "file:///d%3A/codelad/.build/codelad/quiet-shell-2026-10-30/workspace/src/charCode.ts",
+        "line": 80,
+        "column": 4,
+        "visibleLine": 65,
+        "dirty": false
+      }
+    },
+    {
+      "case": "disabled",
+      "sidebar": true,
+      "panel": false,
+      "auxiliary": false,
+      "width": 300,
+      "groups": 1
+    },
+    {
+      "case": "keyboard focus",
+      "context": "focus",
+      "sidebar": false,
+      "panel": false,
+      "auxiliary": false,
+      "width": 0,
+      "groups": 1,
+      "hud": "ui-check, 4 pending changes. Open Source Control"
+    }
+  ],
+  "editorPreserved": true,
+  "defaultShell": true,
+  "defaultTheme": "Codelad Graphite"
+}

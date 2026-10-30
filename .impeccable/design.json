@@ -1,0 +1,284 @@
+{
+	"schemaVersion": 2,
+	"generatedAt": "2026-10-30T11:51:47.627Z",
+	"title": "Design System: Codelad Quiet Shell",
+	"extensions": {
+		"colorMeta": {
+			"ice": {
+				"role": "primary",
+				"displayName": "Ice",
+				"tonalRamp": [
+					"oklch(15.00% 0.0932 249.15)",
+					"oklch(26.43% 0.0932 249.15)",
+					"oklch(37.86% 0.0932 249.15)",
+					"oklch(49.29% 0.0932 249.15)",
+					"oklch(60.71% 0.0932 249.15)",
+					"oklch(72.14% 0.0932 249.15)",
+					"oklch(83.57% 0.0932 249.15)",
+					"oklch(95.00% 0.0932 249.15)"
+				]
+			},
+			"ice-light": {
+				"role": "primary",
+				"displayName": "Ice Light",
+				"tonalRamp": [
+					"oklch(15.00% 0.0454 243.21)",
+					"oklch(26.43% 0.0454 243.21)",
+					"oklch(37.86% 0.0454 243.21)",
+					"oklch(49.29% 0.0454 243.21)",
+					"oklch(60.71% 0.0454 243.21)",
+					"oklch(72.14% 0.0454 243.21)",
+					"oklch(83.57% 0.0454 243.21)",
+					"oklch(95.00% 0.0454 243.21)"
+				]
+			},
+			"ink": {
+				"role": "neutral",
+				"displayName": "Ink",
+				"tonalRamp": [
+					"oklch(15.00% 0.0192 255.78)",
+					"oklch(26.43% 0.0192 255.78)",
+					"oklch(37.86% 0.0192 255.78)",
+					"oklch(49.29% 0.0192 255.78)",
+					"oklch(60.71% 0.0192 255.78)",
+					"oklch(72.14% 0.0192 255.78)",
+					"oklch(83.57% 0.0192 255.78)",
+					"oklch(95.00% 0.0192 255.78)"
+				]
+			},
+			"graphite": {
+				"role": "neutral",
+				"displayName": "Graphite",
+				"tonalRamp": [
+					"oklch(15.00% 0.0256 253.85)",
+					"oklch(26.43% 0.0256 253.85)",
+					"oklch(37.86% 0.0256 253.85)",
+					"oklch(49.29% 0.0256 253.85)",
+					"oklch(60.71% 0.0256 253.85)",
+					"oklch(72.14% 0.0256 253.85)",
+					"oklch(83.57% 0.0256 253.85)",
+					"oklch(95.00% 0.0256 253.85)"
+				]
+			},
+			"graphite-raised": {
+				"role": "neutral",
+				"displayName": "Graphite Raised",
+				"tonalRamp": [
+					"oklch(15.00% 0.0340 250.83)",
+					"oklch(26.43% 0.0340 250.83)",
+					"oklch(37.86% 0.0340 250.83)",
+					"oklch(49.29% 0.0340 250.83)",
+					"oklch(60.71% 0.0340 250.83)",
+					"oklch(72.14% 0.0340 250.83)",
+					"oklch(83.57% 0.0340 250.83)",
+					"oklch(95.00% 0.0340 250.83)"
+				]
+			},
+			"slate": {
+				"role": "neutral",
+				"displayName": "Slate",
+				"tonalRamp": [
+					"oklch(15.00% 0.0367 250.46)",
+					"oklch(26.43% 0.0367 250.46)",
+					"oklch(37.86% 0.0367 250.46)",
+					"oklch(49.29% 0.0367 250.46)",
+					"oklch(60.71% 0.0367 250.46)",
+					"oklch(72.14% 0.0367 250.46)",
+					"oklch(83.57% 0.0367 250.46)",
+					"oklch(95.00% 0.0367 250.46)"
+				]
+			},
+			"reading": {
+				"role": "neutral",
+				"displayName": "Reading",
+				"tonalRamp": [
+					"oklch(15.00% 0.0145 244.72)",
+					"oklch(26.43% 0.0145 244.72)",
+					"oklch(37.86% 0.0145 244.72)",
+					"oklch(49.29% 0.0145 244.72)",
+					"oklch(60.71% 0.0145 244.72)",
+					"oklch(72.14% 0.0145 244.72)",
+					"oklch(83.57% 0.0145 244.72)",
+					"oklch(95.00% 0.0145 244.72)"
+				]
+			},
+			"tool-text": {
+				"role": "neutral",
+				"displayName": "Tool Text",
+				"tonalRamp": [
+					"oklch(15.00% 0.0243 244.17)",
+					"oklch(26.43% 0.0243 244.17)",
+					"oklch(37.86% 0.0243 244.17)",
+					"oklch(49.29% 0.0243 244.17)",
+					"oklch(60.71% 0.0243 244.17)",
+					"oklch(72.14% 0.0243 244.17)",
+					"oklch(83.57% 0.0243 244.17)",
+					"oklch(95.00% 0.0243 244.17)"
+				]
+			},
+			"muted": {
+				"role": "neutral",
+				"displayName": "Muted",
+				"tonalRamp": [
+					"oklch(15.00% 0.0333 243.86)",
+					"oklch(26.43% 0.0333 243.86)",
+					"oklch(37.86% 0.0333 243.86)",
+					"oklch(49.29% 0.0333 243.86)",
+					"oklch(60.71% 0.0333 243.86)",
+					"oklch(72.14% 0.0333 243.86)",
+					"oklch(83.57% 0.0333 243.86)",
+					"oklch(95.00% 0.0333 243.86)"
+				]
+			},
+			"inherited-widget-border": {
+				"role": "neutral",
+				"displayName": "Inherited Widget Border",
+				"tonalRamp": [
+					"oklch(15.00% 0.0023 247.91)",
+					"oklch(26.43% 0.0023 247.91)",
+					"oklch(37.86% 0.0023 247.91)",
+					"oklch(49.29% 0.0023 247.91)",
+					"oklch(60.71% 0.0023 247.91)",
+					"oklch(72.14% 0.0023 247.91)",
+					"oklch(83.57% 0.0023 247.91)",
+					"oklch(95.00% 0.0023 247.91)"
+				]
+			},
+			"inherited-disabled": {
+				"role": "neutral",
+				"displayName": "Inherited Disabled",
+				"tonalRamp": [
+					"oklch(15.00% 0.0000 89.88)",
+					"oklch(26.43% 0.0000 89.88)",
+					"oklch(37.86% 0.0000 89.88)",
+					"oklch(49.29% 0.0000 89.88)",
+					"oklch(60.71% 0.0000 89.88)",
+					"oklch(72.14% 0.0000 89.88)",
+					"oklch(83.57% 0.0000 89.88)",
+					"oklch(95.00% 0.0000 89.88)"
+				]
+			}
+		},
+		"typographyMeta": {
+			"body": {
+				"displayName": "Native Workbench Body",
+				"purpose": "Windows UI base; other platforms retain their native stacks."
+			},
+			"shell-label": {
+				"displayName": "Shell Label",
+				"purpose": "Inherited workbench text at the control tier, without a display hierarchy."
+			},
+			"code": {
+				"displayName": "Platform Code Fallback",
+				"purpose": "Windows monospace fallback only; editor and terminal settings remain configurable."
+			}
+		},
+		"shadows": [
+			{
+				"name": "inherited-titlebar-medium",
+				"value": "0 0 6px rgba(0, 0, 0, 0.08)",
+				"purpose": "Existing workbench titlebar shadow; shell controls add no shadow."
+			}
+		],
+		"motion": [],
+		"breakpoints": [
+			{
+				"name": "compact-labels",
+				"value": "1250px"
+			},
+			{
+				"name": "active-context-only",
+				"value": "1000px"
+			},
+			{
+				"name": "icon-scm",
+				"value": "760px"
+			}
+		]
+	},
+	"components": [
+		{
+			"name": "Context Button",
+			"kind": "button",
+			"refersTo": "shell-button",
+			"description": "Unselected native workbench context; the disabled selector shows restoration-unavailable state. Preview has no application handlers.",
+			"html": "<div class=\"ds-stage\"><button class=\"ds-button ds-context\" type=\"button\" aria-pressed=\"false\">Review</button></div>",
+			"css": ".ds-stage { display:inline-flex; align-items:center; gap:var(--vscode-spacing-size40,4px); padding:8px; background:var(--vscode-titleBar-activeBackground,#0B1119); color:var(--vscode-titleBar-activeForeground,#E6EFF7); }.ds-button { display:inline-flex; align-items:center; justify-content:center; gap:var(--vscode-spacing-size40,4px); height:var(--vscode-spacing-size240,24px); min-width:var(--vscode-spacing-size240,24px); padding:0 var(--vscode-spacing-size60,6px); border:var(--vscode-strokeThickness,1px) solid transparent; border-radius:var(--vscode-cornerRadius-small,4px); background:transparent; color:var(--vscode-titleBar-activeForeground,#E6EFF7); font-family:'Segoe WPC','Segoe UI',sans-serif; font-size:13px; line-height:normal; white-space:nowrap; cursor:pointer; } .ds-button:hover { background:var(--vscode-toolbar-hoverBackground,rgba(90,93,94,.31)); } .ds-button:focus-visible { outline:var(--vscode-strokeThickness,1px) solid var(--vscode-focusBorder,#81B5E9); outline-offset:calc(-1 * var(--vscode-strokeThickness,1px)); } .ds-button:disabled { cursor:default; color:var(--vscode-disabledForeground,#555555); }.ds-context[aria-pressed=\"true\"] { background:var(--vscode-list-activeSelectionBackground,#29394A); color:var(--vscode-list-activeSelectionForeground,#E6EFF7); border-bottom-color:var(--vscode-focusBorder,#81B5E9); }"
+		},
+		{
+			"name": "Selected Context",
+			"kind": "button",
+			"refersTo": "context-selected",
+			"description": "Pressed fill and bottom-border shape distinguish the active composition. Keyboard focus remains a separate outline.",
+			"html": "<div class=\"ds-stage\"><button class=\"ds-button ds-context\" type=\"button\" aria-pressed=\"true\">Explore</button></div>",
+			"css": ".ds-stage { display:inline-flex; align-items:center; gap:var(--vscode-spacing-size40,4px); padding:8px; background:var(--vscode-titleBar-activeBackground,#0B1119); color:var(--vscode-titleBar-activeForeground,#E6EFF7); }.ds-button { display:inline-flex; align-items:center; justify-content:center; gap:var(--vscode-spacing-size40,4px); height:var(--vscode-spacing-size240,24px); min-width:var(--vscode-spacing-size240,24px); padding:0 var(--vscode-spacing-size60,6px); border:var(--vscode-strokeThickness,1px) solid transparent; border-radius:var(--vscode-cornerRadius-small,4px); background:transparent; color:var(--vscode-titleBar-activeForeground,#E6EFF7); font-family:'Segoe WPC','Segoe UI',sans-serif; font-size:13px; line-height:normal; white-space:nowrap; cursor:pointer; } .ds-button:hover { background:var(--vscode-toolbar-hoverBackground,rgba(90,93,94,.31)); } .ds-button:focus-visible { outline:var(--vscode-strokeThickness,1px) solid var(--vscode-focusBorder,#81B5E9); outline-offset:calc(-1 * var(--vscode-strokeThickness,1px)); } .ds-button:disabled { cursor:default; color:var(--vscode-disabledForeground,#555555); }.ds-context[aria-pressed=\"true\"] { background:var(--vscode-list-activeSelectionBackground,#29394A); color:var(--vscode-list-activeSelectionForeground,#E6EFF7); border-bottom-color:var(--vscode-focusBorder,#81B5E9); }"
+		},
+		{
+			"name": "Pinned Tool Areas",
+			"kind": "button",
+			"refersTo": "pin-selected",
+			"description": "Pressed border and accent indicate a visibility pin. SVG is a self-contained preview translation of the native pin icon.",
+			"html": "<div class=\"ds-stage\"><button class=\"ds-button ds-pin\" type=\"button\" aria-label=\"Pin Tool Areas\" aria-pressed=\"true\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\"><path d=\"M5 2h6M6 2v4L4 8v2h3v4l1-1v-3h4V8l-2-2V2\"/></svg></button></div>",
+			"css": ".ds-stage { display:inline-flex; align-items:center; gap:var(--vscode-spacing-size40,4px); padding:8px; background:var(--vscode-titleBar-activeBackground,#0B1119); color:var(--vscode-titleBar-activeForeground,#E6EFF7); }.ds-button { display:inline-flex; align-items:center; justify-content:center; gap:var(--vscode-spacing-size40,4px); height:var(--vscode-spacing-size240,24px); min-width:var(--vscode-spacing-size240,24px); padding:0 var(--vscode-spacing-size60,6px); border:var(--vscode-strokeThickness,1px) solid transparent; border-radius:var(--vscode-cornerRadius-small,4px); background:transparent; color:var(--vscode-titleBar-activeForeground,#E6EFF7); font-family:'Segoe WPC','Segoe UI',sans-serif; font-size:13px; line-height:normal; white-space:nowrap; cursor:pointer; } .ds-button:hover { background:var(--vscode-toolbar-hoverBackground,rgba(90,93,94,.31)); } .ds-button:focus-visible { outline:var(--vscode-strokeThickness,1px) solid var(--vscode-focusBorder,#81B5E9); outline-offset:calc(-1 * var(--vscode-strokeThickness,1px)); } .ds-button:disabled { cursor:default; color:var(--vscode-disabledForeground,#555555); }.ds-pin[aria-pressed=\"true\"] { color:var(--vscode-focusBorder,#81B5E9); border-color:var(--vscode-focusBorder,#81B5E9); }"
+		},
+		{
+			"name": "Source Control HUD",
+			"kind": "button",
+			"refersTo": "shell-button",
+			"description": "Repository-unavailable state uses Git without an invented branch or count. The application uses real repository state; the preview has no data connection.",
+			"html": "<div class=\"ds-stage\"><button class=\"ds-button\" type=\"button\" aria-label=\"Open Source Control\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\"><circle cx=\"4\" cy=\"3\" r=\"1.5\"/><circle cx=\"4\" cy=\"13\" r=\"1.5\"/><circle cx=\"12\" cy=\"3\" r=\"1.5\"/><path d=\"M4 4.5v7m8-7c0 4-8 1-8 6\"/></svg><span class=\"ds-repository-label\">Git</span></button></div>",
+			"css": ".ds-stage { display:inline-flex; align-items:center; gap:var(--vscode-spacing-size40,4px); padding:8px; background:var(--vscode-titleBar-activeBackground,#0B1119); color:var(--vscode-titleBar-activeForeground,#E6EFF7); }.ds-button { display:inline-flex; align-items:center; justify-content:center; gap:var(--vscode-spacing-size40,4px); height:var(--vscode-spacing-size240,24px); min-width:var(--vscode-spacing-size240,24px); padding:0 var(--vscode-spacing-size60,6px); border:var(--vscode-strokeThickness,1px) solid transparent; border-radius:var(--vscode-cornerRadius-small,4px); background:transparent; color:var(--vscode-titleBar-activeForeground,#E6EFF7); font-family:'Segoe WPC','Segoe UI',sans-serif; font-size:13px; line-height:normal; white-space:nowrap; cursor:pointer; } .ds-button:hover { background:var(--vscode-toolbar-hoverBackground,rgba(90,93,94,.31)); } .ds-button:focus-visible { outline:var(--vscode-strokeThickness,1px) solid var(--vscode-focusBorder,#81B5E9); outline-offset:calc(-1 * var(--vscode-strokeThickness,1px)); } .ds-button:disabled { cursor:default; color:var(--vscode-disabledForeground,#555555); }.ds-repository-label { max-width:120px; overflow:hidden; text-overflow:ellipsis; } @media(max-width:1250px) { .ds-repository-label { max-width:80px; } } @media(max-width:760px) { .ds-repository-label { display:none; } }"
+		},
+		{
+			"name": "Context Strip",
+			"kind": "nav",
+			"refersTo": "context-selected",
+			"description": "Full and narrow context composition with native toolbar semantics. Preview expresses layout and states; real roving navigation and picker are implemented by the workbench service.",
+			"html": "<div class=\"ds-stage\"><div class=\"ds-strip\" role=\"toolbar\" aria-label=\"Workspace Contexts\"><button class=\"ds-button ds-context\" type=\"button\" aria-pressed=\"false\" tabindex=\"-1\">Focus</button><button class=\"ds-button ds-context\" type=\"button\" aria-pressed=\"true\">Explore</button><button class=\"ds-button ds-context\" type=\"button\" aria-pressed=\"false\" tabindex=\"-1\">Review</button><button class=\"ds-button ds-context\" type=\"button\" aria-pressed=\"false\" tabindex=\"-1\">Operate</button></div><button class=\"ds-button ds-chooser\" type=\"button\" aria-label=\"Choose Workspace Context\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\"><path d=\"m4 6 4 4 4-4\"/></svg></button></div>",
+			"css": ".ds-stage { display:inline-flex; align-items:center; gap:var(--vscode-spacing-size40,4px); padding:8px; background:var(--vscode-titleBar-activeBackground,#0B1119); color:var(--vscode-titleBar-activeForeground,#E6EFF7); }.ds-button { display:inline-flex; align-items:center; justify-content:center; gap:var(--vscode-spacing-size40,4px); height:var(--vscode-spacing-size240,24px); min-width:var(--vscode-spacing-size240,24px); padding:0 var(--vscode-spacing-size60,6px); border:var(--vscode-strokeThickness,1px) solid transparent; border-radius:var(--vscode-cornerRadius-small,4px); background:transparent; color:var(--vscode-titleBar-activeForeground,#E6EFF7); font-family:'Segoe WPC','Segoe UI',sans-serif; font-size:13px; line-height:normal; white-space:nowrap; cursor:pointer; } .ds-button:hover { background:var(--vscode-toolbar-hoverBackground,rgba(90,93,94,.31)); } .ds-button:focus-visible { outline:var(--vscode-strokeThickness,1px) solid var(--vscode-focusBorder,#81B5E9); outline-offset:calc(-1 * var(--vscode-strokeThickness,1px)); } .ds-button:disabled { cursor:default; color:var(--vscode-disabledForeground,#555555); }.ds-context[aria-pressed=\"true\"] { background:var(--vscode-list-activeSelectionBackground,#29394A); color:var(--vscode-list-activeSelectionForeground,#E6EFF7); border-bottom-color:var(--vscode-focusBorder,#81B5E9); }.ds-strip { display:flex; align-items:center; gap:var(--vscode-spacing-size20,2px); border-inline:var(--vscode-strokeThickness,1px) solid var(--vscode-widget-border,#2A2B2C); padding-inline:var(--vscode-spacing-size40,4px); } .ds-chooser { display:none; } @media(max-width:1000px) { .ds-context:not([aria-pressed=\"true\"]) { display:none; } .ds-chooser { display:inline-flex; } }"
+		}
+	],
+	"narrative": {
+		"northStar": "Quiet Shell",
+		"overview": "Codelad is a browser-rendered Electron desktop workbench. This record describes the implemented Quiet Shell strip and Codelad Graphite theme, with the existing editor and workbench controls as its foundation. Source remains the primary field; a compact title-area strip changes the tools around it. The feeling is calm, focused and familiar to a developer using native menus, keyboard commands and extensions.\n\nThe supplied direction is Quiet Shell + Scrollspace + Atlas in Smoke / Graphite / Ice. Its current expression is four saved pane compositions sharing actual editor groups. This implementation does not supply a semantic Atlas graph, a horizontal Scrollspace canvas, independent editor contents per context, or the complete utility system. Existing workbench surfaces retain their own component behavior; this document does not claim an entire VS Code redesign.",
+		"keyCharacteristics": [
+			"One real editor field shared across task contexts.",
+			"Opaque Graphite reading surfaces beneath quieter Ink chrome.",
+			"Compact controls with theme-bound selection and keyboard focus.",
+			"Real source-control state and user-invoked configured tasks.",
+			"Reversible desktop integration that preserves native affordances."
+		],
+		"rules": [
+			{
+				"name": "The Semantic Theme Rule",
+				"body": "Bind shell colors to existing workbench semantic tokens. Graphite is the default dark theme; preserve user-selected themes and high-contrast overrides. The shell setting does not force a theme switch.",
+				"section": "colors"
+			},
+			{
+				"name": "The Native Label Rule",
+				"body": "Keep context names and actions at the workbench text tier. Preserve user zoom, platform font fallbacks and editor typography rather than adding a separate branding type scale to titlebar controls.",
+				"section": "typography"
+			},
+			{
+				"name": "The Shared Editor Rule",
+				"body": "Context selection changes real tool panes around the existing editors. It does not replace, clone or forcibly merge editor groups. Explorer, SCM and terminal continue to use their existing workbench layouts and resizing behavior.",
+				"section": "layout"
+			}
+		],
+		"dos": [
+			"**Do** keep real source central while contextual tools change around shared editor groups.",
+			"**Do** use workbench semantic colors, visible focus and pressed-state shape across Graphite, custom themes and high contrast.",
+			"**Do** preserve caption controls, drag regions, keyboard commands, native menus and extension behavior.",
+			"**Do** use actual SCM state and configured tasks, with execution following an explicit user choice.",
+			"**Do** keep reading surfaces opaque and preserve existing solid, reduced-motion and transparency fallbacks.",
+			"**Do** retain the approved Codelad name and supplied identity assets."
+		],
+		"donts": [
+			"**Don't** present pane snapshots as independent editor sessions, an Atlas semantic graph or a Scrollspace canvas.",
+			"**Don't** hardcode the Graphite palette over custom or high-contrast themes.",
+			"**Don't** use invented Git/task data, fake graph edges, embedded wallpaper or AI drawings as proof of the actual workbench.",
+			"**Don't** infer OS DPI or additional platform validation from application zoom or the available Windows captures.",
+			"**Don't** treat this visual record as closure of the open privacy checks or authority to redesign every incumbent workbench component."
+		]
+	}
+}

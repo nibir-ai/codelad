@@ -1,0 +1,26 @@
+[
+  {
+    "case": "pin and unpin preserves focus baseline",
+    "active": "focus",
+    "side": false,
+    "panel": false,
+    "width": 0,
+    "hud": "ui-check, 4 pending changes. Open Source Control"
+  },
+  {
+    "case": "roving keyboard at compact width",
+    "active": "focus",
+    "side": false,
+    "panel": false,
+    "width": 0,
+    "hud": "ui-check, 4 pending changes. Open Source Control"
+  },
+  {
+    "case": "sidebar width restored",
+    "active": "explore",
+    "side": true,
+    "panel": false,
+    "width": 170,
+    "hud": "ui-check, 4 pending changes. Open Source Control"
+  }
+]

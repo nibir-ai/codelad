@@ -1,6 +1,6 @@
 # Privacy checks still open
 
-The user authorized proceeding to the native glass proof of concept on 2026-10-30 while keeping unrun checks visible. **Phase 1 is not fully accepted.** Glass work does not erase the existing evidence or convert unavailable tests into passes.
+The user authorized proceeding through native glass to Quiet Shell on 2026-10-30 while keeping unrun checks visible. **Phase 1 is not fully accepted.** Appearance work does not erase the existing evidence or convert unavailable tests into passes. Quiet Shell uses existing SCM observables, the normal task/trust service and machine-only workspace layout storage; it adds no network service or analytics. Its Chromium smoke capture is bounded evidence, not a substitute for the gates below.
 
 | Gate | Evidence / remaining work |
 | --- | --- |
