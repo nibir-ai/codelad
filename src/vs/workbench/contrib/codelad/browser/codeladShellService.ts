@@ -167,12 +167,12 @@ export class CodeladShellService extends Disposable implements ICodeladShellServ
 	}
 
 	private async apply(layout: ICodeladLayout, honorPins: boolean): Promise<void> {
+		// A picker can restore tool focus asynchronously. Let it settle before
+		// suppressing layout events and applying the requested composition.
+		await timeout(0);
 		this.applying = true;
 		this.saveScheduler.cancel();
 		try {
-			// A picker can restore terminal focus asynchronously. Let that settle
-			// before hiding panes, otherwise it can reopen the panel afterwards.
-			await timeout(0);
 			const sidebar = layout.sidebar || (honorPins && this.state.pinSidebar);
 			const panel = layout.panel || (honorPins && this.state.pinPanel);
 			// Opening through the views service awaits the composite and prevents the
