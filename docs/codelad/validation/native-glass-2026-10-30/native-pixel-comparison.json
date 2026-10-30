@@ -1,0 +1,128 @@
+[
+  {
+    "gutter": [
+      224,
+      27,
+      45
+    ],
+    "editor": [
+      30,
+      30,
+      30
+    ],
+    "activity": [
+      91,
+      24,
+      31
+    ],
+    "file": "fixed-acrylic-red-blue.png"
+  },
+  {
+    "gutter": [
+      12,
+      169,
+      52
+    ],
+    "editor": [
+      30,
+      30,
+      30
+    ],
+    "activity": [
+      19,
+      71,
+      32
+    ],
+    "file": "fixed-acrylic-green-yellow.png"
+  },
+  {
+    "gutter": [
+      24,
+      25,
+      27
+    ],
+    "editor": [
+      30,
+      30,
+      30
+    ],
+    "activity": [
+      25,
+      26,
+      28
+    ],
+    "file": "fixed-solid.png"
+  },
+  {
+    "gutter": [
+      28,
+      33,
+      37
+    ],
+    "editor": [
+      30,
+      30,
+      30
+    ],
+    "activity": [
+      27,
+      28,
+      32
+    ],
+    "file": "fixed-mica-background-a.png"
+  },
+  {
+    "gutter": [
+      28,
+      33,
+      37
+    ],
+    "editor": [
+      30,
+      30,
+      30
+    ],
+    "activity": [
+      27,
+      28,
+      32
+    ],
+    "file": "fixed-mica-background-b.png"
+  },
+  {
+    "editor": [
+      18,
+      19,
+      21
+    ],
+    "gutter": [
+      224,
+      32,
+      43
+    ],
+    "file": "packaged-acrylic-red-blue.png",
+    "activity": [
+      57,
+      25,
+      30
+    ]
+  },
+  {
+    "editor": [
+      18,
+      19,
+      21
+    ],
+    "gutter": [
+      14,
+      173,
+      57
+    ],
+    "file": "packaged-acrylic-green-yellow.png",
+    "activity": [
+      21,
+      48,
+      29
+    ]
+  }
+]

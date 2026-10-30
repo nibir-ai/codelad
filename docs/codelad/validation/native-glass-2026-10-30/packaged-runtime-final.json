@@ -1,0 +1,62 @@
+{
+  "buildCommit": "1600ef9e0f0acb54792db8fc170b9e31aed263ad",
+  "results": [
+    {
+      "label": "acrylic",
+      "effective": "acrylic",
+      "grid": "rgba(0, 0, 0, 0)",
+      "editor": "rgb(18, 19, 20)"
+    },
+    {
+      "label": "solid",
+      "effective": "none",
+      "grid": "rgb(25, 26, 27)",
+      "editor": "rgb(18, 19, 20)"
+    },
+    {
+      "label": "mica",
+      "effective": "mica",
+      "grid": "rgba(0, 0, 0, 0)",
+      "editor": "rgb(18, 19, 20)"
+    },
+    {
+      "label": "restored acrylic",
+      "effective": "acrylic",
+      "grid": "rgba(0, 0, 0, 0)",
+      "editor": "rgb(18, 19, 20)"
+    },
+    {
+      "label": "edit/save",
+      "passed": true
+    },
+    {
+      "label": "split editors",
+      "passed": true
+    },
+    {
+      "label": "real terminal shell",
+      "passed": true
+    },
+    {
+      "label": "opaque terminal panel",
+      "background": "rgb(25, 26, 27)"
+    }
+  ],
+  "telemetry": false,
+  "additionalChecks": {
+    "defaultSolidWithUserSettingRemoved": true,
+    "localDiff": true,
+    "localWebview": true,
+    "terminalEchoObserved": true
+  },
+  "exit": {
+    "code": 0,
+    "signal": null
+  },
+  "netlog": {
+    "coverage": "Chromium URL events only. Node, extension host, child processes, DNS and OS traffic require separate capture.",
+    "localRequests": 0,
+    "emptyWebSocketEvents": 0,
+    "hosts": []
+  }
+}

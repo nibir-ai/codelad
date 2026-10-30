@@ -1,8 +1,12 @@
 # Codelad handoff
 
-Latest Windows trial packaging and visual-check continuation: [trial report](native-glass-trial-2026-10-30.md). This supersedes the earlier source-only artifact status below; visual acceptance and the packaged runtime smoke remain open.
+## Windows visual continuation after idle confirmation
 
-## Native glass continuation, 2026-10-30
+The native comparison exposed an opaque floating layout grid. Fix `1600ef9e0f0` clears only the outer grid while native glass is active. [Native screenshots and pixel comparisons](native-glass-visual-2026-10-30.md) now establish live Acrylic color changes with an unchanged opaque code background, independent Mica behavior, solid/accessibility fallbacks, inactive/light/dark states, palette readability and application zoom. Physical OS DPI and performance/other-host gates remain open. Use the [current trial report](native-glass-trial-2026-10-30.md) for the rebuilt installer and final packaged smoke scope. The older statements below about blocked capture and an open unsaved source window are historical: that app was absent on resume; the fresh source validation windows closed normally without changing tracked source files.
+
+The refreshed package identifies `1600ef9e0f0`. Its native captures at chrome opacity 0.85, default-solid behavior, real edit/save, splits, terminal output, diff and local webview pass at the recorded scope. The final app exits code 0 and the completed Chromium log lists no URL hosts. See the [trial report and installer identity](native-glass-trial-2026-10-30.md). All new test windows are closed and helpers removed. Physical DPI, performance, wider privacy/platform and release gates remain open; keep `stable` unchanged.
+
+## Earlier native glass checkpoint, 2026-10-30 (historical)
 
 The user explicitly moved on to the native glass proof of concept while keeping unavailable privacy checks documented. The opt-in adapter, live user settings, Windows Acrylic/Mica, solid fallbacks, applied high-contrast theme guard and opaque reading surfaces are implemented in the real workbench. Read [native glass status and evidence](native-glass-poc.md), [remaining privacy gates](privacy-open-checks.md) and the [new design research index](design/README.md). All four supplied research/catalog files are archived there unchanged; their instructions are reference material, not independent authorization for the entire redesign. Quiet Shell + Scrollspace + Atlas supersedes the old compulsory five-pane sketch as planning direction.
 

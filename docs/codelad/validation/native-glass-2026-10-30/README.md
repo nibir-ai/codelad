@@ -1,5 +1,7 @@
 # Native material evidence, Windows development process
 
+Current continuation: [native visual checks and grid fix](../../native-glass-visual-2026-10-30.md), [refreshed packaged runtime](packaged-runtime-final.json) and [current installer identity](trial-artifact.json). The original API-only checkpoint below is historical. Captures prefixed `fixed-` exercise the corrected source renderer; `packaged-` captures exercise build `1600ef9e0f0`. The [pixel comparison](native-pixel-comparison.json) records the external-background distinction and unchanged code-region samples.
+
 Scope: Windows 11 25H2 build 26200.9168, Electron 43.8.3, source workbench, isolated user/shared/extension directories. No personal credentials or third-party extensions were copied. The temporary extension changes only its disposable user settings and fixture files and invokes existing editor/terminal commands.
 
 [Runtime results](runtime-results.json) record ten material/layout states, computed chrome/editor/terminal backgrounds, viewport sizes and read-only DWM attribute 38 results. DWM values 3, 2 and 1 identify Acrylic, Mica and no backdrop. The extra reading-surface sample confirms an opaque `rgb(25, 26, 27)` terminal panel, opaque `rgb(18, 19, 20)` editor and live chrome alpha 0.85. A transparent terminal wrapper is expected; its enclosing panel retains the opaque reading background. These are tested theme values, not a guarantee about arbitrary user-authored theme colors. Whole-window opacity is 1 and maximize/restore returns normally.

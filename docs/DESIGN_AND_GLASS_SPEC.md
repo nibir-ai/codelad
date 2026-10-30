@@ -52,7 +52,7 @@ Example token names (adapt to actual VS Code ColorRegistry / theming services):
 
 ## Very important compositor distinction
 
-The [current source proof of concept](codelad/native-glass-poc.md) implements application-scoped `window.codeladGlass.mode`, `chromeOpacity` and `reduceTransparency`. It defaults to solid; Windows Acrylic/Mica have bounded native API evidence, macOS vibrancy is unrun, and Linux remains solid. The report separates accepted DWM attributes from still-open live-background visual acceptance. These real settings supersede the illustrative token names above for this prototype.
+The [current proof of concept](codelad/native-glass-poc.md) implements application-scoped `window.codeladGlass.mode`, `chromeOpacity` and `reduceTransparency`. It defaults to solid; Windows Acrylic/Mica have [native screenshot/API evidence](codelad/native-glass-visual-2026-10-30.md), macOS vibrancy is unrun, and Linux remains solid. The outer floating layout grid is transparent only with an active material; reading surfaces remain opaque. Physical OS DPI, performance and wider platform acceptance remain open. These real settings supersede the illustrative token names above for this prototype.
 
 Kitty's `background_opacity` means the terminal's *background pixels* can be transparent. Real blur of the actual desktop behind is supported only when platform/compositor permits it. Kitty's own documentation states `background_blur` currently works on macOS and compositor-supported Wayland environments; do not assume same capability in Electron, or X11, or all Linux distributions.
 

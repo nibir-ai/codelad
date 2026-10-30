@@ -1,13 +1,27 @@
 # Windows native glass trial
 
-The Windows app was rebuilt from `1759a6844e2d990add1a966995c5ddee6d2387e8`: all 26 minified desktop bundles completed in 135.5 seconds and Windows packaging completed in 3.13 minutes. Packaged product privacy configuration passes. This is a development trial, not a stable release. The [artifact metadata](validation/native-glass-2026-10-30/trial-artifact.json) records installer completion, identity and SHA-256. It was not installed, and the refreshed packaged app has not yet had its own runtime smoke test.
+Current runtime build: **`1600ef9e0f0acb54792db8fc170b9e31aed263ad`**. This replaces the earlier `1759a6844e2` trial, whose floating-panel grid hid the native backdrop. All 26 minified desktop bundles rebuilt in 215.7 seconds; Windows packaging completed in 5.1 minutes. Unchanged staged built-in extension outputs were reused. This is a development trial, not clean release provenance or a stable release.
+
+## Try it
 
 - Unpacked app: `D:/VSCode-win32-x64/Codelad.exe`.
 - Installer: `D:/codelad/.build/win32-x64/user-setup/CodeladSetup.exe`.
-- Trial launcher: `D:/codelad/.build/codelad/Try-Codelad-Glass.cmd`. This enables native mode at chrome opacity 0.85 in a separate preview user/shared/extensions profile; it does not change the normal profile. Regular installation still defaults to solid mode. The preview files are local build artifacts, not repository source.
+- Trial launcher: `D:/codelad/.build/codelad/Try-Codelad-Glass.cmd`. It enables native mode at chrome opacity 0.85 in separate preview user/shared/extensions directories. It does not modify the normal profile. Regular installation defaults to solid mode.
 
-The initial [native source-window capture](validation/native-glass-2026-10-30/windows-source-initial.png) shows readable text and controls at display scale factor 1. It also shows Restricted Mode and a development extension-host startup warning. It is not evidence of live desktop blur. Foreground keyboard input interrupted the external-background comparison; no Acrylic/Mica visual sign-off, moving-background comparison, inactive-window, DPI or performance pass is claimed. The earlier [ten-state API/layout checks](native-glass-poc.md) remain valid at their recorded scope. No unavailable [privacy checks](privacy-open-checks.md) were converted into passes.
+The [artifact metadata](validation/native-glass-2026-10-30/trial-artifact.json) records the current installer identity, size, SHA-256 and signature status. The installer was not installed. Preview files are local build artifacts, not repository source. Keep `stable` unchanged.
 
-The native source validation window remains open with an unsaved buffer after keyboard interference. No source edit was saved; review/preserve that buffer before closing. Always-on-top behavior was removed and the diagnostic background window closed. Its disposable profile/logs are under `.build/codelad/glass-visual-2026-10-30`; the recorded main/renderer inspector ports are 59038/59037. The temporary launcher helper was removed. Continue captures only after the user confirms the test window can remain idle, then run a fresh packaged smoke check. The user's offered generated UI image is welcome as a design reference; no replacement UI is implemented here.
+## Packaged validation
 
-The first installer attempt missed the required updater staging task. Running `vscode-win32-x64-inno-updater` supplies the existing local installer helper before `vscode-win32-x64-user-setup`. Raw logs remain ignored alongside the validation profile. Keep `stable` unchanged. This is the user's near-5%-remaining handoff; pause after pushing it.
+Packaged product privacy configuration passes. The refreshed app ran with fresh user/shared/extension directories and a disposable local validation extension; no personal credentials were copied. [Runtime results](validation/native-glass-2026-10-30/packaged-runtime-final.json) record Acrylic, Mica, solid and restored-Acrylic states, with a transparent outer grid only for native materials and an opaque editor throughout. Removing the explicit user setting restores the solid default.
+
+Local edit/save was checked from disk. Split editors, a real terminal shell process and its echo output passed; the terminal panel remains opaque. A real diff editor and local webview rendered over native chrome. An early diff fixture contained literal escape characters; those were corrected before the final diagnostics-clear captures. Telemetry stays disabled, the app exits code 0 and its completed Chromium log lists no URL hosts. This capture excludes Node/native traffic, DNS and OS-level offline behavior.
+
+Native [red/blue](validation/native-glass-2026-10-30/packaged-acrylic-red-blue.png) and [green/yellow](validation/native-glass-2026-10-30/packaged-acrylic-green-yellow.png) captures verify the actual package at chrome opacity 0.85. [Diff/terminal](validation/native-glass-2026-10-30/packaged-diff-terminal.png) and [local webview](validation/native-glass-2026-10-30/packaged-local-webview.png) captures supplement the [source visual matrix](native-glass-visual-2026-10-30.md).
+
+## Remaining scope
+
+The bounded Windows proof now includes native appearance, fallbacks and packaged local coding. Physical Windows DPI changes, GPU/frame-time/power performance, continuous-motion stress, arbitrary third-party renderers, macOS/Linux materials, packet/DNS isolation, live-account privacy, install/uninstall and signing remain open. Preserve the [privacy ledger](privacy-open-checks.md) and [delivery matrix](../PRIVACY_AND_TEST_MATRIX.md).
+
+All fresh validation windows and diagnostic backgrounds closed after testing; temporary executable helpers were removed. Raw profiles/logs remain ignored under `.build/codelad/glass-native-final-2026-10-30` and `.build/codelad/glass-package-final-2026-10-30`. The earlier source NetLog after overlapping helper launches was invalid and is not network evidence; the final packaged run uses a separate path and passes strict parsing. The previous unsaved-window note is historical: that app was absent on resume, and no tracked user source edit was found or overwritten.
+
+Stage `vscode-win32-x64-inno-updater` before `vscode-win32-x64-user-setup`. The first trial omitted this required step; the current build includes it. The user's offered generated image is welcome for the later redesign; this fix does not implement a replacement layout.

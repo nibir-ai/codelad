@@ -1,6 +1,6 @@
 # Native glass proof of concept
 
-Latest Windows trial packaging and visual-check continuation: [trial report](native-glass-trial-2026-10-30.md). This supersedes the earlier source-only artifact status below; visual acceptance and the packaged runtime smoke remain open.
+Latest Windows continuation: the idle-window comparison exposed an opaque floating layout grid. Fix `1600ef9e0f0` now has [native screenshot and pixel evidence](native-glass-visual-2026-10-30.md). See the [current trial artifacts](native-glass-trial-2026-10-30.md) for refreshed packaging and runtime scope. Older source-only/capture-blocked statements below describe the first checkpoint.
 
 Updated 2026-10-30. This is an opt-in material adapter in the real Electron workbench, not the complete Codelad redesign or a release. The user authorized this phase while [unavailable privacy gates](privacy-open-checks.md) remain open. The supplied [research archive](design/README.md) informs later layout work; it does not expand this implementation into Scrollspace or Atlas.
 
@@ -41,9 +41,9 @@ The actual Electron process was inspected with the Windows DWM read-only attribu
 
 All ten final material/layout states pass. The live 0.85 chrome sample preserves opaque editor and terminal-panel backgrounds, with whole-window opacity 1. The final editor and extension host exit code 0; the completed Chromium log lists no URL hosts. This capture excludes Node/native, DNS and OS traffic and is not a replacement for the open privacy gates.
 
-Native visual acceptance is **open**. Foreground activity interfered with native-window captures; those captures were discarded and are not checked in. DWM's accepted material type and computed CSS establish the API and surface state, not a verified live-background blur image. Still required: a controlled bright/dark/moving external background comparison, inactive-window behavior, visual contrast and interaction review, 125%/150% DPI, OS-level reduced-transparency changes, GPU/frame-time/resource measurements and macOS visual testing. Diff views, webviews, notifications and autocomplete retain their existing surfaces but have not received full glass visual acceptance.
+The first capture-blocked checkpoint established native API state, but missed an opaque layout grid. The [completed bounded Windows visual checks](native-glass-visual-2026-10-30.md) verify the fix: Acrylic follows changing external-window colors while code stays opaque, Mica does not follow those windows, and solid/accessibility, inactive, light/dark, palette and application-zoom states remain readable. Full visual/platform acceptance stays open: physical 125%/150% Windows DPI, continuous-motion/GPU/frame-time/resource measurements, OS-level reduced-transparency changes, macOS and the broader interaction matrix remain unverified. Application zoom is not OS DPI testing.
 
-The existing packaged app and unsigned installer still identify **`3736c38819c`** and contain the earlier notebook/provider fixes, **not this glass prototype**. No new installer or stable release is claimed. Keep `stable` unchanged until the release gates pass.
+The earlier `3736c38819c` privacy installer and `1759a6844e2` initial glass trial are historical artifacts. Use the [current trial report and installer identity](native-glass-trial-2026-10-30.md). Keep `stable` unchanged until release gates pass.
 
 ## Sources
 
