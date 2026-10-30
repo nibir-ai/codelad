@@ -967,6 +967,7 @@ export const NotebookSetting = {
 	markdownLineHeight: 'notebook.markdown.lineHeight',
 	interactiveWindowCollapseCodeCells: 'interactiveWindow.collapseCellInputCode',
 	outputScrolling: 'notebook.output.scrolling',
+	outputAllowRemoteContent: 'notebook.output.allowRemoteContent',
 	textOutputLineLimit: 'notebook.output.textLineLimit',
 	LinkifyOutputFilePaths: 'notebook.output.linkifyFilePaths',
 	minimalErrorRendering: 'notebook.output.minimalErrorRendering',

@@ -15,7 +15,7 @@ import { IModelService } from '../../../../editor/common/services/model.js';
 import { ILanguageSelection, ILanguageService } from '../../../../editor/common/languages/language.js';
 import { ITextModelContentProvider, ITextModelService } from '../../../../editor/common/services/resolverService.js';
 import * as nls from '../../../../nls.js';
-import { Extensions, IConfigurationPropertySchema, IConfigurationRegistry } from '../../../../platform/configuration/common/configurationRegistry.js';
+import { ConfigurationScope, Extensions, IConfigurationPropertySchema, IConfigurationRegistry } from '../../../../platform/configuration/common/configurationRegistry.js';
 import { SyncDescriptor } from '../../../../platform/instantiation/common/descriptors.js';
 import { InstantiationType, registerSingleton } from '../../../../platform/instantiation/common/extensions.js';
 import { IInstantiationService } from '../../../../platform/instantiation/common/instantiation.js';
@@ -1179,6 +1179,12 @@ configurationRegistry.registerConfiguration({
 			type: 'boolean',
 			tags: ['notebookLayout', 'notebookOutputLayout'],
 			default: typeof product.quality === 'string' && product.quality !== 'stable' // only enable as default in insiders
+		},
+		[NotebookSetting.outputAllowRemoteContent]: {
+			type: 'boolean',
+			default: false,
+			scope: ConfigurationScope.APPLICATION,
+			markdownDescription: nls.localize('notebook.outputAllowRemoteContent', "Allow notebook Markdown and output renderers to load remote resources and make network requests. Disabled by default to prevent requests triggered by saved notebook content. Local and embedded resources remain available. Enable only in user settings for notebooks you trust. Changing this setting reloads open notebook renderers. Kernels, extensions and links you open explicitly have separate network behavior."),
 		},
 		[NotebookSetting.outputWordWrap]: {
 			markdownDescription: nls.localize('notebook.outputWordWrap', "Controls whether the lines in output should wrap."),

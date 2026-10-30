@@ -45,14 +45,15 @@ import { NOTEBOOK_WEBVIEW_BOUNDARY } from '../notebookCellList.js';
 import { preloadsScriptStr } from './webviewPreloads.js';
 import { transformWebviewThemeVars } from './webviewThemeMapping.js';
 import { MarkupCellViewModel } from '../../viewModel/markupCellViewModel.js';
-import { CellUri, ICellOutput, INotebookRendererInfo, RendererMessagingSpec } from '../../../common/notebookCommon.js';
+import { CellUri, ICellOutput, INotebookRendererInfo, NotebookSetting, RendererMessagingSpec } from '../../../common/notebookCommon.js';
 import { INotebookKernel } from '../../../common/notebookKernelService.js';
 import { INotebookLoggingService } from '../../../common/notebookLoggingService.js';
 import { IScopedRendererMessaging } from '../../../common/notebookRendererMessagingService.js';
 import { INotebookService } from '../../../common/notebookService.js';
 import { IWebviewElement, IWebviewService, WebviewContentPurpose, WebviewOriginStore } from '../../../../webview/browser/webview.js';
 import { WebviewWindowDragMonitor } from '../../../../webview/browser/webviewWindowDragMonitor.js';
-import { asWebviewUri, webviewGenericCspSource } from '../../../../webview/common/webview.js';
+import { asWebviewUri } from '../../../../webview/common/webview.js';
+import { getNotebookContentSecurityPolicy } from './notebookContentSecurityPolicy.js';
 import { IEditorGroup, IEditorGroupsService } from '../../../../../services/editor/common/editorGroupsService.js';
 import { IEditorService } from '../../../../../services/editor/common/editorService.js';
 import { IWorkbenchEnvironmentService } from '../../../../../services/environment/common/environmentService.js';
@@ -225,6 +226,13 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 				css: getTokenizationCss(),
 			});
 		}));
+
+		this._register(configurationService.onDidChangeConfiguration(e => {
+			if (e.affectsConfiguration(NotebookSetting.outputAllowRemoteContent) || e.affectsConfiguration('notebook.experimental.enableCsp')) {
+				const baseUrl = this.asWebviewUri(this.getNotebookBaseUri(), undefined);
+				this.webview?.setHtml(this.generateContent(baseUrl.toString()));
+			}
+		}));
 	}
 
 	updateOptions(options: BacklayerWebviewOptions) {
@@ -312,6 +320,7 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 			this.nonce);
 
 		const enableCsp = this.configurationService.getValue('notebook.experimental.enableCsp');
+		const csp = getNotebookContentSecurityPolicy(this.configurationService.getValue<boolean>(NotebookSetting.outputAllowRemoteContent) === true, enableCsp === true);
 		const currentHighlight = this.getColor(editorFindMatch);
 		const findMatchHighlight = this.getColor(editorFindMatchHighlight);
 		return /* html */`
@@ -319,16 +328,7 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 			<head>
 				<meta charset="UTF-8">
 				<base href="${baseUrl}/" />
-				${enableCsp ?
-				`<meta http-equiv="Content-Security-Policy" content="
-					default-src 'none';
-					script-src ${webviewGenericCspSource} 'unsafe-inline' 'unsafe-eval';
-					style-src ${webviewGenericCspSource} 'unsafe-inline';
-					img-src ${webviewGenericCspSource} https: http: data:;
-					font-src ${webviewGenericCspSource} https:;
-					connect-src https:;
-					child-src https: data:;
-				">` : ''}
+				${csp ? `<meta http-equiv="Content-Security-Policy" content="${csp}">` : ''}
 				<style nonce="${this.nonce}">
 					::highlight(find-highlight) {
 						background-color: var(--vscode-editor-findMatchBackground, ${findMatchHighlight});

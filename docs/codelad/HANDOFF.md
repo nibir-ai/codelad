@@ -1,5 +1,9 @@
 # Codelad handoff
 
+## Notebook/provider continuation, 2026-10-30
+
+The user requested packaging the GitHub fix and completing notebook/provider checks available here. The refreshed baseline package contains `af6ab194bf1`. Actual notebook loading reproduced remote images and a script POST. The new user-only `notebook.output.allowRemoteContent` defaults off and enforces a local resource policy independently of the legacy experimental CSP switch. All six development notebook/provider cases, seven selected notebook/output unit tests, client types and targeted lint pass. The actual GitHub suite passes five tests, including controlled real GraphQL transport/payload checks. See [current evidence](notebook-provider-privacy-2026-10-30.md). Combined final packaging is the next step; retain the remaining host/capture boundaries below.
+
 ## Latest privacy continuation, 2026-10-30
 
 The user requested continued privacy work and confirmed **no additional hosts are available**. GitHub history avatar queries now require user-only opt-in (`github.showAvatar`, default/fallback false). The focused privacy selection passes 23 tests, actual Electron GitHub extension-host suite passes four, and extension types/production bundle/targeted lint pass. The suite's ESM runner, directory discovery and existing relative-path assertion were corrected after failed/empty early attempts; only the final four-test run counts. See [current GitHub privacy report](github-history-privacy-2026-10-30.md).
