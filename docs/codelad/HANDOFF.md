@@ -1,5 +1,13 @@
 # Codelad handoff
 
+## Latest privacy continuation, 2026-10-30
+
+The user requested continued privacy work and confirmed **no additional hosts are available**. GitHub history avatar queries now require user-only opt-in (`github.showAvatar`, default/fallback false). The focused privacy selection passes 23 tests, actual Electron GitHub extension-host suite passes four, and extension types/production bundle/targeted lint pass. The suite's ESM runner, directory discovery and existing relative-path assertion were corrected after failed/empty early attempts; only the final four-test run counts. See [current GitHub privacy report](github-history-privacy-2026-10-30.md).
+
+The latest usage meter reports **100% weekly used**, with **60% five-hour used / 40% remaining**; this checkpoint is preserving work ahead of weekly exhaustion, not claiming the five-hour threshold was reached. No reset credit was consumed. All test editors are closed. Refresh GitHub extension staging and package it on resumption: the last complete Windows package still contains `240b6558231`, and the installer remains `557b296eae2`.
+
+Privacy is unfinished. Windows OS isolation/packet-DNS and macOS/remaining Linux recovery need an available environment. Independent work also remains on notebook remote-resource behavior and authenticated provider payloads; do not describe the host limitations as the only remaining checks. Preserve previous evidence at its actual scope, keep `stable` unchanged, and continue the complete product objective after the privacy gate.
+
 ## Resumed on 2026-10-30
 
 The user requested a pull and continued work. `git pull --ff-only origin dev` succeeded, already up to date at `3da323c722b`, with a clean starting checkout. This supersedes the historical pause below. Continue on `dev`; `stable` remains the protected bootstrap checkpoint. The approximately 5%-remaining **five-hour** handoff/push/pause preference still applies.

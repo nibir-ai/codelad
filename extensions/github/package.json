@@ -211,8 +211,8 @@
           },
           "github.showAvatar": {
             "type": "boolean",
-            "scope": "resource",
-            "default": true,
+            "scope": "application",
+            "default": false,
             "description": "%config.showAvatar%"
           }
         }

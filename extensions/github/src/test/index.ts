@@ -30,3 +30,8 @@ if (process.env.BUILD_ARTIFACTSTAGINGDIRECTORY || process.env.GITHUB_WORKSPACE) 
 testRunner.configure(options);
 
 export default testRunner;
+
+/** Resolve test files relative to this ESM runner even when the host passes its file path. */
+export function run(_testsRoot: string, callback: (error: Error | null | undefined, failures?: number) => void): void {
+	testRunner.run(import.meta.dirname, callback);
+}

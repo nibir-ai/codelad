@@ -10,7 +10,7 @@
 	"config.branchProtection": "Controls whether to query repository rules for GitHub repositories",
 	"config.gitAuthentication": "Controls whether to enable automatic GitHub authentication for git commands within VS Code.",
 	"config.gitProtocol": "Controls which protocol is used to clone a GitHub repository",
-	"config.showAvatar": "Controls whether to show the GitHub avatar of the commit author in various hovers (ex: Git blame, Timeline, Source Control Graph, etc.)",
+	"config.showAvatar": "Show GitHub commit-author avatars in Git blame, Timeline and Source Control Graph. Disabled by default. Enabling this can send repository and commit details to GitHub using your signed-in account and download avatar images. Can only be enabled in user settings.",
 	"welcome.publishFolder": {
 		"message": "You can directly publish this folder to a GitHub repository. Once published, you'll have access to source control features powered by Git and GitHub.\n[$(github) Publish to GitHub](command:github.publish)",
 		"comment": [

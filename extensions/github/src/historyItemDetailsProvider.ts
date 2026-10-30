@@ -107,7 +107,7 @@ export class GitHubSourceControlHistoryItemDetailsProvider implements SourceCont
 		this._logger.trace(`[GitHubSourceControlHistoryItemDetailsProvider][provideAvatar] Avatar resolution for ${query.commits.length} commit(s) in ${repository.rootUri.fsPath}.`);
 
 		const config = workspace.getConfiguration('github', repository.rootUri);
-		const showAvatar = config.get<boolean>('showAvatar', true) === true;
+		const showAvatar = config.get<boolean>('showAvatar', false) === true;
 
 		if (!this._isUserAuthenticated || !showAvatar) {
 			this._logger.trace(`[GitHubSourceControlHistoryItemDetailsProvider][provideAvatar] Avatar resolution is disabled. (${showAvatar === false ? 'setting' : 'auth'})`);

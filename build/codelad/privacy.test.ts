@@ -30,6 +30,12 @@ test('Markdown remote resources and live link metadata require user opt-in', () 
 	})), [{ default: false, scope: 'application' }, { default: false, scope: 'application' }]);
 });
 
+test('GitHub history avatar lookups require user opt-in', () => {
+	const manifest = JSON.parse(readFileSync(new URL('../../extensions/github/package.json', import.meta.url), 'utf8'));
+	const properties = Object.assign({}, ...manifest.contributes.configuration.map((section: { properties: object }) => section.properties));
+	assert.deepStrictEqual({ default: properties['github.showAvatar'].default, scope: properties['github.showAvatar'].scope }, { default: false, scope: 'application' });
+});
+
 test('desktop, server, web and included built-ins do not depend on the removed telemetry SDKs', () => {
 	assertCodeladDependencyManifests(fileURLToPath(new URL('../../', import.meta.url)), product.skipBuiltinExtensions);
 });
