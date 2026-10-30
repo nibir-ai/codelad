@@ -10,7 +10,8 @@
 /* Native material shows through secondary chrome; editor and terminal surfaces keep their theme. */
 html.codelad-native-glass,
 html.codelad-native-glass body,
-html.codelad-native-glass .monaco-workbench {
+html.codelad-native-glass .monaco-workbench,
+html.codelad-native-glass .monaco-workbench > .monaco-grid-view {
 	background-color: transparent !important;
 }
 
