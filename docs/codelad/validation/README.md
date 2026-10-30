@@ -1,5 +1,11 @@
 # Desktop privacy validation evidence
 
+## Markdown remote-content defaults, 2026-10-30
+
+The actual Electron development workbench passed nine default/opt-in/opt-out rendering cases across the standard preview, preview editor and rich Markdown editor. [Standard preview](windows-markdown-preview-private.png) and [rich editor](windows-markdown-editor-private.png) show a rendered local image and blocked remote image. These development screenshots are privacy evidence, not final packaged branding or glass acceptance. [Safe request/sample summary](windows-markdown-summary-2026-10-30.json) records the five controlled opt-in GETs and capture limits. See the [continuation report](../markdown-privacy-2026-10-30.md) for exact build and platform scope.
+
+The refreshed incremental Windows package from `240b6558231` repeats all nine cases and exits normally. Its [security picker](windows-markdown-security.png) exposes the remote-content state and opens the [user setting](windows-markdown-user-setting.png), which remains unchecked. The summary also records packaged results and the short action capture; this is not offline/packet/DNS or release acceptance.
+
 ## Supplied artwork and independent branches, 2026-10-29
 
 The user-supplied blue artwork replaces the previously rejected mark. These are actual packaged/native screenshots, not glass or reference-image acceptance.

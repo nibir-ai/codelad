@@ -214,5 +214,47 @@
     "Test process excepted only the fixture certificate public-key hash; no OS trust changes.",
     "Not a disconnected-network test or two-minute idle check.",
     "No macOS/Linux/runtime or installer acceptance from this batch."
-  ]
+  ],
+  "packaged": {
+    "commit": "240b65582314d9cbd63641fc22caecbcc4fb823b",
+    "build": "Incremental Windows minified package; unchanged prepared core bundles plus rebuilt extension staging.",
+    "passed": true,
+    "renderingCases": 9,
+    "securitySettingsLink": true,
+    "defaults": {
+      "telemetry": false,
+      "trusted": true,
+      "remote": false,
+      "richLinks": false
+    },
+    "expectedGetPaths": [
+      "/remote.css",
+      "/preview.svg",
+      "/remote.css",
+      "/preview-editor.svg",
+      "/editor.svg"
+    ],
+    "exit": {
+      "code": 0,
+      "signal": null
+    },
+    "chromium": {
+      "hosts": [
+        {
+          "host": "127.0.0.1",
+          "urlEvents": 20,
+          "expectedForAction": true
+        }
+      ]
+    },
+    "tcp": {
+      "complete": {
+        "type": "complete",
+        "elapsedSeconds": 10.04,
+        "connectionStatesObserved": 3
+      },
+      "nonloopbackObserved": 0
+    },
+    "coverage": "Short controlled-action capture; same Chromium/TCP limitations as development evidence. Not offline/packet/DNS or release acceptance."
+  }
 }
