@@ -1,5 +1,7 @@
 # Codelad implementation status
 
+Latest Windows trial packaging and visual-check continuation: [trial report](native-glass-trial-2026-10-30.md). This supersedes the earlier source-only artifact status below; visual acceptance and the packaged runtime smoke remain open.
+
 Current continuation, 2026-10-30: the user authorized the native glass proof of concept despite unavailable privacy hosts. The source workbench now has opt-in native material settings, Windows Acrylic/Mica, theme-aware solid/accessibility fallbacks and opaque editor/terminal reading surfaces. Windows DWM, focused tests, client checks and controlled local editor/layout fixtures provide bounded evidence; native visual, DPI, performance and macOS acceptance remain open. See [glass report](native-glass-poc.md), [privacy open checks](privacy-open-checks.md) and [organized design research](design/README.md). The last packaged app/installer remains the earlier notebook/provider build; no stable release or complete redesign is claimed. Older “pending packaging” and phase descriptions below are historical snapshots.
 
 ## Previous checkpoints (historical)

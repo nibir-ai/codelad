@@ -1,5 +1,7 @@
 # Native glass proof of concept
 
+Latest Windows trial packaging and visual-check continuation: [trial report](native-glass-trial-2026-10-30.md). This supersedes the earlier source-only artifact status below; visual acceptance and the packaged runtime smoke remain open.
+
 Updated 2026-10-30. This is an opt-in material adapter in the real Electron workbench, not the complete Codelad redesign or a release. The user authorized this phase while [unavailable privacy gates](privacy-open-checks.md) remain open. The supplied [research archive](design/README.md) informs later layout work; it does not expand this implementation into Scrollspace or Atlas.
 
 ## Try it from sources

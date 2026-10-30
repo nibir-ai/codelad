@@ -1,5 +1,7 @@
 # Codelad handoff
 
+Latest Windows trial packaging and visual-check continuation: [trial report](native-glass-trial-2026-10-30.md). This supersedes the earlier source-only artifact status below; visual acceptance and the packaged runtime smoke remain open.
+
 ## Native glass continuation, 2026-10-30
 
 The user explicitly moved on to the native glass proof of concept while keeping unavailable privacy checks documented. The opt-in adapter, live user settings, Windows Acrylic/Mica, solid fallbacks, applied high-contrast theme guard and opaque reading surfaces are implemented in the real workbench. Read [native glass status and evidence](native-glass-poc.md), [remaining privacy gates](privacy-open-checks.md) and the [new design research index](design/README.md). All four supplied research/catalog files are archived there unchanged; their instructions are reference material, not independent authorization for the entire redesign. Quiet Shell + Scrollspace + Atlas supersedes the old compulsory five-pane sketch as planning direction.

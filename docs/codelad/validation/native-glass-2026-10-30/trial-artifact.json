@@ -1,0 +1,13 @@
+{
+  "buildCommit": "1759a6844e2d990add1a966995c5ddee6d2387e8",
+  "installerBuild": "passed",
+  "installerPath": "D:\\codelad\\.build\\win32-x64\\user-setup\\CodeladSetup.exe",
+  "bytes": 251266462,
+  "sha256": "764b724bb51cc52cf576561619287867803a45770d4b83b036da480e8d4b2d9f",
+  "signature": "NotSigned",
+  "installed": false,
+  "packagedProductPrivacy": "passed",
+  "packagedRuntimeSmoke": "not run",
+  "nativeVisualAcceptance": "open",
+  "sourceDisplayScale": 1
+}

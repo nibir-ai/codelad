@@ -1,0 +1,13 @@
+# Windows native glass trial
+
+The Windows app was rebuilt from `1759a6844e2d990add1a966995c5ddee6d2387e8`: all 26 minified desktop bundles completed in 135.5 seconds and Windows packaging completed in 3.13 minutes. Packaged product privacy configuration passes. This is a development trial, not a stable release. The [artifact metadata](validation/native-glass-2026-10-30/trial-artifact.json) records installer completion, identity and SHA-256. It was not installed, and the refreshed packaged app has not yet had its own runtime smoke test.
+
+- Unpacked app: `D:/VSCode-win32-x64/Codelad.exe`.
+- Installer: `D:/codelad/.build/win32-x64/user-setup/CodeladSetup.exe`.
+- Trial launcher: `D:/codelad/.build/codelad/Try-Codelad-Glass.cmd`. This enables native mode at chrome opacity 0.85 in a separate preview user/shared/extensions profile; it does not change the normal profile. Regular installation still defaults to solid mode. The preview files are local build artifacts, not repository source.
+
+The initial [native source-window capture](validation/native-glass-2026-10-30/windows-source-initial.png) shows readable text and controls at display scale factor 1. It also shows Restricted Mode and a development extension-host startup warning. It is not evidence of live desktop blur. Foreground keyboard input interrupted the external-background comparison; no Acrylic/Mica visual sign-off, moving-background comparison, inactive-window, DPI or performance pass is claimed. The earlier [ten-state API/layout checks](native-glass-poc.md) remain valid at their recorded scope. No unavailable [privacy checks](privacy-open-checks.md) were converted into passes.
+
+The native source validation window remains open with an unsaved buffer after keyboard interference. No source edit was saved; review/preserve that buffer before closing. Always-on-top behavior was removed and the diagnostic background window closed. Its disposable profile/logs are under `.build/codelad/glass-visual-2026-10-30`; the recorded main/renderer inspector ports are 59038/59037. The temporary launcher helper was removed. Continue captures only after the user confirms the test window can remain idle, then run a fresh packaged smoke check. The user's offered generated UI image is welcome as a design reference; no replacement UI is implemented here.
+
+The first installer attempt missed the required updater staging task. Running `vscode-win32-x64-inno-updater` supplies the existing local installer helper before `vscode-win32-x64-user-setup`. Raw logs remain ignored alongside the validation profile. Keep `stable` unchanged. This is the user's near-5%-remaining handoff; pause after pushing it.
