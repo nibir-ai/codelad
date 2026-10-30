@@ -15,6 +15,7 @@ import { Schemas } from '../../../../base/common/network.js';
 import { IProductService } from '../../../../platform/product/common/productService.js';
 import { joinPath } from '../../../../base/common/resources.js';
 import { decodeBase64, VSBuffer } from '../../../../base/common/buffer.js';
+import { IWindowMaterialState } from '../../../../platform/window/common/windowMaterial.js';
 
 export const INativeWorkbenchEnvironmentService = refineServiceDecorator<IEnvironmentService, INativeWorkbenchEnvironmentService>(IEnvironmentService);
 
@@ -26,6 +27,7 @@ export interface INativeWorkbenchEnvironmentService extends IBrowserWorkbenchEnv
 
 	// --- Window
 	readonly window: {
+		codeladMaterial?: IWindowMaterialState;
 		id: number;
 		handle?: VSBuffer;
 		colorScheme: IColorScheme;
@@ -89,6 +91,7 @@ export class NativeWorkbenchEnvironmentService extends AbstractNativeEnvironment
 	get window() {
 		return {
 			id: this.configuration.windowId,
+			codeladMaterial: this.configuration.codeladMaterial,
 			handle: this.configuration.handle,
 			colorScheme: this.configuration.colorScheme,
 			maximized: this.configuration.maximized,

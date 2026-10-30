@@ -19,6 +19,7 @@ import { PolicyDefinition, PolicyValue } from '../../policy/common/policy.js';
 import { IPartsSplash } from '../../theme/common/themeService.js';
 import { IUserDataProfile } from '../../userDataProfile/common/userDataProfile.js';
 import { IAnyWorkspaceIdentifier, ISingleFolderWorkspaceIdentifier, IWorkspaceIdentifier } from '../../workspace/common/workspace.js';
+import { IWindowMaterialState } from './windowMaterial.js';
 
 export const WindowMinimumSize = {
 	WIDTH: 400,
@@ -519,6 +520,7 @@ export interface IOSConfiguration {
 }
 
 export interface INativeWindowConfiguration extends IWindowConfiguration, NativeParsedArgs, ISandboxConfiguration {
+	codeladMaterial?: IWindowMaterialState;
 	mainPid: number;
 	handle?: VSBuffer;
 

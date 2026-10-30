@@ -4,6 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import './media/window.css';
+import { IWindowMaterialState } from '../../platform/window/common/windowMaterial.js';
+import { isHighContrast } from '../../platform/theme/common/theme.js';
 import { localize } from '../../nls.js';
 import { URI } from '../../base/common/uri.js';
 import { equals } from '../../base/common/objects.js';
@@ -134,12 +136,30 @@ export class NativeWindow extends BaseWindow {
 		super(mainWindow, undefined, hostService, nativeEnvironmentService, contextMenuService, layoutService);
 
 		this.configuredWindowZoomLevel = this.resolveConfiguredWindowZoomLevel();
+		this.updateCodeladMaterial(this.nativeEnvironmentService.window.codeladMaterial);
 
 		this.registerListeners();
 		this.create();
 	}
 
+	private codeladMaterialState: IWindowMaterialState | undefined;
+
+	private updateCodeladMaterial(state: IWindowMaterialState | undefined): void {
+		this.codeladMaterialState = state;
+		// Use the applied theme type as well as the main-process policy. Custom
+		// high-contrast themes need not include "high contrast" in their name.
+		const highContrast = isHighContrast(this.themeService.getColorTheme().type);
+		const root = mainWindow.document.documentElement;
+		root.classList.toggle('codelad-native-glass', !!state && state.effective !== 'none' && !highContrast);
+		root.dataset.codeladMaterial = highContrast ? 'none' : state?.effective ?? 'none';
+		root.dataset.codeladMaterialReason = highContrast ? 'accessibility' : state?.reason ?? 'disabled';
+		root.style.setProperty('--codelad-chrome-opacity', String(state?.chromeOpacity ?? 0.85));
+	}
+
 	protected registerListeners(): void {
+		const onMaterialChanged = (_event: unknown, ...args: unknown[]) => this.updateCodeladMaterial(args[0] as IWindowMaterialState);
+		ipcRenderer.on('vscode:codeladMaterial', onMaterialChanged);
+		this._register(toDisposable(() => ipcRenderer.removeListener('vscode:codeladMaterial', onMaterialChanged)));
 
 		// Layout
 		this._register(addDisposableListener(mainWindow, EventType.RESIZE, () => this.layoutService.layout()));
@@ -433,7 +453,10 @@ export class NativeWindow extends BaseWindow {
 		this.onDidChangePanelPosition(this.layoutService.getPanelPosition());
 
 		// Border
-		this._register(this.themeService.onDidColorThemeChange(() => this.updateWindowBorder()));
+		this._register(this.themeService.onDidColorThemeChange(() => {
+			this.updateWindowBorder();
+			this.updateCodeladMaterial(this.codeladMaterialState);
+		}));
 		this._register(this.hostService.onDidChangeActiveWindow(() => this.updateWindowBorder()));
 		this._register(this.hostService.onDidChangeFocus(() => this.updateWindowBorder()));
 

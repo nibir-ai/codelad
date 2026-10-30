@@ -1,5 +1,7 @@
 # CODEX MASTER PROMPT: Codelad from the VS Code OSS fork
 
+**Current execution note (2026-10-30):** the user authorized the native glass proof of concept while [unavailable privacy checks](codelad/privacy-open-checks.md) remain documented. This supersedes the historical Phase 1 stop instruction below for that limited step; it does not accept the whole privacy matrix. Functional requirements remain. The new [design direction and supplied research](codelad/design/README.md) supersede the fixed, permanently visible pane arrangement in the original sketch. Implement the material proof first; the attached redesign prompt is not a separate instruction to build all concepts now. Previously named reference images have not been supplied.
+
 You are working in my existing fork of the open-source `microsoft/vscode` source repository. Your job is to incrementally transform it into **Codelad**, a polished, privacy-respecting, entirely open-source developer workspace. Do not replace it with a web mockup, Electron boilerplate, a React replica, or a lightweight Monaco-only editor.
 
 **REFERENCE IMAGE:** `docs/codelad/reference/codelad-target.png` (or locate the included `reference/codelad-target.png` if the package was copied elsewhere). Treat this as a visual target for layout hierarchy and atmosphere, not as a bitmap to embed. Inspect the reference visually before implementing UI.

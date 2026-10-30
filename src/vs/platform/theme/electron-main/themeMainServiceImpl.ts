@@ -17,6 +17,7 @@ import { coalesce } from '../../../base/common/arrays.js';
 import { getAllWindowsExcludingOffscreen } from '../../windows/electron-main/windows.js';
 import { ILogService, LogLevel } from '../../log/common/log.js';
 import { IThemeMainService } from './themeMainService.js';
+import { getWindowMaterialBackground } from '../../window/electron-main/windowMaterial.js';
 
 // These default colors match our default themes
 // editor background color ("Dark Modern", etc...)
@@ -329,7 +330,7 @@ export class ThemeMainService extends Disposable implements IThemeMainService {
 	private updateBackgroundColor(windowId: number, splash: IPartsSplash): void {
 		for (const window of getAllWindowsExcludingOffscreen()) {
 			if (window.id === windowId) {
-				window.setBackgroundColor(splash.colorInfo.background);
+				window.setBackgroundColor(getWindowMaterialBackground(window, splash.colorInfo.background));
 				break;
 			}
 		}

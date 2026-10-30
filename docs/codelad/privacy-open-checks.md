@@ -1,0 +1,14 @@
+# Privacy checks still open
+
+The user authorized proceeding to the native glass proof of concept on 2026-10-30 while keeping unrun checks visible. **Phase 1 is not fully accepted.** Glass work does not erase the existing evidence or convert unavailable tests into passes.
+
+| Gate | Evidence / remaining work |
+| --- | --- |
+| Windows OS-level offline behavior | Two earlier disconnect attempts retained an external route and never executed an offline workload. This non-elevated host has no available Windows Sandbox or supplied isolated VM. Do not repeat blind disconnect requests or use Chromium offline emulation as OS isolation. |
+| Packet/DNS and broader payload coverage | Completed Chromium URL logs, sampled process-tree TCP and controlled local-server request tests exist. They omit DNS/UDP, some short-lived/startup connections and native/Node transports. No privileged packet collector was run. |
+| Live-account provider behavior | Controlled real Octokit transport and link-presentation API checks pass with fixture-only data. No actual account/session was accessed, no universal provider policy or all-avatar-image flow is certified. |
+| Third-party extensions, renderers, kernels and remote workspaces | Separate network boundaries remain; source policies and selected fixtures are not an extension/kernel firewall. Validate deliberately selected workflows and classify their traffic. |
+| macOS and remaining Linux native recovery/platform cases | No additional hosts supplied. Preserve the earlier Linux namespace-offline result at its recorded build/scope; unresolved Linux native recovery/SIGPIPE and macOS behavior remain open. |
+| Install/uninstall and release provenance | The Windows development installer builds, but is unsigned and was not installed. Shell/registry/uninstall, signing and clean release provenance remain unverified. |
+
+Completed foundation and controlled notebook/provider evidence remains in [privacy](privacy.md), [notebook/provider report](notebook-provider-privacy-2026-10-30.md), [Windows continuation](windows-continuation.md) and [Linux continuation](linux-continuation.md). New appearance code must preserve the default-off collector, upload, update, schema, Markdown, notebook and provider policies. Native materials themselves require no new remote service or dependency.

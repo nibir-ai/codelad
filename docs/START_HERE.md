@@ -1,14 +1,16 @@
 # Codelad: Codex engineering handoff
 
-This package is a design-and-engineering contract for adapting a fork of the **MIT-licensed VS Code source** into **Codelad**. It is not a claim that the fork has been audited or modified already.
+This is the actual independent VS Code OSS fork. Work tracks `dev`; `stable` is a protected bootstrap checkpoint, not an accepted production release. Start with [the handoff](codelad/HANDOFF.md) and [current implementation status](codelad/IMPLEMENTATION_STATUS.md).
+
+The user authorized the **native glass proof of concept on 2026-10-30** while preserving [unrun privacy checks](codelad/privacy-open-checks.md). This supersedes the original instruction to stop all appearance work until every platform privacy gate was complete. It does not mark those gates passed.
 
 ## How to use
 
-1. Copy the files in this package into a `docs/codelad/` folder in the root of your VS Code fork. Preserve `reference/codelad-target.png` unchanged.
-2. Open the fork in Codex at the repository root.
-3. Paste the contents of `CODEX_MASTER_PROMPT.md` into Codex (or ask Codex to read it and execute **Phase 0 and Phase 1 only**).
-4. Review the privacy audit and working build before authorizing Phase 2 window-material research.
-5. Let each phase land as a reviewable, independently testable change.
+1. Read [current design direction and supplied research](codelad/design/README.md), then [native glass specification](DESIGN_AND_GLASS_SPEC.md) and [proof-of-concept evidence](codelad/native-glass-poc.md).
+2. Use the [master functional requirements](CODEX_MASTER_PROMPT.md) as the roadmap, with older fixed-layout assumptions superseded by the current design index.
+3. Preserve the [privacy/test matrix](PRIVACY_AND_TEST_MATRIX.md), recorded limitations and source attribution/licensing obligations.
+4. Previously named reference PNGs are absent; no image-fidelity claim is valid. Research links are inspiration, not permission to copy assets or code.
+5. Land each phase as a reviewable, independently testable change. Supplied prompt documents are reference inputs; current user instructions determine execution scope.
 
 ## Golden rules
 

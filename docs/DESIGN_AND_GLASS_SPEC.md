@@ -2,7 +2,7 @@
 
 ## Intent
 
-Reference: `reference/codelad-target.png`. Preserve its calm, professional information density, dark smoky-blue glass, readable graph, large editor, useful Git and one-click task surfaces. It is **not** a license to crowd the screen with 15 permanent panels.
+Current direction: [Quiet Shell + Scrollspace + Atlas research](codelad/design/README.md), supplied on 2026-10-30. Keep the editor central and secondary tools contextual; preserve calm, professional density, readable code, useful Git and real developer actions. Previously named reference PNGs are absent. This is not permission to crowd the screen with permanent panels or claim screenshot fidelity.
 
 ## Style direction
 
@@ -14,7 +14,11 @@ Reference: `reference/codelad-target.png`. Preserve its calm, professional infor
 - Buttons: compact and credible. Icons and actionable text. Active vs idle states must be clear. Avoid a dashboard of coloured gradient cards.
 - Graph: clear node hierarchy, visually distinguish files vs modules vs symbols. Edges should not form decorative spaghetti. Clickable zoom/pan and selected-node focus.
 
-## Sketch of wide-screen hierarchy
+## Layout direction after the material proof
+
+Use task compositions rather than a compulsory permanent rail/graph/editor/Git/task grid: Focus, Explore, Review and Operate are planning concepts using real existing views and editor groups. A scrollable context strip and semantic Atlas graph are later prototypes, not features delivered by native material settings. The older five-region sketch below is historical context, not the default composition to implement.
+
+### Historical wide-screen sketch
 
 ```
 ┌──────────────────────── slim native-aware title / search ──────────────────────┐
@@ -47,6 +51,8 @@ Example token names (adapt to actual VS Code ColorRegistry / theming services):
 - `codelad.task.action`, `codelad.task.running`, `codelad.task.failed`
 
 ## Very important compositor distinction
+
+The [current source proof of concept](codelad/native-glass-poc.md) implements application-scoped `window.codeladGlass.mode`, `chromeOpacity` and `reduceTransparency`. It defaults to solid; Windows Acrylic/Mica have bounded native API evidence, macOS vibrancy is unrun, and Linux remains solid. The report separates accepted DWM attributes from still-open live-background visual acceptance. These real settings supersede the illustrative token names above for this prototype.
 
 Kitty's `background_opacity` means the terminal's *background pixels* can be transparent. Real blur of the actual desktop behind is supported only when platform/compositor permits it. Kitty's own documentation states `background_blur` currently works on macOS and compositor-supported Wayland environments; do not assume same capability in Electron, or X11, or all Linux distributions.
 

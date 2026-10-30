@@ -1,0 +1,293 @@
+{
+  "results": [
+    {
+      "label": "acrylic",
+      "effective": "acrylic",
+      "reason": "supported",
+      "chrome": {
+        "background": "color(srgb 0.145098 0.145098 0.14902 / 0.7)",
+        "opacity": "1"
+      },
+      "editor": {
+        "background": "rgb(30, 30, 30)",
+        "opacity": "1"
+      },
+      "terminal": {
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      "width": 1100,
+      "height": 760,
+      "dwm": {
+        "type": 3,
+        "hresult": 0
+      }
+    },
+    {
+      "label": "mica",
+      "effective": "mica",
+      "reason": "supported",
+      "chrome": {
+        "background": "color(srgb 0.145098 0.145098 0.14902 / 0.7)",
+        "opacity": "1"
+      },
+      "editor": {
+        "background": "rgb(30, 30, 30)",
+        "opacity": "1"
+      },
+      "terminal": {
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      "width": 1100,
+      "height": 760,
+      "dwm": {
+        "type": 2,
+        "hresult": 0
+      }
+    },
+    {
+      "label": "solid",
+      "effective": "none",
+      "reason": "disabled",
+      "chrome": {
+        "background": "rgb(37, 37, 38)",
+        "opacity": "1"
+      },
+      "editor": {
+        "background": "rgb(30, 30, 30)",
+        "opacity": "1"
+      },
+      "terminal": {
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      "width": 1100,
+      "height": 760,
+      "dwm": {
+        "type": 1,
+        "hresult": 0
+      }
+    },
+    {
+      "label": "reduced transparency",
+      "effective": "none",
+      "reason": "accessibility",
+      "chrome": {
+        "background": "rgb(37, 37, 38)",
+        "opacity": "1"
+      },
+      "editor": {
+        "background": "rgb(30, 30, 30)",
+        "opacity": "1"
+      },
+      "terminal": {
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      "width": 1100,
+      "height": 760,
+      "dwm": {
+        "type": 1,
+        "hresult": 0
+      }
+    },
+    {
+      "label": "high contrast",
+      "effective": "none",
+      "reason": "accessibility",
+      "chrome": {
+        "background": "rgb(0, 0, 0)",
+        "opacity": "1"
+      },
+      "editor": {
+        "background": "rgb(0, 0, 0)",
+        "opacity": "1"
+      },
+      "terminal": {
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      "width": 1100,
+      "height": 760,
+      "dwm": {
+        "type": 1,
+        "hresult": 0
+      }
+    },
+    {
+      "label": "custom high contrast: opaque renderer",
+      "effective": "none",
+      "reason": "accessibility",
+      "chrome": {
+        "background": "rgb(0, 0, 0)",
+        "opacity": "1"
+      },
+      "editor": {
+        "background": "rgb(0, 0, 0)",
+        "opacity": "1"
+      },
+      "terminal": {
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      "width": 1100,
+      "height": 760,
+      "dwm": {
+        "type": 3,
+        "hresult": 0
+      }
+    },
+    {
+      "label": "restored acrylic",
+      "effective": "acrylic",
+      "reason": "supported",
+      "chrome": {
+        "background": "color(srgb 0.0980392 0.101961 0.105882 / 0.7)",
+        "opacity": "1"
+      },
+      "editor": {
+        "background": "rgb(18, 19, 20)",
+        "opacity": "1"
+      },
+      "terminal": {
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      "width": 1100,
+      "height": 760,
+      "dwm": {
+        "type": 3,
+        "hresult": 0
+      }
+    },
+    {
+      "label": "resize 900",
+      "effective": "acrylic",
+      "reason": "supported",
+      "chrome": {
+        "background": "color(srgb 0.0980392 0.101961 0.105882 / 0.7)",
+        "opacity": "1"
+      },
+      "editor": {
+        "background": "rgb(18, 19, 20)",
+        "opacity": "1"
+      },
+      "terminal": {
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      "width": 900,
+      "height": 760,
+      "dwm": {
+        "type": 3,
+        "hresult": 0
+      }
+    },
+    {
+      "label": "resize 1380",
+      "effective": "acrylic",
+      "reason": "supported",
+      "chrome": {
+        "background": "color(srgb 0.0980392 0.101961 0.105882 / 0.7)",
+        "opacity": "1"
+      },
+      "editor": {
+        "background": "rgb(18, 19, 20)",
+        "opacity": "1"
+      },
+      "terminal": {
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      "width": 1380,
+      "height": 760,
+      "dwm": {
+        "type": 3,
+        "hresult": 0
+      }
+    },
+    {
+      "label": "maximized",
+      "effective": "acrylic",
+      "reason": "supported",
+      "chrome": {
+        "background": "color(srgb 0.0980392 0.101961 0.105882 / 0.7)",
+        "opacity": "1"
+      },
+      "editor": {
+        "background": "rgb(18, 19, 20)",
+        "opacity": "1"
+      },
+      "terminal": {
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      "width": 1920,
+      "height": 1040,
+      "dwm": {
+        "type": 3,
+        "hresult": 0
+      }
+    }
+  ],
+  "editSave": true,
+  "split": true,
+  "terminal": true,
+  "visualSignoff": false,
+  "readingSurfaces": {
+    "panel": {
+      "className": "part panel basepanel bottom pane-composite-part floating-part-outer-right floating-part-outer-bottom",
+      "background": "rgb(25, 26, 27)",
+      "opacity": "1"
+    },
+    "editor": {
+      "className": "monaco-editor no-user-select  showUnused showDeprecated vs-dark",
+      "background": "rgb(18, 19, 20)",
+      "opacity": "1"
+    },
+    "chrome": {
+      "className": "part sidebar left pane-composite-part floating-part-outer-top floating-part-outer-bottom",
+      "background": "color(srgb 0.0980392 0.101961 0.105882 / 0.85)",
+      "opacity": "1"
+    },
+    "terminalAncestors": [
+      {
+        "className": "terminal-wrapper active",
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      {
+        "className": "terminal-split-pane",
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      {
+        "className": "split-view-view visible",
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      {
+        "className": "split-view-container",
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      {
+        "className": "monaco-scrollable-element ",
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      {
+        "className": "monaco-split-view2 horizontal",
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      {
+        "className": "terminal-group",
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      }
+    ]
+  },
+  "telemetry": false
+}

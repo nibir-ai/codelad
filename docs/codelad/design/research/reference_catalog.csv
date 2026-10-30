@@ -1,0 +1,46 @@
+category,wm_or_de,post_title,reddit_id,date_or_year,verified_observation,codeLad_application,priority
+Contextual shell,SwayFX,I simplified Noctalia down to only what I use,1x2k5av,2026-10-10,"Minimal developer shell, one-command theme change, fast clipboard/file search",Make tool access contextual; support command/action parity,High
+Contextual shell,Hyprland,The bar became a shell,1vlxzu4,2026-08-11,"Small shell, quiet idle state, keyboard-first contextual popups",Minimal always-on HUD; let inspector panels emerge,High
+Contextual shell,Hyprland,odyssey: a contextual Quickshell desktop shell,1wax008,2026-09-08,"Dynamic Island, context-expanding controls, launcher and palette","One adaptive context capsule, not five permanent toolbars",High
+Contextual shell,Hyprland,As fluid as it gets,1s84jik,2026,Unified NixOS/Hyprland/Quickshell workflow and animation,Subtle state transitions and a cohesive workspace system,High
+Contextual shell,Hyprland,Minimal Quickshell setup (Frosted Glassmorphism),1vbg333,2026-07-31,"Kitty, bespoke shell, restrained frosted panels","Glass on chrome, opaque readable code",High
+Contextual shell,Hyprland,Shell from scratch with Quickshell and shaders,1rwyzlx,2026-03-18,"Full native shell: toasts, launcher, settings, services, shortcuts",Single composable system for popups and tool states,Medium
+Contextual shell,Hyprland,Minimal desktop with graceful-degradation mode,1u52r28,2026-06-13,Hotkey swaps rich shell for lightweight shell; turns off blur/animations,Add fast solid mode with persistent keyboard bindings,High
+Contextual shell,Hyprland,Cool Quickshell stuff,1ut94nj,2026-07-11,"Launcher, wallpaper, music and bar share components","Consolidate commands, tasks and services under one control system",Medium
+Contextual shell,Hyprland,Migration from Waybar to Quickshell,1v9n0wi,2026-07-29,Custom interactive widgets replace a static bar,Stateful mini-panels rather than passive buttons,Medium
+Contextual shell,Hyprland,Project Sekai Inspired Quickshell,1x37y28,2026-10-11,"Unusual Figma-designed, phone-shaped desktop shell; high reported RAM",Original interaction idea but warning against resource-heavy decoration,Low
+Contextual shell,Hyprland,SekaiPop Quickshell released,1x8zl9d,2026-10-18,Publicly released highly bespoke themed shell,Good example of distinct authorship; avoid copying aesthetics,Low
+Contextual shell,Hyprland,Lightweight Quickshell island for iGPU,1ukoi3i,2026-07-01,Compact system island with clipboard and OSD; author reports ~200MB RAM,Set a real memory budget for integrated micro-UI,Medium
+Contextual shell,Hyprland,My boring main desktop,1v4ixll,2026-07-23,"Long-lived daily driver uses tiling, floating when needed",Default to reliable tiles; float only contextual inspectors,Medium
+Contextual shell,Hyprland,NixOS btw with custom Quickshell,1xfpm7z,2026-10-26,Workspace overview with drag-to-move previews and focus mode,Visual overview of editor groups and pinned tools,Medium
+Theme system,Hyprland,Matugen with Quickshell dynamic UI colors,1s0yhny,2026-03-22,Live theme tokens generated from wallpaper,"Optional wallpaper-derived accents, never force code syntax changes",Medium
+Theme system,Hyprland,HyprPunk Catppuccin Mocha,1u86zj7,2026-06-17,"Coherent terminal, WM, menu, GTK and shell tokens",One shared visual token registry and few accent colours,Medium
+Theme system,Hyprland,MochaLand,1wj2bzw,2026-09-17,Catppuccin carried across complete Linux workflow,"Consistent chroma across Code, Git, Graph and Tasks",Medium
+Theme system,SwayFX,My year-long Arch rice,1x0ifsk,2026-10-08,"Theme scripts manage accent, rounding, gaps and blur across tools","Define knobs for dense/comfortable, solid/glass, radius and accent",High
+Theme system,DWM,Slackkitty soft themed desktop,1reftxf,2026-02-25,Wallpaper-generated soft colors on old-school minimal dwm,Art direction can be rich even when UI is simple,Low
+Scrollable tiling,Niri,Niri + Noctalia best combo,1wue8b7,2026-09-30,"Niri scrollable tiling, Kitty, shell",Horizontal context columns instead of tab overload,High
+Scrollable tiling,Niri,First time building a DE,1wcogmr,2026-09-10,Custom Waybar/Rofi with Matugen and environment-based blur,Support user-configured backgrounds and material fallbacks,High
+Scrollable tiling,Niri,First rice on NixOS x Noctalia,1wtkorx,2026-09-29,"Scrollable tiling, capsule blur, Ghostty, deep palette",Graph/Code/Git columns can move as one navigable strip,High
+Scrollable tiling,Niri,Welcome Home (now with Noctalia),1wg0oc4,2026-09-14,Accordion-hidden status bar on hover,Make secondary controls peek only when needed,High
+Scrollable tiling,Niri,Simple (and) enough,1ua5q8r,2026-06-19,"Minimal, wallpaper-driven Niri configuration",Compact persistent chrome and free spatial movement,High
+Scrollable tiling,Niri,Niku: minimal and functional rice,1rqlfvz,2026-03-11,Daily-oriented Niri shell and dynamic colours,Visual consistency without sacrificing usability,Medium
+Scrollable tiling,Niri,Eye-candy rice: blur too strong discussion,1w0jh4s,2026-08-28,Blur & wallpaper tuning with critique of excessive blur,"Explicit contrast boundaries, opaque coding surfaces",High
+Scrollable tiling,Niri,My new desktop,1wu5wa5,2026-09-30,Large bespoke Quickshell/Niri setup; memory discussed,Do not let effects inflate memory or hide controls,Medium
+Scrollable tiling,Niri,My first Wayland rice with Noctalia,1x8b1se,2026-10-17,Comment highlights transparency without blur,Offer clear acrylic AND transparent-no-blur options,Medium
+Readable minimalism,Sway,More from my dots,1shiukb,2026-04-10,"Waybar, Rofi, Foot, Neovim, Iosevka/JetBrains Mono","Monospace hierarchy, narrow bars, terminal-first discipline",High
+Readable minimalism,BSPWM,"My first rice, black and white",1oadthr,2025-10-19,Simple controls and ASCII-inspired black-white visual language,Use monochrome structural theme as alternative to glass,Medium
+Readable minimalism,BSPWM,Ultimate Nord rice,wcsm3p,2022-07-31,BSPWM/Polybar/Picom/Rofi with expandable menu,A drawer should be closed by default and explicit to open,High
+Readable minimalism,BSPWM,Minimal BSPWM rice,1kyizaz,2025-05-29,"Polybar, Alacritty and MateriaDark","Small topology, strong spacing, no elaborate ornaments",Medium
+Readable minimalism,DWM,Simple setup for daily use,1u13u2e,2026-06-09,"No blur, rounded corners, opacity or animation",Offer crisp pure-solid focus preset,High
+Readable minimalism,DWM,Switched to Xorg with Nordfox,1qm0jff,2026-01-24,Nordfox theme + st/dmenu/nvim,Readable color palette can be the visual identity,Medium
+Readable minimalism,AwesomeWM,Bitmap fonts are cool,1xcpmm2,2026-10-22,"Terminus font and original EWW bar, distinctive mature look",A clean retro/bitmap variant can be original without neon,Medium
+Readable minimalism,Hyprland,Basic laptop configuration,1spe6rx,2026-04-19,VS Code coexists with Kitty/Rofi/Waybar/Neovim community,No need to replace familiar shortcuts to feel native,Medium
+Experimental workspace,vxwm,Bar-centric infinite desktop,1usv4xs,2026-07-10,All menus/actions share exact bar geometry and pywal theme,One consistent command strip across Git/Tasks/Graph,High
+Experimental workspace,vxwm,Probably the most unique WM,1r6m589,2026,Unconventional window-management experiment,Study spatial behavior and workspace metaphors,Medium
+Experimental workspace,DeskWM,Windows as sheets of paper,1wzzxjn,2026-10-19,"Skeuomorphic window metaphor, radically different approach","Explore spatial rearrangement, avoid copying wooden textures",Medium
+Experimental workspace,Hyprland,Waylandcraft ricing,1tjw02m,2026,Custom deeply configured visual workflow,"Learn motion and stage-based grouping, not decoration",Medium
+Experimental workspace,KDE Plasma,My first rice: monochrome,1tg82cr,2026,Monochrome visual hierarchy,Use color sparingly; test no-accent mode,High
+Experimental workspace,Hyprland,Neo Brutalism lovers,1vmg29f,2026,"Strong borders, bold structure and unconventional style",Use sharp high-contrast variant as an optional theme,Medium
+Experimental workspace,DriftWM,Just Enough Shell minimap improvement,1w6wmai,2026-09-04,Overview minimap for a large spatial desktop,Graph minimap doubles as an interactive navigation compass,High
+Experimental workspace,DriftWM,Shell popup minimap,1uefz0y,2026-06-24,A keyboard shortcut reveals a global spatial minimap,"Graph or workspace overview should be summonable, not permanent",High
+Performance / critique,SwayFX,Traditional dots for stability,1w3a3la,2026-08-31,User preference for stable set-and-forget configurations,Native first-party UI should degrade gracefully,Medium

@@ -1,5 +1,7 @@
 # Codelad — privacy verification and delivery matrix
 
+Current execution note, 2026-10-30: the user authorized the [native glass proof of concept](codelad/native-glass-poc.md) while the [unavailable privacy checks](codelad/privacy-open-checks.md) remain open. This is a sequencing exception, not privacy or release acceptance. Keep the prior controlled notebook/provider evidence and all missing host, packet/DNS, live-account and installer checks explicit.
+
 ## Core privacy commitments
 
 - **No Codelad-owned telemetry**: usage, errors, crash submission, diagnostics, experiments, personalized recommendations or tracking identifiers transmitted without user-directed action.

@@ -1,5 +1,13 @@
 # Codelad handoff
 
+## Native glass continuation, 2026-10-30
+
+The user explicitly moved on to the native glass proof of concept while keeping unavailable privacy checks documented. The opt-in adapter, live user settings, Windows Acrylic/Mica, solid fallbacks, applied high-contrast theme guard and opaque reading surfaces are implemented in the real workbench. Read [native glass status and evidence](native-glass-poc.md), [remaining privacy gates](privacy-open-checks.md) and the [new design research index](design/README.md). All four supplied research/catalog files are archived there unchanged; their instructions are reference material, not independent authorization for the entire redesign. Quiet Shell + Scrollspace + Atlas supersedes the old compulsory five-pane sketch as planning direction.
+
+Windows DWM confirms the requested native backdrop types. Native screenshot/live-background visual sign-off remains open because foreground activity interfered with capture. No screenshot is presented as proof. The source prototype is separate from the last packaged app/installer (`3736c38819c`); those artifacts do not include glass. Keep `stable` unchanged. Resume with the bounded visual/DPI/performance checks in the glass report, not blind offline-disconnect requests or another request for unavailable hosts. The requested notebook/provider batch below is complete at its recorded scope; full privacy/platform/release acceptance remains open.
+
+## Earlier notebook/provider checkpoint
+
 ## Notebook/provider continuation, 2026-10-30
 
 The requested controlled notebook/provider checks and packaging are complete. Runtime implementation `3736c38819c` is pushed with green source-policy CI. The user-only `notebook.output.allowRemoteContent` defaults off and enforces a local policy independently of the legacy experimental CSP switch. Both development and packaged runs pass all six expanded phases: repository settings cannot enable the opt-ins; remote image/style/font/frame/form/beacon/fetch/WebSocket controls work only after user opt-in; opt-out stops requests and closes the socket; local rendering and notebook edit/save persist. The focused selection passes 24 tests, notebook/output seven and actual GitHub extension-host five, including real GraphQL transport against a controlled local endpoint. No real account was used. See [current evidence](notebook-provider-privacy-2026-10-30.md).

@@ -228,6 +228,29 @@ import product from '../../platform/product/common/product.js';
 				'scope': ConfigurationScope.APPLICATION,
 				'description': localize('newWindowDimensions', "Controls the dimensions of opening a new window when at least one window is already opened. Note that this setting does not have an impact on the first window that is opened. The first window will always restore the size and location as you left it before closing.")
 			},
+			'window.codeladGlass.mode': {
+				type: 'string',
+				enum: ['solid', 'native', 'mica'],
+				default: 'solid',
+				scope: ConfigurationScope.APPLICATION,
+				enumDescriptions: [
+					localize('codeladGlass.solid', "Opaque window surfaces."),
+					localize('codeladGlass.native', "Experimental native material: Acrylic on supported Windows 11, vibrancy on macOS. Other hosts use solid surfaces."),
+					localize('codeladGlass.mica', "Experimental Windows 11 Mica material. Mica samples the wallpaper rather than live windows. Other hosts use solid surfaces.")
+				],
+				description: localize('codeladGlass.mode', "Native glass proof of concept for the main editor window. Code and terminal reading surfaces remain opaque. Unsupported hosts, high contrast and reduced transparency use solid surfaces. macOS behavior requires native validation."),
+			},
+			'window.codeladGlass.chromeOpacity': {
+				type: 'number', default: 0.85, minimum: 0.6, maximum: 1,
+				scope: ConfigurationScope.APPLICATION,
+				description: localize('codeladGlass.chromeOpacity', "Opacity of secondary chrome over an active native material. This does not fade text or change the opacity of the entire window."),
+			},
+			'window.codeladGlass.reduceTransparency': {
+				type: 'boolean', default: false,
+				scope: ConfigurationScope.APPLICATION,
+				tags: ['accessibility'],
+				description: localize('codeladGlass.reduceTransparency', "Always use solid window surfaces. System reduced-transparency and high-contrast preferences are also respected."),
+			},
 			'window.closeWhenEmpty': {
 				'type': 'boolean',
 				'default': false,

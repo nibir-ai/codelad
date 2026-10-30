@@ -7,6 +7,28 @@
 	display: flex;
 }
 
+/* Native material shows through secondary chrome; editor and terminal surfaces keep their theme. */
+html.codelad-native-glass,
+html.codelad-native-glass body,
+html.codelad-native-glass .monaco-workbench {
+	background-color: transparent !important;
+}
+
+html.codelad-native-glass .monaco-workbench .part.titlebar,
+html.codelad-native-glass .monaco-workbench .part.activitybar,
+html.codelad-native-glass .monaco-workbench .part.sidebar,
+html.codelad-native-glass .monaco-workbench .part.auxiliarybar,
+html.codelad-native-glass .monaco-workbench .part.statusbar {
+	background-color: color-mix(in srgb, var(--vscode-sideBar-background) calc(var(--codelad-chrome-opacity) * 100%), transparent) !important;
+}
+
+html.codelad-native-glass .monaco-workbench .part.sidebar .monaco-list,
+html.codelad-native-glass .monaco-workbench .part.sidebar .monaco-list-rows,
+html.codelad-native-glass .monaco-workbench .part.auxiliarybar .monaco-list,
+html.codelad-native-glass .monaco-workbench .part.auxiliarybar .monaco-list-rows {
+	background-color: transparent !important;
+}
+
 .monaco-workbench .zoom-status .monaco-action-bar .action-label.codicon::before {
 	/*
 	 * the hover sets font-size: inherit which makes actions

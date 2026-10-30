@@ -16,6 +16,8 @@ import { isTahoeOrNewer, isLinux, isMacintosh, isWindows } from '../../../base/c
 import { URI } from '../../../base/common/uri.js';
 import { localize } from '../../../nls.js';
 import { release } from 'os';
+import { IWindowMaterialState, resolveWindowMaterial } from '../../window/common/windowMaterial.js';
+import { applyWindowMaterial } from '../../window/electron-main/windowMaterial.js';
 import { ISerializableCommandAction } from '../../action/common/action.js';
 import { IBackupMainService } from '../../backup/electron-main/backup.js';
 import { IConfigurationChangeEvent, IConfigurationService } from '../../configuration/common/configuration.js';
@@ -735,6 +737,8 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 	private readonly configObjectUrl: IIPCObjectUrl<INativeWindowConfiguration>;
 	private pendingLoadConfig: INativeWindowConfiguration | undefined;
 	private wasLoaded = false;
+	private codeladMaterial?: IWindowMaterialState;
+	private materialTarget = false;
 
 	private readonly jsCallStackMap: Map<string, number>;
 	private readonly jsCallStackEffectiveSampleCount: number;
@@ -793,6 +797,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 				webPreferences.backgroundThrottling = false; // keep agents window responsive when in background
 			}
 
+			this.materialTarget = !config.isSessionsWindow;
 			const options = instantiationService.invokeFunction(defaultBrowserWindowOptions, this.windowState, undefined, webPreferences);
 			const iconPath = config.isSessionsWindow && isWindows ? join(this.environmentMainService.appRoot, 'resources/win32/sessions.ico') : undefined;
 			if (iconPath) {
@@ -816,6 +821,8 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 		//#endregion
 
 		//#region JS Callstack Collector
+		this.updateCodeladMaterial();
+		this._register(Event.fromNodeEventEmitter(electron.nativeTheme, 'updated')(() => this.updateCodeladMaterial()));
 
 		let sampleInterval = parseInt(this.environmentMainService.args['unresponsive-sample-interval'] || '1000');
 		let samplePeriod = parseInt(this.environmentMainService.args['unresponsive-sample-period'] || '15000');
@@ -1190,7 +1197,30 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 		}
 	}
 
+	private updateCodeladMaterial(): void {
+		if (!this._win || this._win.isDestroyed()) {
+			return;
+		}
+		const mode = this.materialTarget ? this.configurationService.getValue<string>('window.codeladGlass.mode') : 'solid';
+		const theme = this.configurationService.getValue<string>('workbench.colorTheme') ?? '';
+		const resolved = resolveWindowMaterial(mode, process.platform, release(),
+			electron.nativeTheme.prefersReducedTransparency || this.configurationService.getValue<boolean>('window.codeladGlass.reduceTransparency') === true,
+			electron.nativeTheme.shouldUseHighContrastColors || /high contrast|^hc-/i.test(theme),
+			this.configurationService.getValue<number>('window.codeladGlass.chromeOpacity'));
+		if (JSON.stringify(resolved) === JSON.stringify(this.codeladMaterial)) {
+			return;
+		}
+		this.codeladMaterial = applyWindowMaterial(this._win, resolved, this.themeMainService.getBackgroundColor());
+		if (this.codeladMaterial.reason === 'native-error') {
+			this.logService.warn('Native window material unavailable; using solid surfaces.');
+		}
+		this._win.webContents.send('vscode:codeladMaterial', this.codeladMaterial);
+	}
+
 	private onConfigurationUpdated(e?: IConfigurationChangeEvent): void {
+		if (!e || ['window.codeladGlass', 'workbench.colorTheme'].some(setting => e.affectsConfiguration(setting))) {
+			this.updateCodeladMaterial();
+		}
 
 		// Swipe command support (macOS)
 		if (isMacintosh && (!e || e.affectsConfiguration('workbench.editor.swipeToNavigate'))) {
@@ -1378,6 +1408,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 		} catch (error) {
 			this.logService.error(`Error getting native window handle: ${error}`);
 		}
+		configuration.codeladMaterial = this.codeladMaterial;
 		configuration.fullscreen = this.isFullScreen;
 		configuration.maximized = this._win.isMaximized();
 		configuration.partsSplash = this.themeMainService.getWindowSplash(configuration.workspace);

@@ -995,6 +995,7 @@
 		"--vscode-modernSash-gripForeground"
 	],
 	"others": [
+		"--codelad-chrome-opacity",
 		"--action-widget-close-start-opacity",
 		"--action-widget-close-start-transform",
 		"--activity-bar-action-gap",
