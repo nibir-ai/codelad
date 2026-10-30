@@ -41,3 +41,16 @@ test('invalid request URLs are rejected without exposing their contents', () => 
 	assert.throws(() => summarizeNetLog(JSON.stringify({ constants: { logEventTypes: {} }, events: [{ params: { url: 'PRIVATE_SECRET_INVALID_URL' } }] })), error =>
 		error instanceof Error && error.message.includes('Unparseable request URL') && !error.message.includes('PRIVATE_'));
 });
+
+test('empty WebSocket lifecycle metadata is counted separately without weakening invalid URL checks', () => {
+	const report = summarizeNetLog(JSON.stringify({ constants: { logEventTypes: { WEBSOCKET_ALIVE: 3 } }, events: [
+		{ type: 3, params: { url: '' } },
+		{ params: { url: 'ws://127.0.0.1/socket?PRIVATE_TOKEN' } }
+	] }));
+	assert.deepStrictEqual({ metadata: report.emptyWebSocketEvents, localRequests: report.localRequests, hosts: report.hosts }, {
+		metadata: 1, localRequests: 0, hosts: [{ host: '127.0.0.1', urlEvents: 1, expectedForThisAction: false }]
+	});
+	for (const event of [{ params: { url: '' } }, { type: 4, params: { url: '' } }, { type: 3, params: { url: 'PRIVATE_INVALID' } }]) {
+		assert.throws(() => summarizeNetLog(JSON.stringify({ constants: { logEventTypes: { WEBSOCKET_ALIVE: 3 } }, events: [event] })), /Unparseable request URL/);
+	}
+});

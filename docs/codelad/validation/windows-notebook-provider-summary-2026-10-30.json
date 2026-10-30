@@ -1,0 +1,696 @@
+{
+  "date": "2026-10-30",
+  "platform": "win32-x64",
+  "runtimeCommit": "3736c38819cf748c2fabd17fd0415e05a20baac6",
+  "build": {
+    "desktopBundles": 26,
+    "desktopBundleMs": 156140,
+    "packageMinutes": 3.27,
+    "installerSeconds": 276.453,
+    "productPolicyPassed": true
+  },
+  "installer": {
+    "path": "D:/codelad/.build/win32-x64/user-setup/CodeladSetup.exe",
+    "bytes": 251268206,
+    "sha256": "0f4d93f6485cd78302df78c27050b9d88a53035016fca23f9aa3d337a7b2f57a",
+    "signature": "NotSigned",
+    "installed": false
+  },
+  "tests": {
+    "focused": 24,
+    "notebookAndOutput": 7,
+    "githubExtensionHost": 5,
+    "clientTypes": "pass",
+    "targetedLint": "pass"
+  },
+  "githubPayload": {
+    "transport": "Real Octokit GraphQL client to a controlled loopback HTTP server through the test service",
+    "requestsBeforeOptIn": 0,
+    "requestsAfterOptIn": 2,
+    "requestsAfterOptOut": 0,
+    "path": "/graphql",
+    "bodyFields": [
+      "query",
+      "variables"
+    ],
+    "variableFields": [
+      [
+        "owner",
+        "repo"
+      ],
+      [
+        "owner",
+        "repo",
+        "commit"
+      ]
+    ],
+    "authorization": "Fixture-only token; no real account accessed",
+    "machineSessionCookieHeaderNames": false,
+    "avatarMapVerified": true,
+    "avatarImageRequestTested": false
+  },
+  "captures": [
+    {
+      "build": "development",
+      "passed": true,
+      "workspaceSettingsCouldNotEnableNetworking": true,
+      "defaults": {
+        "telemetry": false,
+        "trusted": true,
+        "githubAvatars": false,
+        "notebookRemote": false,
+        "richLinks": false
+      },
+      "notebookEditSaved": true,
+      "savedOutputsRetained": 2,
+      "cases": [
+        {
+          "phase": "notebook-default",
+          "state": {
+            "images": {
+              "nb-local": true,
+              "nb-remote": false,
+              "out-local": true,
+              "out-remote": false
+            },
+            "htmlOutput": true,
+            "localScript": "yes",
+            "fetchResult": "blocked",
+            "remoteStyle": "",
+            "socketResult": "blocked",
+            "hasCsp": true
+          },
+          "requests": []
+        },
+        {
+          "phase": "notebook-opt-in",
+          "state": {
+            "images": {
+              "nb-local": true,
+              "nb-remote": true,
+              "out-local": true,
+              "out-remote": true
+            },
+            "htmlOutput": true,
+            "localScript": "yes",
+            "fetchResult": "yes",
+            "remoteStyle": "loaded",
+            "socketResult": "yes",
+            "hasCsp": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "path": "/notebook-font.ttf",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "host",
+                "origin",
+                "sec-ch-ua",
+                "sec-ch-ua-mobile",
+                "sec-ch-ua-platform",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "user-agent"
+              ],
+              "bodyBytes": 0
+            },
+            {
+              "method": "POST",
+              "path": "/notebook-fetch",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "content-length",
+                "content-type",
+                "host",
+                "origin",
+                "sec-ch-ua",
+                "sec-ch-ua-mobile",
+                "sec-ch-ua-platform",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "user-agent"
+              ],
+              "bodyBytes": 24
+            },
+            {
+              "method": "GET",
+              "path": "/notebook-frame.html",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "host",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "sec-fetch-storage-access",
+                "upgrade-insecure-requests",
+                "user-agent"
+              ],
+              "bodyBytes": 0
+            },
+            {
+              "method": "POST",
+              "path": "/notebook-form",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "cache-control",
+                "connection",
+                "content-length",
+                "content-type",
+                "host",
+                "origin",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "sec-fetch-storage-access",
+                "upgrade-insecure-requests",
+                "user-agent"
+              ],
+              "bodyBytes": 18
+            },
+            {
+              "method": "UPGRADE",
+              "path": "/notebook-socket",
+              "headerNames": [
+                "accept-encoding",
+                "accept-language",
+                "cache-control",
+                "connection",
+                "host",
+                "origin",
+                "pragma",
+                "sec-websocket-extensions",
+                "sec-websocket-key",
+                "sec-websocket-version",
+                "upgrade",
+                "user-agent"
+              ],
+              "bodyBytes": 0
+            },
+            {
+              "method": "GET",
+              "path": "/notebook-style.css",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "host",
+                "sec-ch-ua",
+                "sec-ch-ua-mobile",
+                "sec-ch-ua-platform",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "sec-fetch-storage-access",
+                "user-agent"
+              ],
+              "bodyBytes": 0
+            },
+            {
+              "method": "GET",
+              "path": "/notebook-output.png",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "host",
+                "sec-ch-ua",
+                "sec-ch-ua-mobile",
+                "sec-ch-ua-platform",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "sec-fetch-storage-access",
+                "user-agent"
+              ],
+              "bodyBytes": 0
+            },
+            {
+              "method": "GET",
+              "path": "/notebook-markdown.png",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "host",
+                "sec-ch-ua",
+                "sec-ch-ua-mobile",
+                "sec-ch-ua-platform",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "sec-fetch-storage-access",
+                "user-agent"
+              ],
+              "bodyBytes": 0
+            },
+            {
+              "method": "POST",
+              "path": "/notebook-beacon",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "content-length",
+                "content-type",
+                "host",
+                "origin",
+                "sec-ch-ua",
+                "sec-ch-ua-mobile",
+                "sec-ch-ua-platform",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "sec-fetch-storage-access",
+                "user-agent"
+              ],
+              "bodyBytes": 22
+            }
+          ]
+        },
+        {
+          "phase": "notebook-opt-out",
+          "state": {
+            "images": {
+              "nb-local": true,
+              "nb-remote": false,
+              "out-local": true,
+              "out-remote": false
+            },
+            "htmlOutput": true,
+            "localScript": "yes",
+            "fetchResult": "blocked",
+            "remoteStyle": "",
+            "socketResult": "blocked",
+            "hasCsp": true
+          },
+          "requests": []
+        },
+        {
+          "phase": "provider-default",
+          "requests": []
+        },
+        {
+          "phase": "provider-opt-in",
+          "requests": [
+            {
+              "method": "POST",
+              "path": "/provider-payload",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "content-length",
+                "content-type",
+                "host",
+                "sec-fetch-mode",
+                "user-agent"
+              ],
+              "bodyBytes": 51,
+              "jsonFieldNames": [
+                "resource"
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "provider-opt-out",
+          "requests": [],
+          "stats": {
+            "created": 1,
+            "disposed": 1,
+            "completed": 1,
+            "errors": []
+          }
+        }
+      ],
+      "chromium": {
+        "coverage": "Chromium URL events only. Node, extension host, child processes, DNS and OS traffic require separate capture.",
+        "localRequests": 0,
+        "emptyWebSocketEvents": 1,
+        "hosts": [
+          {
+            "host": "127.0.0.1",
+            "urlEvents": 35,
+            "expectedForThisAction": true
+          }
+        ]
+      },
+      "tcp": {
+        "complete": {
+          "connectionStatesObserved": 8,
+          "type": "complete",
+          "elapsedSeconds": 71.79
+        },
+        "nonloopbackObserved": 0
+      },
+      "exit": {
+        "code": 0,
+        "signal": null
+      }
+    },
+    {
+      "build": "packaged",
+      "passed": true,
+      "workspaceSettingsCouldNotEnableNetworking": true,
+      "defaults": {
+        "telemetry": false,
+        "trusted": true,
+        "githubAvatars": false,
+        "notebookRemote": false,
+        "richLinks": false
+      },
+      "notebookEditSaved": true,
+      "savedOutputsRetained": 2,
+      "cases": [
+        {
+          "phase": "notebook-default",
+          "state": {
+            "images": {
+              "nb-local": true,
+              "nb-remote": false,
+              "out-local": true,
+              "out-remote": false
+            },
+            "htmlOutput": true,
+            "localScript": "yes",
+            "fetchResult": "blocked",
+            "remoteStyle": "",
+            "socketResult": "blocked",
+            "hasCsp": true
+          },
+          "requests": []
+        },
+        {
+          "phase": "notebook-opt-in",
+          "state": {
+            "images": {
+              "nb-local": true,
+              "nb-remote": true,
+              "out-local": true,
+              "out-remote": true
+            },
+            "htmlOutput": true,
+            "localScript": "yes",
+            "fetchResult": "yes",
+            "remoteStyle": "loaded",
+            "socketResult": "yes",
+            "hasCsp": false
+          },
+          "requests": [
+            {
+              "method": "GET",
+              "path": "/notebook-font.ttf",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "host",
+                "origin",
+                "sec-ch-ua",
+                "sec-ch-ua-mobile",
+                "sec-ch-ua-platform",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "user-agent"
+              ],
+              "bodyBytes": 0
+            },
+            {
+              "method": "POST",
+              "path": "/notebook-fetch",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "content-length",
+                "content-type",
+                "host",
+                "origin",
+                "sec-ch-ua",
+                "sec-ch-ua-mobile",
+                "sec-ch-ua-platform",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "user-agent"
+              ],
+              "bodyBytes": 24
+            },
+            {
+              "method": "GET",
+              "path": "/notebook-frame.html",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "host",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "sec-fetch-storage-access",
+                "upgrade-insecure-requests",
+                "user-agent"
+              ],
+              "bodyBytes": 0
+            },
+            {
+              "method": "UPGRADE",
+              "path": "/notebook-socket",
+              "headerNames": [
+                "accept-encoding",
+                "accept-language",
+                "cache-control",
+                "connection",
+                "host",
+                "origin",
+                "pragma",
+                "sec-websocket-extensions",
+                "sec-websocket-key",
+                "sec-websocket-version",
+                "upgrade",
+                "user-agent"
+              ],
+              "bodyBytes": 0
+            },
+            {
+              "method": "POST",
+              "path": "/notebook-form",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "cache-control",
+                "connection",
+                "content-length",
+                "content-type",
+                "host",
+                "origin",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "sec-fetch-storage-access",
+                "upgrade-insecure-requests",
+                "user-agent"
+              ],
+              "bodyBytes": 18
+            },
+            {
+              "method": "GET",
+              "path": "/notebook-style.css",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "host",
+                "sec-ch-ua",
+                "sec-ch-ua-mobile",
+                "sec-ch-ua-platform",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "sec-fetch-storage-access",
+                "user-agent"
+              ],
+              "bodyBytes": 0
+            },
+            {
+              "method": "POST",
+              "path": "/notebook-beacon",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "content-length",
+                "content-type",
+                "host",
+                "origin",
+                "sec-ch-ua",
+                "sec-ch-ua-mobile",
+                "sec-ch-ua-platform",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "sec-fetch-storage-access",
+                "user-agent"
+              ],
+              "bodyBytes": 22
+            },
+            {
+              "method": "GET",
+              "path": "/notebook-output.png",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "host",
+                "sec-ch-ua",
+                "sec-ch-ua-mobile",
+                "sec-ch-ua-platform",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "sec-fetch-storage-access",
+                "user-agent"
+              ],
+              "bodyBytes": 0
+            },
+            {
+              "method": "GET",
+              "path": "/notebook-markdown.png",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "host",
+                "sec-ch-ua",
+                "sec-ch-ua-mobile",
+                "sec-ch-ua-platform",
+                "sec-fetch-dest",
+                "sec-fetch-mode",
+                "sec-fetch-site",
+                "sec-fetch-storage-access",
+                "user-agent"
+              ],
+              "bodyBytes": 0
+            }
+          ]
+        },
+        {
+          "phase": "notebook-opt-out",
+          "state": {
+            "images": {
+              "nb-local": true,
+              "nb-remote": false,
+              "out-local": true,
+              "out-remote": false
+            },
+            "htmlOutput": true,
+            "localScript": "yes",
+            "fetchResult": "blocked",
+            "remoteStyle": "",
+            "socketResult": "blocked",
+            "hasCsp": true
+          },
+          "requests": []
+        },
+        {
+          "phase": "provider-default",
+          "requests": []
+        },
+        {
+          "phase": "provider-opt-in",
+          "requests": [
+            {
+              "method": "POST",
+              "path": "/provider-payload",
+              "headerNames": [
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "connection",
+                "content-length",
+                "content-type",
+                "host",
+                "sec-fetch-mode",
+                "user-agent"
+              ],
+              "bodyBytes": 51,
+              "jsonFieldNames": [
+                "resource"
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "provider-opt-out",
+          "requests": [],
+          "stats": {
+            "created": 1,
+            "disposed": 1,
+            "completed": 1,
+            "errors": []
+          }
+        }
+      ],
+      "chromium": {
+        "coverage": "Chromium URL events only. Node, extension host, child processes, DNS and OS traffic require separate capture.",
+        "localRequests": 0,
+        "emptyWebSocketEvents": 1,
+        "hosts": [
+          {
+            "host": "127.0.0.1",
+            "urlEvents": 35,
+            "expectedForThisAction": true
+          }
+        ]
+      },
+      "tcp": {
+        "complete": {
+          "connectionStatesObserved": 5,
+          "type": "complete",
+          "elapsedSeconds": 22.4
+        },
+        "nonloopbackObserved": 0
+      },
+      "exit": {
+        "code": 0,
+        "signal": null
+      }
+    }
+  ],
+  "limits": [
+    "Chromium URL events exclude Node/native/DNS. Empty WEBSOCKET_ALIVE metadata is counted separately and provides no destination.",
+    "TCP sampling may miss startup races, short-lived sockets and UDP/DNS.",
+    "Controlled endpoints and fixture payloads; no live-account provider or universal payload audit.",
+    "Known disposable workspace used process-scoped trust bypass for renderer tests; not workspace-trust acceptance.",
+    "Kernel/extension-host networking, remote workspaces and explicitly opened links are separate boundaries.",
+    "No disconnected Windows, macOS, install/uninstall, signing or clean-release acceptance."
+  ]
+}

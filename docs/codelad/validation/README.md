@@ -1,5 +1,11 @@
 # Desktop privacy validation evidence
 
+## Notebook and provider checks, 2026-10-30
+
+The final Windows package identifies `3736c38819c` and includes both the GitHub avatar and notebook networking opt-ins. [Notebook output](windows-notebook-private-output.png) shows local HTML/image/text output and blocked remote images after opting back out. The edited input and preserved previous output were saved; no kernel was executed. [Selected provider](windows-provider-opt-in.png) shows metadata returned through the actual link-presentation API after explicit opt-in to a controlled local provider.
+
+The [safe summary](windows-notebook-provider-summary-2026-10-30.json) records both six-phase runs, ignored repository opt-in attempts, nine notebook request-path controls, request header names/body sizes, watcher disposal, build/installer metadata and capture limits. The real GitHub suite separately uses the actual Octokit GraphQL client against a controlled endpoint with a fixture-only token; no real account was accessed. See the [report](../notebook-provider-privacy-2026-10-30.md) for scope. These images/captures do not accept glass, OS isolation, live-account providers or full privacy/release certification.
+
 ## Markdown remote-content defaults, 2026-10-30
 
 The actual Electron development workbench passed nine default/opt-in/opt-out rendering cases across the standard preview, preview editor and rich Markdown editor. [Standard preview](windows-markdown-preview-private.png) and [rich editor](windows-markdown-editor-private.png) show a rendered local image and blocked remote image. These development screenshots are privacy evidence, not final packaged branding or glass acceptance. [Safe request/sample summary](windows-markdown-summary-2026-10-30.json) records the five controlled opt-in GETs and capture limits. See the [continuation report](../markdown-privacy-2026-10-30.md) for exact build and platform scope.

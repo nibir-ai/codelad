@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 interface INetLog {
-	readonly events: readonly { readonly params?: { readonly url?: string } }[];
+	readonly events: readonly { readonly type?: number; readonly params?: { readonly url?: string } }[];
 	readonly constants?: { readonly logEventTypes?: Record<string, number> };
 }
 
@@ -21,12 +21,19 @@ export function summarizeNetLog(contents: string, allowedHosts: readonly string[
 	}
 	const hosts = new Map<string, number>();
 	let localRequests = 0;
+	let emptyWebSocketEvents = 0;
 	for (const event of log.events) {
 		if (!event || typeof event !== 'object') {
 			throw new Error('Invalid event in NetLog; review the raw log locally.');
 		}
 		const rawUrl = event.params?.url;
 		if (typeof rawUrl !== 'string') {
+			continue;
+		}
+		// Chromium emits an empty URL on some WebSocket lifecycle events before URL assignment.
+		// Count that metadata separately; it supplies no destination and is not a local request.
+		if (rawUrl === '' && typeof event.type === 'number' && event.type === log.constants.logEventTypes.WEBSOCKET_ALIVE) {
+			emptyWebSocketEvents++;
 			continue;
 		}
 		try {
@@ -45,6 +52,7 @@ export function summarizeNetLog(contents: string, allowedHosts: readonly string[
 	return {
 		coverage: 'Chromium URL events only. Node, extension host, child processes, DNS and OS traffic require separate capture.',
 		localRequests,
+		emptyWebSocketEvents,
 		hosts: [...hosts].sort(([a], [b]) => a.localeCompare(b)).map(([host, urlEvents]) => ({ host, urlEvents, expectedForThisAction: allowed.has(host) }))
 	};
 }
