@@ -1,5 +1,6 @@
 {
 	"displayName": "Default Themes",
+	"codeladGraphiteThemeLabel": "Codelad Graphite",
 	"description": "The default Visual Studio light and dark themes",
 	"light2026ThemeLabel": "Light 2026",
 	"dark2026ThemeLabel": "Dark 2026",

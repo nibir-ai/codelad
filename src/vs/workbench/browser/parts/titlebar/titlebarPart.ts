@@ -30,6 +30,8 @@ import { IContextKey, IContextKeyService } from '../../../../platform/contextkey
 import { IHostService } from '../../../services/host/browser/host.js';
 import { WindowTitle } from './windowTitle.js';
 import { CommandCenterControl } from './commandCenterControl.js';
+import { CodeladShellControl } from './codeladShellControl.js';
+import { CODELAD_SHELL_ENABLED } from '../../../services/codelad/common/codeladShellService.js';
 import { Categories } from '../../../../platform/action/common/actionCommonCategories.js';
 import { HiddenItemStrategy, MenuWorkbenchToolBar, WorkbenchToolBar } from '../../../../platform/actions/browser/toolbar.js';
 import { IActionViewItemService } from '../../../../platform/actions/browser/actionViewItemService.js';
@@ -395,7 +397,7 @@ export class BrowserTitlebarPart extends Part implements ITitlebarPart {
 		}
 
 		// Command Center
-		if (event.affectsConfiguration(LayoutSettings.COMMAND_CENTER)) {
+		if (event.affectsConfiguration(LayoutSettings.COMMAND_CENTER) || event.affectsConfiguration(CODELAD_SHELL_ENABLED)) {
 			this.recreateTitle();
 		}
 	}
@@ -612,6 +614,11 @@ export class BrowserTitlebarPart extends Part implements ITitlebarPart {
 
 	private createTitle(): void {
 		this.titleDisposables.clear();
+		if (!this.isAuxiliary && hasCustomTitlebar(this.configurationService, this.titleBarStyle) && this.configurationService.getValue<boolean>(CODELAD_SHELL_ENABLED)) {
+			const shell = this.titleDisposables.add(this.instantiationService.createInstance(CodeladShellControl, this.windowTitle));
+			reset(this.title, shell.element);
+			return;
+		}
 
 		const isShowingTitleInNativeTitlebar = hasNativeTitlebar(this.configurationService, this.titleBarStyle);
 
@@ -899,7 +906,7 @@ export class BrowserTitlebarPart extends Part implements ITitlebarPart {
 	}
 
 	protected get isCommandCenterVisible() {
-		return !this.isCompact && this.configurationService.getValue<boolean>(LayoutSettings.COMMAND_CENTER) !== false;
+		return !this.isCompact && ((!this.isAuxiliary && this.configurationService.getValue<boolean>(CODELAD_SHELL_ENABLED) === true) || this.configurationService.getValue<boolean>(LayoutSettings.COMMAND_CENTER) !== false);
 	}
 
 	private get editorActionsEnabled(): boolean {

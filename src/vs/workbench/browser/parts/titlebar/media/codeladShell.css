@@ -1,0 +1,131 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.monaco-workbench.codelad-quiet-shell .part.titlebar .titlebar-container.has-center > .titlebar-left,
+.monaco-workbench.codelad-quiet-shell .part.titlebar .titlebar-container.has-center > .titlebar-right {
+	width: auto;
+	flex-grow: 0;
+}
+
+.monaco-workbench.codelad-quiet-shell .part.titlebar .titlebar-container.has-center > .titlebar-center {
+	width: auto;
+	max-width: none;
+	flex: 1;
+	min-width: 0;
+	justify-content: center;
+	margin-inline: var(--vscode-spacing-size80);
+}
+
+.codelad-shell-control {
+	display: flex;
+	align-items: center;
+	gap: var(--vscode-spacing-size40);
+	min-width: 0;
+	height: 100%;
+	color: var(--vscode-titleBar-activeForeground);
+	-webkit-app-region: no-drag;
+}
+
+.codelad-context-strip {
+	display: flex;
+	align-items: center;
+	gap: var(--vscode-spacing-size20);
+	border-inline: var(--vscode-strokeThickness) solid var(--vscode-widget-border, transparent);
+	padding-inline: var(--vscode-spacing-size40);
+}
+
+.codelad-shell-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--vscode-spacing-size40);
+	height: var(--vscode-spacing-size240);
+	min-width: var(--vscode-spacing-size240);
+	padding: 0 var(--vscode-spacing-size60);
+	border: var(--vscode-strokeThickness) solid transparent;
+	border-radius: var(--vscode-cornerRadius-small);
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	line-height: normal;
+	white-space: nowrap;
+	cursor: pointer;
+	-webkit-app-region: no-drag;
+}
+
+.codelad-shell-button:hover {
+	background: var(--vscode-toolbar-hoverBackground);
+}
+
+.codelad-shell-button:focus-visible {
+	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	outline-offset: calc(-1 * var(--vscode-strokeThickness));
+}
+
+.codelad-context[aria-pressed="true"] {
+	background: var(--vscode-list-activeSelectionBackground);
+	color: var(--vscode-list-activeSelectionForeground);
+	border-bottom-color: var(--vscode-focusBorder);
+}
+
+.codelad-pin[aria-pressed="true"] {
+	color: var(--vscode-focusBorder);
+	border-color: var(--vscode-focusBorder);
+}
+
+.codelad-shell-button:disabled {
+	cursor: default;
+	color: var(--vscode-disabledForeground);
+}
+
+.codelad-project-label,
+.codelad-repository-label {
+	max-width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.codelad-project {
+	color: var(--vscode-titleBar-inactiveForeground);
+}
+
+.codelad-context-chooser {
+	display: none;
+}
+
+.codelad-repository-count:not(:empty) {
+	padding-inline: var(--vscode-spacing-size40);
+	border-radius: var(--vscode-cornerRadius-small);
+	background: var(--vscode-badge-background);
+	color: var(--vscode-badge-foreground);
+	font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 1250px) {
+	.codelad-project-label,
+	.codelad-action-label {
+		display: none;
+	}
+
+	.codelad-repository-label {
+		max-width: 80px;
+	}
+}
+
+@media (max-width: 760px) {
+	.codelad-repository-label {
+		display: none;
+	}
+}
+
+@media (max-width: 1000px) {
+	.codelad-context:not([aria-pressed="true"]) {
+		display: none;
+	}
+
+	.codelad-context-chooser {
+		display: inline-flex;
+	}
+}
