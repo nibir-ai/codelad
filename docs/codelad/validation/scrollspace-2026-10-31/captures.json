@@ -1,0 +1,44 @@
+[
+  {
+    "name": "desktop",
+    "file": "desktop.jpg",
+    "format": "JPEG",
+    "requestedWindowBounds": {
+      "width": 1440,
+      "height": 1000
+    },
+    "capturedPixels": {
+      "width": 1441,
+      "height": 1001
+    },
+    "note": "Native capture includes the frame edge; no image conversion or resizing."
+  },
+  {
+    "name": "compact",
+    "file": "compact.jpg",
+    "format": "JPEG",
+    "requestedWindowBounds": {
+      "width": 900,
+      "height": 700
+    },
+    "capturedPixels": {
+      "width": 901,
+      "height": 701
+    },
+    "note": "Native capture includes the frame edge; no image conversion or resizing."
+  },
+  {
+    "name": "high-contrast",
+    "file": "high-contrast.jpg",
+    "format": "JPEG",
+    "requestedWindowBounds": {
+      "width": 1440,
+      "height": 1000
+    },
+    "capturedPixels": {
+      "width": 1441,
+      "height": 1001
+    },
+    "note": "Native capture includes the frame edge; no image conversion or resizing."
+  }
+]

@@ -1,5 +1,9 @@
 # Privacy checks still open
 
+Scrollspace continuation: the initial work-surface strip reads existing editor-group metadata and focuses existing groups. It adds no content index, secondary editor-state store, account flow or network dependency. All gates below remain open; this UI work does not accept Phase 1.
+
+The Scrollspace source and packaged runtime checks run with the telemetry API disabled. Twenty-two selected source/dependency/debugger/NetLog regressions pass. Three completed source-run Chromium logs strictly parse with no URL hosts; [summaries and exclusions](validation/scrollspace-2026-10-31/source-network-summary.json) preserve their actual scope. The packaged app passes product policy and seven actual runtime cases, then exits normally with [no Chromium URL hosts](validation/scrollspace-2026-10-31/packaged-network-summary.json). UI/state/visual checks do not certify native/Node/DNS transport coverage or genuine Windows OS isolation. See the [delivery report](scrollspace-2026-10-31.md) for artifact identity.
+
 The user authorized proceeding through native glass to Quiet Shell on 2026-10-30 while keeping unrun checks visible. **Phase 1 is not fully accepted.** Appearance work does not erase the existing evidence or convert unavailable tests into passes. Quiet Shell uses existing SCM observables, the normal task/trust service and machine-only workspace layout storage; it adds no network service or analytics. Its Chromium smoke capture is bounded evidence, not a substitute for the gates below.
 
 | Gate | Evidence / remaining work |

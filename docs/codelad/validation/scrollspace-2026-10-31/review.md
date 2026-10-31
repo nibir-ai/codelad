@@ -2,7 +2,7 @@
 
 Scope: the approved, code-led work-surface strip extending the incumbent Quiet Shell / Graphite Electron titlebar. No new visual identity, concept roll or approved comp applies. This review does not close privacy, physical DPI, other-platform or full-canvas acceptance.
 
-Evidence: `desktop.png`, `compact.png` and `high-contrast.png` in this directory, inspected with the supplied product/design/direction records, craft floor and primary titlebar/navigation source. All three captures are valid and show real source and terminal content. Runtime behavior and mechanical checks are reported by the parent; no browser, new capture or second detector pass was run by this reviewer. No separate QUALITY BAR card or five-block contract was supplied; the incumbent design and scoped direction provide the authority.
+Evidence: `desktop.jpg`, `compact.jpg` and `high-contrast.jpg` in this directory, inspected with the supplied product/design/direction records, craft floor and primary titlebar/navigation source. All three captures are valid and show real source and terminal content. Runtime behavior and mechanical checks are reported by the parent; no browser, new capture or second detector pass was run by this reviewer. No separate QUALITY BAR card or five-block contract was supplied; the incumbent design and scoped direction provide the authority.
 
 ## Initial review
 

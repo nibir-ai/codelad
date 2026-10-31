@@ -1,0 +1,12 @@
+{
+  "commit": "78d0765d8402913daff07adbc9064e34b6a6a7f4",
+  "unpackedApp": "D:/VSCode-win32-x64/Codelad.exe",
+  "installer": "D:/codelad/.build/win32-x64/user-setup/CodeladSetup.exe",
+  "trialCopy": "D:/codelad/.build/codelad/CodeladSetup-Scrollspace-78d0765d840.exe",
+  "bytes": 251313784,
+  "sha256": "bad05521e06a988ab44559c6d3c61c7f71476e7da0c0888f69f5c2287dd37ed9",
+  "signatureStatus": "NotSigned",
+  "installed": false,
+  "compileSeconds": 662.797,
+  "previewLauncher": "D:/codelad/.build/codelad/Try-Codelad-Scrollspace.cmd"
+}

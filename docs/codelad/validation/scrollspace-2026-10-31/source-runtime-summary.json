@@ -1,0 +1,282 @@
+{
+  "implementation": "78d0765d840",
+  "checks": {
+    "clientTypes": "pass",
+    "targetedLint": "4 files pass",
+    "stylelint": "1 file pass",
+    "focusedElectronTests": 13,
+    "selectedPrivacyRegressions": 22
+  },
+  "cases": [
+    {
+      "case": "pointer source.ts",
+      "labels": [
+        "source.ts",
+        "review.ts",
+        "operations.ts"
+      ],
+      "active": "source.ts",
+      "overflow": {
+        "width": 213,
+        "world": 213,
+        "x": 0
+      }
+    },
+    {
+      "case": "pointer review.ts",
+      "labels": [
+        "source.ts",
+        "review.ts",
+        "operations.ts"
+      ],
+      "active": "review.ts",
+      "overflow": {
+        "width": 213,
+        "world": 213,
+        "x": 0
+      }
+    },
+    {
+      "case": "pointer operations.ts",
+      "labels": [
+        "source.ts",
+        "review.ts",
+        "operations.ts"
+      ],
+      "active": "operations.ts",
+      "overflow": {
+        "width": 213,
+        "world": 213,
+        "x": 0
+      }
+    },
+    {
+      "case": "shortcut wrapping and unsaved state",
+      "active": "operations.ts"
+    },
+    {
+      "case": "roving keyboard focus",
+      "labels": [
+        "source.ts",
+        "review.ts",
+        "operations.ts"
+      ],
+      "active": "source.ts",
+      "overflow": {
+        "width": 213,
+        "world": 213,
+        "x": 0
+      }
+    },
+    {
+      "case": "terminal preserved",
+      "labels": [
+        "source.ts",
+        "review.ts",
+        "operations.ts"
+      ],
+      "active": "review.ts",
+      "overflow": {
+        "width": 213,
+        "world": 213,
+        "x": 0
+      }
+    },
+    {
+      "case": "group add/remove",
+      "labels": [
+        "source.ts",
+        "review.ts",
+        "operations.ts"
+      ],
+      "active": "review.ts",
+      "overflow": {
+        "width": 213,
+        "world": 213,
+        "x": 0
+      }
+    },
+    {
+      "case": "group reorder",
+      "labels": [
+        "review.ts",
+        "source.ts",
+        "operations.ts"
+      ],
+      "active": "review.ts",
+      "overflow": {
+        "width": 213,
+        "world": 213,
+        "x": 0
+      }
+    }
+  ],
+  "navigationBaseline": {
+    "active": "operations.ts",
+    "editors": [
+      {
+        "uri": "source.ts",
+        "line": 40,
+        "column": 4,
+        "scroll": 20,
+        "dirty": false
+      },
+      {
+        "uri": "review.ts",
+        "line": 55,
+        "column": 4,
+        "scroll": 35,
+        "dirty": false
+      },
+      {
+        "uri": "operations.ts",
+        "line": 72,
+        "column": 4,
+        "scroll": 50,
+        "dirty": true
+      }
+    ],
+    "tabs": [
+      {
+        "active": false,
+        "labels": [
+          "source.ts"
+        ]
+      },
+      {
+        "active": false,
+        "labels": [
+          "review.ts"
+        ]
+      },
+      {
+        "active": true,
+        "labels": [
+          "operations.ts"
+        ]
+      }
+    ],
+    "terminals": [],
+    "telemetry": false
+  },
+  "restored": {
+    "ok": true,
+    "state": {
+      "active": "review.ts",
+      "editors": [
+        {
+          "uri": "review.ts",
+          "line": 55,
+          "column": 4,
+          "scroll": 150,
+          "dirty": false
+        },
+        {
+          "uri": "source.ts",
+          "line": 40,
+          "column": 4,
+          "scroll": 5,
+          "dirty": false
+        },
+        {
+          "uri": "operations.ts",
+          "line": 72,
+          "column": 4,
+          "scroll": 50,
+          "dirty": false
+        }
+      ],
+      "tabs": [
+        {
+          "active": true,
+          "labels": [
+            "review.ts"
+          ]
+        },
+        {
+          "active": false,
+          "labels": [
+            "source.ts"
+          ]
+        },
+        {
+          "active": false,
+          "labels": [
+            "operations.ts"
+          ]
+        }
+      ],
+      "terminals": [
+        "Scrollspace local check"
+      ],
+      "telemetry": false
+    }
+  },
+  "compact": {
+    "s": {
+      "labels": [
+        "review.ts",
+        "review.ts",
+        "review.ts",
+        "review.ts",
+        "review.ts",
+        "source.ts",
+        "operations.ts"
+      ],
+      "active": "review.ts",
+      "width": 83,
+      "world": 454,
+      "x": 224,
+      "activeVisible": true,
+      "buttons": [
+        {
+          "label": "Explore (Ctrl+Alt+2)",
+          "hit": true
+        },
+        {
+          "label": "Choose Workspace Context",
+          "hit": true
+        },
+        {
+          "label": "Open Code Atlas (Ctrl+Alt+G)",
+          "hit": true
+        }
+      ]
+    },
+    "wrapped": {
+      "labels": [
+        "review.ts",
+        "review.ts",
+        "review.ts",
+        "review.ts",
+        "review.ts",
+        "source.ts",
+        "operations.ts"
+      ],
+      "active": "source.ts",
+      "width": 83,
+      "world": 454,
+      "x": 287,
+      "activeVisible": true,
+      "buttons": [
+        {
+          "label": "Explore (Ctrl+Alt+2)",
+          "hit": true
+        },
+        {
+          "label": "Choose Workspace Context",
+          "hit": true
+        },
+        {
+          "label": "Open Code Atlas (Ctrl+Alt+G)",
+          "hit": true
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Available Windows PC only; physical DPI and other platforms untested",
+    "No full off-screen scrolling canvas",
+    "Chromium URL logs exclude DNS/Node/native/OS transports"
+  ]
+}

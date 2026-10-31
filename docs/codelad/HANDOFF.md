@@ -1,6 +1,12 @@
 # Codelad handoff
 
-## Resumed 2026-10-31
+## Scrollspace continuation
+
+The user resumed after an accidental Escape and requested completion of the Scrollspace strip checks and Windows trial package. Implementation `78d0765d840` is pushed on `dev`: real editor groups in visual order, same-window traversal and core ownership of editor contents/state. Source runtime and desktop/compact/high-contrast native checks pass. The fresh independent reviewer found no visual repairs and scored the sole design-document fix resolved with `ship`. The minified Windows app identifies the same commit, passes product policy and seven packaged runtime cases, then exits normally with no Chromium URL hosts. [Scrollspace report](scrollspace-2026-10-31.md) records exact scope and transport exclusions.
+
+The installer completed successfully: **251,313,784 bytes**, SHA-256 `bad05521e06a988ab44559c6d3c61c7f71476e7da0c0888f69f5c2287dd37ed9`, unsigned and not installed. Named copy: `D:/codelad/.build/codelad/CodeladSetup-Scrollspace-78d0765d840.exe`. Separate-profile preview: `.build/codelad/Try-Codelad-Scrollspace.cmd`. All validation apps closed normally, builds finished and temporary execution helpers were removed; ignored raw logs/profiles remain. This supersedes the prior Atlas package at the shared latest-output paths. Preserve [open privacy gates](privacy-open-checks.md) and `stable` at `936dd77b0b00dbd56b40d2879c8df7eddb163967`. The full canvas and broader product objective remain unfinished; the existing near-5%-remaining handoff/push/pause preference still applies.
+
+## Previous Atlas checkpoint (historical)
 
 Current Atlas runtime/app: `61cf9fa6fcb`, with native visual review, source and packaged runtime/layout checks complete at the first call-map scope. [Delivery report](atlas-2026-10-31.md) records the ready-to-try unpacked app and separate preview launcher, plus remaining privacy/product limits. At the final meter check, five-hour usage was **98% used / 2% remaining**; the requested handoff/push/pause applies now. The installer is still compressing in session 57683; confirm successful completion and record its hash before calling it current. Its log is `.build/codelad/atlas-2026-10-31/installer.log`. Existing compression may finish in the background; do not automatically resume agent work. Source and packaged fixture apps exited normally; temporary execution helpers are removed, while ignored raw profiles/logs remain. Preserve `stable`; full Atlas/Scrollspace/privacy acceptance remain unfinished.
 

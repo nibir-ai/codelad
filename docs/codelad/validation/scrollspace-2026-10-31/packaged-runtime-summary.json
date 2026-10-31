@@ -1,0 +1,125 @@
+{
+  "commit": "78d0765d8402913daff07adbc9064e34b6a6a7f4",
+  "results": [
+    {
+      "case": "pointer selection preserves URI/caret/scroll/unsaved state",
+      "ok": true
+    },
+    {
+      "case": "actual keybindings wrap and focused arrows retain button focus",
+      "ok": true
+    },
+    {
+      "case": "terminal continuity and actual group add/remove",
+      "ok": true
+    },
+    {
+      "case": "active editor changes and real file rename update labels",
+      "ok": true
+    },
+    {
+      "case": "compact overflow, full accessible long name and pointer hits",
+      "ok": true,
+      "geometry": {
+        "labels": [
+          "review.ts",
+          "source.ts",
+          "operations-with-a-long-surface-name-for-overflow.ts"
+        ],
+        "active": "operations-with-a-long-surface-name-for-overflow.ts",
+        "fullName": "Group 3, operations-with-a-long-surface-name-for-overflow.ts",
+        "width": 83,
+        "world": 207,
+        "x": 124,
+        "activeVisible": true,
+        "visibleButtons": [
+          {
+            "label": "Explore (Ctrl+Alt+2)",
+            "hit": true
+          },
+          {
+            "label": "Choose Workspace Context",
+            "hit": true
+          },
+          {
+            "label": "Open Code Atlas (Ctrl+Alt+G)",
+            "hit": true
+          }
+        ],
+        "selection": {
+          "background": "rgba(90, 93, 94, 0.31)",
+          "border": "rgb(129, 181, 233)"
+        },
+        "theme": "file-icons-enabled monaco-enable-motion modern-ui modern-ui-tabs modern-ui-connected-editor-tabs modern-ui-notifications-dialogs codelad-quiet-shell monaco-workbench windows chromium noauxiliarybar floating-panels panel-position-bottom panel-alignment-center floating-panel-outer-right vs-dark vscode-theme-defaults-themes-codelad-graphite-json modern-ui-frosted-glass"
+      }
+    },
+    {
+      "case": "packaged high contrast",
+      "ok": true,
+      "selection": {
+        "background": "rgba(0, 0, 0, 0)",
+        "border": "rgb(243, 133, 24)"
+      }
+    },
+    {
+      "case": "packaged full-width titlebar hits",
+      "ok": true,
+      "geometry": {
+        "labels": [
+          "review.ts",
+          "source.ts",
+          "operations.ts"
+        ],
+        "active": "operations.ts",
+        "fullName": "Group 3, operations.ts",
+        "width": 213,
+        "world": 213,
+        "x": 0,
+        "activeVisible": true,
+        "visibleButtons": [
+          {
+            "label": "Open File",
+            "hit": true
+          },
+          {
+            "label": "Focus (Ctrl+Alt+1)",
+            "hit": true
+          },
+          {
+            "label": "Explore (Ctrl+Alt+2)",
+            "hit": true
+          },
+          {
+            "label": "Review (Ctrl+Alt+3)",
+            "hit": true
+          },
+          {
+            "label": "Operate (Ctrl+Alt+4)",
+            "hit": true
+          },
+          {
+            "label": "Open Code Atlas (Ctrl+Alt+G)",
+            "hit": true
+          },
+          {
+            "label": "Project Actions",
+            "hit": true
+          },
+          {
+            "label": "Pin Tool Areas",
+            "hit": true
+          },
+          {
+            "label": "Open Source Control",
+            "hit": true
+          }
+        ],
+        "selection": {
+          "background": "rgb(26, 40, 55)",
+          "border": "rgb(129, 181, 233)"
+        },
+        "theme": "file-icons-enabled monaco-enable-motion modern-ui modern-ui-tabs modern-ui-connected-editor-tabs modern-ui-notifications-dialogs codelad-quiet-shell monaco-workbench windows chromium noauxiliarybar floating-panels panel-position-bottom panel-alignment-center floating-panel-outer-right vs-dark vscode-theme-defaults-themes-codelad-graphite-json modern-ui-frosted-glass"
+      }
+    }
+  ]
+}

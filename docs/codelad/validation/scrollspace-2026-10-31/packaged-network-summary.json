@@ -1,0 +1,12 @@
+{
+  "run": "packaged-a",
+  "commit": "78d0765d8402913daff07adbc9064e34b6a6a7f4",
+  "exit": {
+    "code": 0,
+    "signal": null
+  },
+  "coverage": "Chromium URL events only. Node, extension host, child processes, DNS and OS traffic require separate capture.",
+  "localRequests": 0,
+  "emptyWebSocketEvents": 0,
+  "hosts": []
+}

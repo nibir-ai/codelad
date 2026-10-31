@@ -1,6 +1,6 @@
 # Codelad design direction
 
-The next approved milestone is now the first [Atlas call map](atlas-direction.md), using actual installed language-provider relationships in a real editor surface. See [runtime/native evidence and delivery](../atlas-2026-10-31.md). This extends Quiet Shell; complete repository semantics and Scrollspace remain future work.
+The current approved extension is the first [Scrollspace work-surface strip](scrollspace-direction.md), navigating actual editor groups in visual order. See [runtime/native evidence and delivery](../scrollspace-2026-10-31.md). It extends Quiet Shell and the first [Atlas call map](atlas-direction.md); complete repository semantics and the full off-screen scrolling canvas remain future work.
 
 The user authorized the **Quiet Shell UI on 2026-10-30**, and confirmed it should become the default on `dev`. The first implementation adds real context compositions, configured project actions, a repository HUD and the Graphite theme. Unavailable privacy checks remain open; `stable` is unchanged. See the [implementation contract](quiet-shell-direction.md) and [UI validation](../quiet-shell-ui-2026-10-30.md).
 
