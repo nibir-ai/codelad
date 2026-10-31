@@ -1,5 +1,9 @@
 # Codelad handoff
 
+## Resumed 2026-10-31
+
+The user resumed work and selected **Atlas code graph** as the next UI milestone. `dev` was clean at `93f6504b36d`, with no remote commits to pull. The Quiet Shell installer completed successfully after the previous pause; the UI report now records its hash, size and unsigned status. The runtime remains `856aab4dac6`. The older pending-compression note below is historical. Continue on `dev`; preserve `stable` and all open privacy gates. The user's near-5%-remaining handoff/push/pause preference still applies.
+
 ## Quiet Shell continuation, 2026-10-30
 
 Implementation `269a9bf6fbe` introduces the first real Quiet Shell UI. The user explicitly confirmed **default on dev**. The custom main-window title area provides four shared-editor contexts, real configured project actions, visibility pins and an SCM HUD. Codelad Graphite is the default dark theme; explicit custom themes remain intact, native material stays opt-in and the shell has a reversible application setting. [UI report](quiet-shell-ui-2026-10-30.md), root `PRODUCT.md`, root `DESIGN.md` and [direction contract](design/quiet-shell-direction.md) distinguish this prototype from the future semantic Atlas/Scrollspace/utility system.
