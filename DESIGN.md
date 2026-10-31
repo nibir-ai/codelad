@@ -61,6 +61,18 @@ components:
     rounded: "{rounded.control}"
     padding: "0 6px"
     height: "{spacing.control-height}"
+  work-surface:
+    backgroundColor: "transparent"
+    textColor: "{colors.reading}"
+    typography: "{typography.shell-label}"
+    rounded: "{rounded.control}"
+    padding: "2px 6px"
+  work-surface-selected:
+    backgroundColor: "{colors.graphite-raised}"
+    textColor: "{colors.reading}"
+    typography: "{typography.shell-label}"
+    rounded: "{rounded.control}"
+    padding: "2px 6px"
   pin-selected:
     backgroundColor: "transparent"
     textColor: "{colors.ice}"
@@ -108,13 +120,14 @@ components:
 
 Codelad is a browser-rendered Electron desktop workbench. This record describes the implemented Quiet Shell strip and Codelad Graphite theme, with the existing editor and workbench controls as its foundation. Source remains the primary field; a compact title-area strip changes the tools around it. The feeling is calm, focused and familiar to a developer using native menus, keyboard commands and extensions.
 
-The supplied direction is Quiet Shell + Scrollspace + Atlas in Smoke / Graphite / Ice. Its current expression is four saved pane compositions sharing actual editor groups and a first provider-backed Atlas call map. Atlas supplies bounded caller/callee relationships and source navigation; complete repository semantics, imports/types/test edges, a horizontal Scrollspace canvas, independent editor contents per context and the complete utility system remain unimplemented. Existing workbench surfaces retain their own component behavior; this document does not claim an entire VS Code redesign.
+The supplied direction is Quiet Shell + Scrollspace + Atlas in Smoke / Graphite / Ice. Its current expression is four saved pane compositions sharing actual editor groups, a scrollable work-surface strip for those groups and a first provider-backed Atlas call map. Atlas supplies bounded caller/callee relationships and source navigation; complete repository semantics, imports/types/test edges, a horizontal Scrollspace canvas, independent editor contents per context and the complete utility system remain unimplemented. Existing workbench surfaces retain their own component behavior; this document does not claim an entire VS Code redesign.
 
 **Key Characteristics:**
 
 - One real editor field shared across task contexts.
 - Opaque Graphite reading surfaces beneath quieter Ink chrome.
 - Compact controls with theme-bound selection and keyboard focus.
+- Scrollable navigation of existing editor groups in visual order.
 - Real source-control state and user-invoked configured tasks.
 - Bounded provider-backed call relationships beside actual source.
 - Reversible desktop integration that preserves native affordances.
@@ -122,6 +135,8 @@ The supplied direction is Quiet Shell + Scrollspace + Atlas in Smoke / Graphite 
 Ground truth: `src/vs/workbench/browser/parts/titlebar/codeladShellControl.ts`, its `media/codeladShell.css`, `titlebarPart.ts`, the Codelad shell contribution/service/state files, and `extensions/theme-defaults/themes/codelad-graphite.json` with its `2026-dark.json` include. Product and direction context: `PRODUCT.md` and `docs/codelad/design/quiet-shell-direction.md`. Real application captures are under `docs/codelad/validation/quiet-shell-2026-10-30/`; all four initial contexts, task picker, narrow and high-contrast captures were inspected while documenting, alongside the source. The full capture set also records the before state. These are runtime evidence, not image-generated comps or screenshot-fidelity references.
 
 Atlas ground truth: `src/vs/workbench/contrib/codelad/browser/atlasEditor.ts`, `atlasEditorInput.ts`, `atlasGraph.ts`, `atlas.contribution.ts` and `media/atlas.css`, with inherited size roles from `src/vs/platform/theme/common/sizes/baseSizes.ts`. The approved extension is recorded in `docs/codelad/design/atlas-direction.md`. Final native captures `before.jpg`, `alongside.jpg`, `full-map.jpg`, `narrow.jpg` and `high-contrast.jpg` under `docs/codelad/validation/atlas-2026-10-31/` were inspected with `source-runtime.json` and `restored-before.json` / `restored-after.json`. They establish this Windows call-map surface and its source continuity; they do not establish additional platform or DPI acceptance.
+
+Scrollspace ground truth: the titlebar control and stylesheet above, `src/vs/workbench/contrib/codelad/browser/scrollspace.contribution.ts` and `scrollspaceNavigation.ts`. The approved extension is recorded in `docs/codelad/design/scrollspace-direction.md`. Native Windows captures `desktop.png` (1440×1000), `compact.png` (900×700) and `high-contrast.png` under `docs/codelad/validation/scrollspace-2026-10-31/` were inspected alongside the source. They establish this strip within the incumbent Graphite world; they do not establish physical DPI or other-platform acceptance. The full spatial canvas remains deferred and `docs/codelad/privacy-open-checks.md` remains open.
 
 ## Colors
 
@@ -145,7 +160,7 @@ The built-in Graphite theme uses cool opaque neutrals with a restrained Ice acce
 
 **The Semantic Theme Rule.** Bind shell colors to existing workbench semantic tokens. Graphite is the default dark theme; preserve user-selected themes and high-contrast overrides. The shell setting does not force a theme switch.
 
-The theme includes 2026 Dark, which includes Dark Modern. Syntax colors, validation colors, input styling, hover colors and many other controls retain that inherited vocabulary. The shell itself uses `titleBar`, `toolbar.hoverBackground`, `focusBorder`, `list.activeSelection`, `badge`, `widget.border` and `disabledForeground` tokens. Sidecar tonal ramps are synthesized preview strips in OKLCH, not additional shipped palette tokens. Its self-contained component snippets illustrate source states without connecting to application services; inline SVGs translate the native icon roles for the preview.
+The theme includes 2026 Dark, which includes Dark Modern. Syntax colors, validation colors, input styling, hover colors and many other controls retain that inherited vocabulary. The shell itself uses `titleBar`, `toolbar.hoverBackground`, `focusBorder`, `list.activeSelection`, `list.inactiveSelectionBackground`, `scrollbarSlider.background`, `badge`, `widget.border` and `disabledForeground` tokens. Sidecar tonal ramps are synthesized preview strips in OKLCH, not additional shipped palette tokens. Its self-contained component snippets illustrate source states without connecting to application services; inline SVGs translate the native icon roles for the preview.
 
 ## Typography
 
@@ -163,7 +178,9 @@ Atlas reuses the workbench type ramp rather than adding a brand face. Its headin
 
 The titlebar remains native-aware desktop chrome. Its left and right regions size to their contents while the center flexes with `min-width: 0` and the center-margin token. The strip is a horizontal flex row at the full title-area height. Control-gap separates its controls; context-gap separates context buttons inside a compact group with control-gap inline padding and theme-bound one-pixel side dividers. Every shell button has the control-height token as its height and minimum width, with control-inset horizontal padding. Preserve caption buttons and surrounding draggable titlebar regions; interactive shell controls are explicitly non-draggable.
 
-The visible order is project/file search, Focus / Explore / Review / Operate, a narrow-only context chooser, Atlas, Run, Pin Tool Areas and the source-control HUD. Project and branch labels truncate rather than wrap. Their full-width caps are 120px. At viewport widths of 1250px or less, hide the project and Run text labels and reduce the branch label cap to 80px. At 1000px or less, show only the selected context plus the context chooser. At 760px or less, hide branch text while retaining the SCM button and nonempty count. These are desktop CSS viewport thresholds, not mobile layouts; all contexts remain available through the chooser and keyboard commands.
+The visible order is project/file search, Focus / Explore / Review / Operate, work surfaces, a narrow-only context chooser, Atlas, Run, Pin Tool Areas and the source-control HUD. Project and branch labels truncate rather than wrap. Their full-width caps are 120px. At viewport widths of 1250px or less, hide the project and Run text labels and reduce the branch label cap to 80px. At 1000px or less, hide the Open File, Run, Pin Tool Areas and SCM titlebar controls and all unselected contexts; retain the selected context, horizontally scrollable work surfaces, context chooser and Atlas. Commands, quick input and the activity bar retain access to the hidden actions. The 760px branch-label rule remains in the stylesheet, but the entire SCM control is already hidden at that width. These are desktop CSS viewport thresholds, not mobile layouts; all contexts remain available through the chooser and keyboard commands.
+
+The work-surface rail flexes from a 220px basis and cap down to a 64px minimum. Its nonshrinking buttons use context-gap spacing, horizontal scrolling and a thin theme-bound scrollbar. Each label is capped at the lesser of 120px or the rail width, with ellipsis instead of wrapping; activating a group scrolls its button into view. It remains a compact navigation rail around the existing editor layout.
 
 **The Shared Editor Rule.** Context selection changes real tool panes around the existing editors. It does not replace, clone or forcibly merge editor groups. Explorer, SCM and terminal continue to use their existing workbench layouts and resizing behavior.
 
@@ -205,6 +222,14 @@ Atlas symbol nodes use the existing medium workbench corner tier, recorded as ma
 Four plain-language buttons form a toolbar named Workspace Contexts. The selected button has `aria-pressed="true"`, active-selection fill/text and a focus-colored bottom border, so selection has both shape and color. Only the active context is in the tab sequence; Left/Right/Home/End selects and focuses a context. Contexts are disabled until workbench restoration completes, using disabled text and a default cursor. Hover uses the workbench toolbar hover background. Keyboard focus uses an inset one-pixel focus-colored outline, independent of selection.
 
 Ctrl/Cmd+Alt+1–4 selects Focus, Explore, Review and Operate. Ctrl/Cmd+Alt+PageUp/PageDown cycles contexts. Alt+wheel over the strip cycles with a short input throttle; it is an optional shortcut, not a motion effect. Focus Context Strip targets the active control, or opens the picker when a custom strip is unavailable. The narrow chooser exposes the same four real contexts through standard quick input.
+
+### Work-surface navigation
+
+A toolbar named Work Surfaces lists the active native window's real editor groups in grid appearance order. Each label uses the group's active editor name, falling back to the group label; the accessible name includes both the group label and visible name. Group add/remove/reorder, active-group changes, active-editor changes and editor-label changes refresh the rail from service metadata. Core editor-group persistence remains authoritative; this strip stores no second copy of editor contents or layout.
+
+The active group's button has `aria-pressed="true"`, an inactive-selection fill and a full focus-colored border. Only that button is in the tab sequence. Resting controls are transparent; hover uses the toolbar hover background, while keyboard focus has its own one-pixel semantic focus outline. Colors inherit the titlebar and existing workbench theme roles, including high contrast. Buttons remain non-draggable, and long labels retain their accessible names when truncated.
+
+Pointer activation focuses the existing group. Previous Work Surface and Next Work Surface (Ctrl/Cmd+Alt+[ and Ctrl/Cmd+Alt+]) wrap through groups in visual order within the active native window. Left/Right while the rail is focused invokes the same commands and focuses the newly active surface button. Navigation does not move, close, duplicate or reopen editors. Pane contexts remain separate; the full horizontally scrolling editor canvas, off-screen columns and drag/reorder choreography remain deferred.
 
 ### Project and action buttons
 
@@ -252,4 +277,4 @@ Existing Explorer rows, editor tabs, terminal, quick input, buttons, inputs, men
 - **Don't** infer OS DPI or additional platform validation from application zoom or the available Windows captures.
 - **Don't** treat this visual record as closure of the open privacy checks or authority to redesign every incumbent workbench component.
 
-Not canonized or repaired: inherited workbench styling outside the shell/call map, complete Atlas and Scrollspace, other-platform/native-material acceptance and the open privacy gates remain outside this record's claims.
+Not canonized or repaired: inherited workbench styling outside the shell/call map/work-surface strip, complete Atlas and the full Scrollspace canvas, other-platform/native-material acceptance and the open privacy gates remain outside this record's claims.

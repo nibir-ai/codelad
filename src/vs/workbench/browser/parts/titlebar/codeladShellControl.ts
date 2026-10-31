@@ -9,7 +9,7 @@ import { renderIcon } from '../../../../base/browser/ui/iconLabel/iconLabels.js'
 import { getDefaultHoverDelegate } from '../../../../base/browser/ui/hover/hoverDelegateFactory.js';
 import { IManagedHover } from '../../../../base/browser/ui/hover/hover.js';
 import { Codicon } from '../../../../base/common/codicons.js';
-import { Disposable } from '../../../../base/common/lifecycle.js';
+import { Disposable, DisposableStore } from '../../../../base/common/lifecycle.js';
 import { ThemeIcon } from '../../../../base/common/themables.js';
 import { localize } from '../../../../nls.js';
 import { ICommandService } from '../../../../platform/commands/common/commands.js';
@@ -18,6 +18,8 @@ import { IKeybindingService } from '../../../../platform/keybinding/common/keybi
 import { INotificationService } from '../../../../platform/notification/common/notification.js';
 import { CODELAD_CONTEXTS, CodeladContext, codeladContextLabels as labels, ICodeladShellService } from '../../../services/codelad/common/codeladShellService.js';
 import { WindowTitle } from './windowTitle.js';
+import { GroupsOrder, IEditorGroupsService } from '../../../services/editor/common/editorGroupsService.js';
+import { IEditorService } from '../../../services/editor/common/editorService.js';
 
 /** Compact navigation for real workspace compositions, inside the native-aware title area. */
 export class CodeladShellControl extends Disposable {
@@ -36,6 +38,8 @@ export class CodeladShellControl extends Disposable {
 		@IHoverService private readonly hoverService: IHoverService,
 		@IKeybindingService keybindingService: IKeybindingService,
 		@INotificationService private readonly notificationService: INotificationService,
+		@IEditorGroupsService groupsService: IEditorGroupsService,
+		@IEditorService editorService: IEditorService,
 	) {
 		super();
 		const project = this.button(this.element, localize('codelad.openFile', "Open File"), Codicon.search, () => this.commandService.executeCommand<void>('workbench.action.quickOpen'));
@@ -81,6 +85,45 @@ export class CodeladShellControl extends Disposable {
 			}
 		}, { passive: false }));
 		this._register(shellService.registerContextStrip(() => this.contexts.get(shellService.activeContext)?.focus()));
+		const surfaces = append(this.element, $('.codelad-surface-strip'));
+		surfaces.role = 'toolbar';
+		surfaces.setAttribute('aria-label', localize('codelad.surfaces', "Work Surfaces"));
+		const surfaceListeners = this._register(new DisposableStore());
+		const surfaceButtons = new Map<number, HTMLButtonElement>();
+		const updateSurfaces = () => {
+			if (!groupsService.isReady || this._store.isDisposed) { return; }
+			surfaceListeners.clear();
+			surfaceButtons.clear();
+			surfaces.replaceChildren();
+			const active = groupsService.activeGroup;
+			for (const group of groupsService.getGroups(GroupsOrder.GRID_APPEARANCE)) {
+				if (group.windowId !== active.windowId) { continue; }
+				const button = append(surfaces, $<HTMLButtonElement>('button.codelad-surface'));
+				button.type = 'button';
+				surfaceButtons.set(group.id, button);
+				button.textContent = group.activeEditor?.getName() ?? group.label;
+				if (group.activeEditor) { surfaceListeners.add(group.activeEditor.onDidChangeLabel(updateSurfaces)); }
+				button.setAttribute('aria-label', localize('codelad.surface', "{0}, {1}", group.label, button.textContent));
+				button.setAttribute('aria-pressed', String(group.id === active.id));
+				button.tabIndex = group.id === active.id ? 0 : -1;
+				surfaceListeners.add(addDisposableListener(button, EventType.CLICK, () => { groupsService.activateGroup(group); group.focus(); }));
+				if (group.id === active.id) { queueMicrotask(() => button.scrollIntoView({ block: 'nearest', inline: 'nearest' })); }
+			}
+		};
+		for (const event of [groupsService.onDidAddGroup, groupsService.onDidRemoveGroup, groupsService.onDidMoveGroup, groupsService.onDidChangeActiveGroup]) {
+			this._register(event(updateSurfaces));
+		}
+		this._register(editorService.onDidActiveEditorChange(updateSurfaces));
+		this._register(addDisposableListener(surfaces, EventType.KEY_DOWN, (event: KeyboardEvent) => {
+			if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') { return; }
+			event.preventDefault(); event.stopPropagation();
+			this.run(async () => {
+				await this.commandService.executeCommand(event.key === 'ArrowLeft' ? 'workbench.action.codelad.previousSurface' : 'workbench.action.codelad.nextSurface');
+				surfaceButtons.get(groupsService.activeGroup.id)?.focus();
+			});
+		}));
+		updateSurfaces();
+		void groupsService.whenReady.then(updateSurfaces);
 		const chooser = this.button(this.element, localize('codelad.chooseContext', "Choose Workspace Context"), Codicon.chevronDown, () => shellService.showContexts());
 		chooser.classList.add('codelad-context-chooser');
 		const atlasBinding = keybindingService.lookupKeybinding('workbench.action.codelad.openAtlas')?.getLabel();

@@ -19,6 +19,8 @@
 }
 
 .codelad-shell-control {
+	position: relative;
+	z-index: 2500;
 	display: flex;
 	align-items: center;
 	gap: var(--vscode-spacing-size40);
@@ -27,6 +29,39 @@
 	color: var(--vscode-titleBar-activeForeground);
 	-webkit-app-region: no-drag;
 }
+
+.codelad-surface-strip {
+	position: relative;
+	-webkit-app-region: no-drag;
+	display: flex;
+	gap: var(--vscode-spacing-size20);
+	flex: 0 1 220px;
+	min-width: 64px;
+	max-width: 220px;
+	overflow-x: auto;
+	scrollbar-width: thin;
+	scrollbar-color: var(--vscode-scrollbarSlider-background) transparent;
+}
+
+.codelad-surface {
+	-webkit-app-region: no-drag;
+	flex: 0 0 auto;
+	max-width: min(120px, 100%);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: inherit;
+	background: transparent;
+	border: var(--vscode-strokeThickness) solid transparent;
+	border-radius: var(--vscode-cornerRadius-small);
+	font: inherit;
+	padding: 2px 6px;
+	cursor: pointer;
+}
+
+.codelad-surface[aria-pressed="true"] { background: var(--vscode-list-inactiveSelectionBackground); border-color: var(--vscode-focusBorder); }
+.codelad-surface:hover { background: var(--vscode-toolbar-hoverBackground); }
+.codelad-surface:focus-visible { outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder); }
 
 .codelad-context-strip {
 	display: flex;
@@ -121,6 +156,10 @@
 }
 
 @media (max-width: 1000px) {
+	.codelad-project,
+	.codelad-project-actions,
+	.codelad-pin,
+	.codelad-repository,
 	.codelad-context:not([aria-pressed="true"]) {
 		display: none;
 	}

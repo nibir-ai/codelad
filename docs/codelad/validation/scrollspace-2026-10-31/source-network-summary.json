@@ -1,0 +1,35 @@
+[
+  {
+    "run": "source-b",
+    "exit": {
+      "code": 0,
+      "signal": null
+    },
+    "coverage": "Chromium URL events only. Node, extension host, child processes, DNS and OS traffic require separate capture.",
+    "localRequests": 0,
+    "emptyWebSocketEvents": 0,
+    "hosts": []
+  },
+  {
+    "run": "source-c",
+    "exit": {
+      "code": 0,
+      "signal": null
+    },
+    "coverage": "Chromium URL events only. Node, extension host, child processes, DNS and OS traffic require separate capture.",
+    "localRequests": 0,
+    "emptyWebSocketEvents": 0,
+    "hosts": []
+  },
+  {
+    "run": "source-d",
+    "exit": {
+      "code": 0,
+      "signal": null
+    },
+    "coverage": "Chromium URL events only. Node, extension host, child processes, DNS and OS traffic require separate capture.",
+    "localRequests": 0,
+    "emptyWebSocketEvents": 0,
+    "hosts": []
+  }
+]
