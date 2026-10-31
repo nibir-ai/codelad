@@ -26,7 +26,7 @@ Local desktop coding with workspaces, editor groups, Git, terminal, tasks, langu
 
 ## Capabilities and Constraints
 
-The native glass adapter has bounded Windows API/visual and packaged coding evidence. The complete semantic graph, broad utility system and spatial canvas are not implemented. Privacy acceptance remains incomplete; preserve `docs/codelad/privacy-open-checks.md`. Develop on `dev`; `stable` remains a protected bootstrap checkpoint, not a release.
+The native glass adapter has bounded Windows API/visual and packaged coding evidence. Atlas now provides a first bounded, language-provider call map with real source navigation, progressive expansion, filtering and a minimap. Complete repository semantics, import/type/test edges, the broad utility system and spatial canvas remain unimplemented. Privacy acceptance remains incomplete; preserve `docs/codelad/privacy-open-checks.md`. Develop on `dev`; `stable` remains a protected bootstrap checkpoint, not a release.
 
 ## Brand Commitments
 

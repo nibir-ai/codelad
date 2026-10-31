@@ -245,6 +245,7 @@ export class CodeladShellService extends Disposable implements ICodeladShellServ
 			task
 		}));
 		items.push(
+			{ label: localize('codelad.atlas', "Open Code Atlas"), command: 'workbench.action.codelad.openAtlas' },
 			{ label: localize('codelad.allTasks', "All Tasks…"), command: 'workbench.action.tasks.runTask' },
 			{ label: localize('codelad.configureTasks', "Configure Tasks…"), command: 'workbench.action.tasks.configureTaskRunner' },
 			{ label: localize('codelad.toggleTerminal', "Toggle Terminal"), command: 'workbench.action.terminal.toggleTerminal' },

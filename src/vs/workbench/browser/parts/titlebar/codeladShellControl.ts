@@ -83,6 +83,10 @@ export class CodeladShellControl extends Disposable {
 		this._register(shellService.registerContextStrip(() => this.contexts.get(shellService.activeContext)?.focus()));
 		const chooser = this.button(this.element, localize('codelad.chooseContext', "Choose Workspace Context"), Codicon.chevronDown, () => shellService.showContexts());
 		chooser.classList.add('codelad-context-chooser');
+		const atlasBinding = keybindingService.lookupKeybinding('workbench.action.codelad.openAtlas')?.getLabel();
+		const atlasHint = atlasBinding ? localize('codelad.atlasKeybinding', "Open Code Atlas ({0})", atlasBinding) : localize('codelad.atlas', "Open Code Atlas");
+		const atlas = this.button(this.element, atlasHint, Codicon.typeHierarchy, () => this.commandService.executeCommand<void>('workbench.action.codelad.openAtlas'));
+		atlas.classList.add('codelad-atlas');
 		const actions = this.button(this.element, localize('codelad.projectActions', "Project Actions"), Codicon.play, () => shellService.showActions());
 		actions.classList.add('codelad-project-actions');
 		append(actions, $('span.codelad-action-label')).textContent = localize('codelad.run', "Run");
