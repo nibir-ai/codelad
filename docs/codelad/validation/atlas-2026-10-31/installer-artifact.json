@@ -1,0 +1,9 @@
+{
+  "runtimeCommit": "61cf9fa6fcbd5a3c51c22a369339c33e68013e6c",
+  "path": "D:\\codelad\\.build\\win32-x64\\user-setup\\CodeladSetup.exe",
+  "bytes": 251334284,
+  "sha256": "5eae26a197aa8594f5fe11a48f1868c990afc4086bbf985feca64d1ee54ce6a0",
+  "signature": "NotSigned",
+  "installed": false,
+  "compileSeconds": 552.375
+}
