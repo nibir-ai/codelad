@@ -1,0 +1,308 @@
+{
+  "results": [
+    {
+      "case": "actual TypeScript cross-file graph, initial focus and SCM",
+      "message": "typescript call hierarchy snapshot. Arrows point from caller to callee. Refresh after source changes; the anchor stays visible when filtering.",
+      "count": "6 of 6 Symbols · 5 Calls",
+      "nodes": [
+        "testProfile",
+        "renderProfile",
+        "getProfile",
+        "loadUser",
+        "writeAudit",
+        "formatName"
+      ],
+      "edges": 5,
+      "changed": [
+        "loadUser",
+        "writeAudit"
+      ],
+      "groups": 2,
+      "focused": "getProfile. /d:/codelad/.build/codelad/atlas-2026-10-31/workspace/src/api.ts, line 3.  Enter opens source; E expands calls; arrow keys navigate."
+    },
+    {
+      "case": "repeated open retains two groups",
+      "message": "typescript call hierarchy snapshot. Arrows point from caller to callee. Refresh after source changes; the anchor stays visible when filtering.",
+      "count": "6 of 6 Symbols · 5 Calls",
+      "nodes": [
+        "testProfile",
+        "renderProfile",
+        "getProfile",
+        "loadUser",
+        "writeAudit",
+        "formatName"
+      ],
+      "edges": 5,
+      "changed": [
+        "loadUser",
+        "writeAudit"
+      ],
+      "groups": 2,
+      "focused": "getProfile. /d:/codelad/.build/codelad/atlas-2026-10-31/workspace/src/api.ts, line 3.  Enter opens source; E expands calls; arrow keys navigate."
+    },
+    {
+      "case": "provider-backed expansion and keyboard focus",
+      "message": "typescript call hierarchy snapshot. Arrows point from caller to callee. Refresh after source changes; the anchor stays visible when filtering.",
+      "count": "7 of 7 Symbols · 6 Calls",
+      "nodes": [
+        "testProfile",
+        "renderProfile",
+        "getProfile",
+        "loadUser",
+        "writeAudit",
+        "formatName",
+        "normalizeName"
+      ],
+      "edges": 6,
+      "changed": [
+        "loadUser",
+        "writeAudit",
+        "normalizeName"
+      ],
+      "groups": 2,
+      "focused": "writeAudit. /d:/codelad/.build/codelad/atlas-2026-10-31/workspace/src/store.ts, line 5. Source control reports changes in this file. Enter opens source; E expands calls; arrow keys navigate."
+    },
+    {
+      "case": "actual source selection",
+      "id": 1793425177103,
+      "ok": true,
+      "telemetry": false,
+      "providerCalls": 0,
+      "canceled": 0,
+      "editors": [
+        {
+          "uri": "file:///d%3A/codelad/.build/codelad/atlas-2026-10-31/workspace/src/store.ts",
+          "line": 4,
+          "column": 26,
+          "dirty": false
+        }
+      ],
+      "active": "file:///d%3A/codelad/.build/codelad/atlas-2026-10-31/workspace/src/store.ts"
+    },
+    {
+      "case": "loaded-data filters",
+      "message": "typescript call hierarchy snapshot. Arrows point from caller to callee. Refresh after source changes; the anchor stays visible when filtering.",
+      "count": "7 of 7 Symbols · 6 Calls",
+      "nodes": [
+        "testProfile",
+        "renderProfile",
+        "getProfile",
+        "loadUser",
+        "writeAudit",
+        "formatName",
+        "normalizeName"
+      ],
+      "edges": 6,
+      "changed": [
+        "loadUser",
+        "writeAudit",
+        "normalizeName"
+      ],
+      "groups": 2,
+      "focused": null
+    },
+    {
+      "case": "source edit marks snapshot stale",
+      "message": "An open source file changed. Refresh before expanding this snapshot.",
+      "count": "7 of 7 Symbols · 6 Calls",
+      "nodes": [
+        "testProfile",
+        "renderProfile",
+        "getProfile",
+        "loadUser",
+        "writeAudit",
+        "formatName",
+        "normalizeName"
+      ],
+      "edges": 6,
+      "changed": [
+        "loadUser",
+        "writeAudit",
+        "normalizeName"
+      ],
+      "groups": 2,
+      "focused": null
+    },
+    {
+      "case": "actual large TypeScript response is bounded",
+      "message": "Graph limit reached (80 symbols / 160 edges). Some provider results were omitted. Open another source anchor to explore further.",
+      "count": "80 of 80 Symbols · 79 Calls",
+      "nodes": [
+        "runMany",
+        "step0",
+        "step1",
+        "step2",
+        "step3",
+        "step4",
+        "step5",
+        "step6",
+        "step7",
+        "step8",
+        "step9",
+        "step10",
+        "step11",
+        "step12",
+        "step13",
+        "step14",
+        "step15",
+        "step16",
+        "step17",
+        "step18",
+        "step19",
+        "step20",
+        "step21",
+        "step22",
+        "step23",
+        "step24",
+        "step25",
+        "step26",
+        "step27",
+        "step28",
+        "step29",
+        "step30",
+        "step31",
+        "step32",
+        "step33",
+        "step34",
+        "step35",
+        "step36",
+        "step37",
+        "step38",
+        "step39",
+        "step40",
+        "step41",
+        "step42",
+        "step43",
+        "step44",
+        "step45",
+        "step46",
+        "step47",
+        "step48",
+        "step49",
+        "step50",
+        "step51",
+        "step52",
+        "step53",
+        "step54",
+        "step55",
+        "step56",
+        "step57",
+        "step58",
+        "step59",
+        "step60",
+        "step61",
+        "step62",
+        "step63",
+        "step64",
+        "step65",
+        "step66",
+        "step67",
+        "step68",
+        "step69",
+        "step70",
+        "step71",
+        "step72",
+        "step73",
+        "step74",
+        "step75",
+        "step76",
+        "step77",
+        "step78"
+      ],
+      "edges": 79,
+      "changed": [],
+      "groups": 2,
+      "focused": "runMany. /d:/codelad/.build/codelad/atlas-2026-10-31/workspace/src/large.ts, line 1.  Enter opens source; E expands calls; arrow keys navigate."
+    },
+    {
+      "case": "actual TypeScript call-site response is bounded and disclosed",
+      "message": "typescript call hierarchy snapshot. Arrows point from caller to callee. Refresh after source changes; the anchor stays visible when filtering.",
+      "count": "2 of 2 Symbols · 1 Calls",
+      "nodes": [
+        "manySites",
+        "target"
+      ],
+      "edges": 1,
+      "changed": [
+        "manySites",
+        "target"
+      ],
+      "groups": 2,
+      "focused": "manySites. /d:/codelad/.build/codelad/atlas-2026-10-31/workspace/src/manySites.ts, line 1. Source control reports changes in this file. Enter opens source; E expands calls; arrow keys navigate."
+    },
+    {
+      "case": "unsupported language",
+      "message": "No call hierarchy provider is available for plaintext. Open a supported source file and place the caret on a function or method.",
+      "count": "Language-Service Call Map",
+      "nodes": [],
+      "edges": 0,
+      "changed": [],
+      "groups": 2,
+      "focused": "Code Call Map"
+    },
+    {
+      "case": "controlled provider cancellation",
+      "id": 1793425211329,
+      "ok": true,
+      "telemetry": false,
+      "providerCalls": 1,
+      "canceled": 1,
+      "editors": [
+        {
+          "uri": "file:///d%3A/codelad/.build/codelad/atlas-2026-10-31/workspace/provider.atlasfixture",
+          "line": 0,
+          "column": 2,
+          "dirty": false
+        }
+      ],
+      "message": "Loading canceled. Refresh or expand a symbol to try again.",
+      "count": "1 of 1 Symbols · 0 Calls",
+      "nodes": [
+        "Controlled provider"
+      ],
+      "edges": 0,
+      "changed": [
+        "Controlled provider"
+      ],
+      "groups": 2,
+      "focused": ""
+    },
+    {
+      "case": "controlled provider error",
+      "message": "Atlas could not load this anchor: Controlled Atlas provider failure. Refresh to try again.",
+      "count": "1 of 1 Symbols · 0 Calls",
+      "nodes": [
+        "Controlled provider"
+      ],
+      "edges": 0,
+      "changed": [
+        "Controlled provider"
+      ],
+      "groups": 2,
+      "focused": "Controlled provider. /d:/codelad/.build/codelad/atlas-2026-10-31/workspace/provider.atlasfixture, line 1. Source control reports changes in this file. Enter opens source; E expands calls; arrow keys navigate."
+    },
+    {
+      "case": "recovery to actual TypeScript",
+      "message": "typescript call hierarchy snapshot. Arrows point from caller to callee. Refresh after source changes; the anchor stays visible when filtering.",
+      "count": "6 of 6 Symbols · 5 Calls",
+      "nodes": [
+        "testProfile",
+        "renderProfile",
+        "getProfile",
+        "loadUser",
+        "writeAudit",
+        "formatName"
+      ],
+      "edges": 5,
+      "changed": [
+        "getProfile",
+        "loadUser",
+        "writeAudit",
+        "formatName"
+      ],
+      "groups": 2,
+      "focused": "getProfile. /d:/codelad/.build/codelad/atlas-2026-10-31/workspace/src/api.ts, line 3. Source control reports changes in this file. Enter opens source; E expands calls; arrow keys navigate."
+    }
+  ],
+  "scope": "Actual TypeScript positive paths; controlled custom provider only for cancellation/error"
+}

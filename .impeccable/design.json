@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 2,
-	"generatedAt": "2026-10-30T11:51:47.627Z",
+	"generatedAt": "2026-10-31T05:58:05.039Z",
 	"title": "Design System: Codelad Quiet Shell",
 	"extensions": {
 		"colorMeta": {
@@ -171,6 +171,26 @@
 			"code": {
 				"displayName": "Platform Code Fallback",
 				"purpose": "Windows monospace fallback only; editor and terminal settings remain configurable."
+			},
+			"atlas-heading": {
+				"displayName": "Atlas Heading",
+				"purpose": "Existing heading2 / semibold workbench role, scoped to the call-map title."
+			},
+			"atlas-inspector-heading": {
+				"displayName": "Atlas Inspector Heading",
+				"purpose": "Existing heading3 size for the selected symbol; inherits the native UI family."
+			},
+			"atlas-label": {
+				"displayName": "Atlas Secondary Label",
+				"purpose": "Existing label1 size for counts, filters, provenance and call-site links."
+			},
+			"atlas-file": {
+				"displayName": "Atlas Source Location",
+				"purpose": "Existing label2 size for node file/line metadata."
+			},
+			"atlas-change": {
+				"displayName": "Atlas File-Change Mark",
+				"purpose": "Existing label3 size for actual SCM file-resource state, not symbol or test status."
 			}
 		},
 		"shadows": [
@@ -193,6 +213,14 @@
 			{
 				"name": "icon-scm",
 				"value": "760px"
+			},
+			{
+				"name": "atlas-inspector-below",
+				"value": "750px"
+			},
+			{
+				"name": "atlas-icon-actions",
+				"value": "450px"
 			}
 		]
 	},
@@ -236,16 +264,49 @@
 			"description": "Full and narrow context composition with native toolbar semantics. Preview expresses layout and states; real roving navigation and picker are implemented by the workbench service.",
 			"html": "<div class=\"ds-stage\"><div class=\"ds-strip\" role=\"toolbar\" aria-label=\"Workspace Contexts\"><button class=\"ds-button ds-context\" type=\"button\" aria-pressed=\"false\" tabindex=\"-1\">Focus</button><button class=\"ds-button ds-context\" type=\"button\" aria-pressed=\"true\">Explore</button><button class=\"ds-button ds-context\" type=\"button\" aria-pressed=\"false\" tabindex=\"-1\">Review</button><button class=\"ds-button ds-context\" type=\"button\" aria-pressed=\"false\" tabindex=\"-1\">Operate</button></div><button class=\"ds-button ds-chooser\" type=\"button\" aria-label=\"Choose Workspace Context\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\"><path d=\"m4 6 4 4 4-4\"/></svg></button></div>",
 			"css": ".ds-stage { display:inline-flex; align-items:center; gap:var(--vscode-spacing-size40,4px); padding:8px; background:var(--vscode-titleBar-activeBackground,#0B1119); color:var(--vscode-titleBar-activeForeground,#E6EFF7); }.ds-button { display:inline-flex; align-items:center; justify-content:center; gap:var(--vscode-spacing-size40,4px); height:var(--vscode-spacing-size240,24px); min-width:var(--vscode-spacing-size240,24px); padding:0 var(--vscode-spacing-size60,6px); border:var(--vscode-strokeThickness,1px) solid transparent; border-radius:var(--vscode-cornerRadius-small,4px); background:transparent; color:var(--vscode-titleBar-activeForeground,#E6EFF7); font-family:'Segoe WPC','Segoe UI',sans-serif; font-size:13px; line-height:normal; white-space:nowrap; cursor:pointer; } .ds-button:hover { background:var(--vscode-toolbar-hoverBackground,rgba(90,93,94,.31)); } .ds-button:focus-visible { outline:var(--vscode-strokeThickness,1px) solid var(--vscode-focusBorder,#81B5E9); outline-offset:calc(-1 * var(--vscode-strokeThickness,1px)); } .ds-button:disabled { cursor:default; color:var(--vscode-disabledForeground,#555555); }.ds-context[aria-pressed=\"true\"] { background:var(--vscode-list-activeSelectionBackground,#29394A); color:var(--vscode-list-activeSelectionForeground,#E6EFF7); border-bottom-color:var(--vscode-focusBorder,#81B5E9); }.ds-strip { display:flex; align-items:center; gap:var(--vscode-spacing-size20,2px); border-inline:var(--vscode-strokeThickness,1px) solid var(--vscode-widget-border,#2A2B2C); padding-inline:var(--vscode-spacing-size40,4px); } .ds-chooser { display:none; } @media(max-width:1000px) { .ds-context:not([aria-pressed=\"true\"]) { display:none; } .ds-chooser { display:inline-flex; } }"
+		},
+		{
+			"name": "Atlas Action",
+			"kind": "button",
+			"refersTo": "atlas-action",
+			"description": "Design preview of a native call-map toolbar action. This isolated snippet does not refresh a provider.",
+			"html": "<button class=\"ds-atlas-action\" type=\"button\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\"><path d=\"M13 7a5 5 0 1 0-1 4M13 2v5H8\"/></svg>Refresh from Anchor</button>",
+			"css": ".ds-atlas-action { display:inline-flex; align-items:center; gap:6px; background:transparent; color:var(--vscode-foreground,#E6EFF7); border:var(--vscode-strokeThickness,1px) solid transparent; border-radius:var(--vscode-cornerRadius-small,4px); padding:6px 8px; font-family:'Segoe WPC','Segoe UI',sans-serif; font-size:var(--vscode-fontSize-body1,13px); text-align:left; cursor:pointer; } .ds-atlas-action:hover:not(:disabled) { background:var(--vscode-toolbar-hoverBackground,rgba(90,93,94,.31)); } .ds-atlas-action:disabled { color:var(--vscode-disabledForeground,#555555); cursor:default; } .ds-atlas-action:focus-visible { outline:1px solid var(--vscode-focusBorder,#81B5E9); outline-offset:2px; }"
+		},
+		{
+			"name": "Atlas Search",
+			"kind": "input",
+			"refersTo": "atlas-search",
+			"description": "Design preview of loaded-symbol/file filtering. Native input colors are inherited from the active theme; no graph data is connected.",
+			"html": "<input class=\"ds-atlas-search\" type=\"search\" aria-label=\"Filter Symbols or Files\" placeholder=\"Filter Symbols or Files\">",
+			"css": ".ds-atlas-search { min-width:130px; max-width:320px; box-sizing:border-box; padding:6px 8px; border:1px solid var(--vscode-input-border,#333536); border-radius:var(--vscode-cornerRadius-small,4px); background:var(--vscode-input-background,#191A1B); color:var(--vscode-input-foreground,#bfbfbf); font-family:'Segoe WPC','Segoe UI',sans-serif; font-size:var(--vscode-fontSize-body1,13px); } .ds-atlas-search::placeholder { color:var(--vscode-input-placeholderForeground,#555555); } .ds-atlas-search:focus-visible { outline:1px solid var(--vscode-focusBorder,#81B5E9); outline-offset:2px; }"
+		},
+		{
+			"name": "Atlas Symbol",
+			"kind": "custom",
+			"refersTo": "atlas-node",
+			"description": "Design preview of an unselected source target, using the real atlasNodeId source label. The SVG translates the native symbol-kind role; this is not live provider data.",
+			"html": "<button class=\"ds-atlas-node\" type=\"button\" aria-pressed=\"false\" aria-label=\"Design preview: atlasNodeId\"><span class=\"ds-atlas-name\"><svg class=\"ds-atlas-symbol\" aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\"><path d=\"m8 1 6 3v7l-6 4-6-4V4l6-3Zm-6 3 6 3 6-3M8 7v8\"/></svg><span>atlasNodeId</span></span><span class=\"ds-atlas-file\">atlasGraph.ts:30</span></button>",
+			"css": ".ds-atlas-node { position:relative; display:block; width:208px; height:64px; box-sizing:border-box; border:1px solid var(--vscode-panel-border,#29394A); border-radius:var(--vscode-cornerRadius-medium,6px); background:var(--vscode-sideBar-background,#111A25); color:var(--vscode-foreground,#E6EFF7); padding:10px 12px; text-align:left; font-family:'Segoe WPC','Segoe UI',sans-serif; font-size:var(--vscode-fontSize-body1,13px); cursor:pointer; } .ds-atlas-node:hover { background:var(--vscode-list-hoverBackground,#FFFFFF14); } .ds-atlas-node[aria-pressed=\"true\"] { border-color:var(--vscode-focusBorder,#81B5E9); background:var(--vscode-list-inactiveSelectionBackground,#1A2837); } .ds-atlas-node:focus-visible { outline:1px solid var(--vscode-focusBorder,#81B5E9); outline-offset:2px; } .ds-atlas-name { display:flex; align-items:center; gap:6px; } .ds-atlas-name > span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } .ds-atlas-anchor .ds-atlas-name { font-weight:var(--vscode-fontWeight-semiBold,600); } .ds-atlas-file { display:block; color:var(--vscode-descriptionForeground,#96AABB); font-size:var(--vscode-fontSize-label2,11px); margin-top:6px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; } .ds-atlas-symbol { flex-shrink:0; color:var(--vscode-symbolIcon-functionForeground,#B180D7); }"
+		},
+		{
+			"name": "Atlas Selected Anchor",
+			"kind": "custom",
+			"refersTo": "atlas-node-selected",
+			"description": "Design preview of selected-anchor border, fill and name emphasis. Uses a real source label without asserting live calls or SCM state.",
+			"html": "<button class=\"ds-atlas-node ds-atlas-anchor\" type=\"button\" aria-pressed=\"true\" aria-label=\"Design preview: selected atlasNodeId\"><span class=\"ds-atlas-name\"><svg class=\"ds-atlas-symbol\" aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\"><path d=\"m8 1 6 3v7l-6 4-6-4V4l6-3Zm-6 3 6 3 6-3M8 7v8\"/></svg><span>atlasNodeId</span></span><span class=\"ds-atlas-file\">atlasGraph.ts:30</span></button>",
+			"css": ".ds-atlas-node { position:relative; display:block; width:208px; height:64px; box-sizing:border-box; border:1px solid var(--vscode-panel-border,#29394A); border-radius:var(--vscode-cornerRadius-medium,6px); background:var(--vscode-sideBar-background,#111A25); color:var(--vscode-foreground,#E6EFF7); padding:10px 12px; text-align:left; font-family:'Segoe WPC','Segoe UI',sans-serif; font-size:var(--vscode-fontSize-body1,13px); cursor:pointer; } .ds-atlas-node:hover { background:var(--vscode-list-hoverBackground,#FFFFFF14); } .ds-atlas-node[aria-pressed=\"true\"] { border-color:var(--vscode-focusBorder,#81B5E9); background:var(--vscode-list-inactiveSelectionBackground,#1A2837); } .ds-atlas-node:focus-visible { outline:1px solid var(--vscode-focusBorder,#81B5E9); outline-offset:2px; } .ds-atlas-name { display:flex; align-items:center; gap:6px; } .ds-atlas-name > span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } .ds-atlas-anchor .ds-atlas-name { font-weight:var(--vscode-fontWeight-semiBold,600); } .ds-atlas-file { display:block; color:var(--vscode-descriptionForeground,#96AABB); font-size:var(--vscode-fontSize-label2,11px); margin-top:6px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; } .ds-atlas-symbol { flex-shrink:0; color:var(--vscode-symbolIcon-functionForeground,#B180D7); }"
 		}
 	],
 	"narrative": {
 		"northStar": "Quiet Shell",
-		"overview": "Codelad is a browser-rendered Electron desktop workbench. This record describes the implemented Quiet Shell strip and Codelad Graphite theme, with the existing editor and workbench controls as its foundation. Source remains the primary field; a compact title-area strip changes the tools around it. The feeling is calm, focused and familiar to a developer using native menus, keyboard commands and extensions.\n\nThe supplied direction is Quiet Shell + Scrollspace + Atlas in Smoke / Graphite / Ice. Its current expression is four saved pane compositions sharing actual editor groups. This implementation does not supply a semantic Atlas graph, a horizontal Scrollspace canvas, independent editor contents per context, or the complete utility system. Existing workbench surfaces retain their own component behavior; this document does not claim an entire VS Code redesign.",
+		"overview": "Codelad is a browser-rendered Electron desktop workbench. This record describes the implemented Quiet Shell strip and Codelad Graphite theme, with the existing editor and workbench controls as its foundation. Source remains the primary field; a compact title-area strip changes the tools around it. The feeling is calm, focused and familiar to a developer using native menus, keyboard commands and extensions.\n\nThe supplied direction is Quiet Shell + Scrollspace + Atlas in Smoke / Graphite / Ice. Its current expression is four saved pane compositions sharing actual editor groups and a first provider-backed Atlas call map. Atlas supplies bounded caller/callee relationships and source navigation; complete repository semantics, imports/types/test edges, a horizontal Scrollspace canvas, independent editor contents per context and the complete utility system remain unimplemented. Existing workbench surfaces retain their own component behavior; this document does not claim an entire VS Code redesign.",
 		"keyCharacteristics": [
 			"One real editor field shared across task contexts.",
 			"Opaque Graphite reading surfaces beneath quieter Ink chrome.",
 			"Compact controls with theme-bound selection and keyboard focus.",
 			"Real source-control state and user-invoked configured tasks.",
+			"Bounded provider-backed call relationships beside actual source.",
 			"Reversible desktop integration that preserves native affordances."
 		],
 		"rules": [
@@ -270,11 +331,12 @@
 			"**Do** use workbench semantic colors, visible focus and pressed-state shape across Graphite, custom themes and high contrast.",
 			"**Do** preserve caption controls, drag regions, keyboard commands, native menus and extension behavior.",
 			"**Do** use actual SCM state and configured tasks, with execution following an explicit user choice.",
+			"**Do** preserve Atlas provider provenance, bounded-result disclosures, visible anchor and actual source navigation.",
 			"**Do** keep reading surfaces opaque and preserve existing solid, reduced-motion and transparency fallbacks.",
 			"**Do** retain the approved Codelad name and supplied identity assets."
 		],
 		"donts": [
-			"**Don't** present pane snapshots as independent editor sessions, an Atlas semantic graph or a Scrollspace canvas.",
+			"**Don't** present pane snapshots as independent editor sessions or a Scrollspace canvas, or the bounded Atlas call map as complete repository semantics or runtime execution.",
 			"**Don't** hardcode the Graphite palette over custom or high-contrast themes.",
 			"**Don't** use invented Git/task data, fake graph edges, embedded wallpaper or AI drawings as proof of the actual workbench.",
 			"**Don't** infer OS DPI or additional platform validation from application zoom or the available Windows captures.",

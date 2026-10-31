@@ -1,0 +1,13 @@
+{
+	"disposition": "ship",
+	"scope": "First bounded provider-backed Atlas call map; not complete Atlas, Scrollspace or privacy acceptance",
+	"requiredCaptures": ["before.jpg", "alongside.jpg", "full-map.jpg", "narrow.jpg", "high-contrast.jpg"],
+	"captureValidity": "All five final native captures valid",
+	"nativeImageSizes": { "wide": [1442, 990], "compact": [902, 701] },
+	"requestedWindowBounds": { "wide": [1440, 1000], "compact": [900, 700] },
+	"visualRepairs": [],
+	"materialFixes": [{ "finding": "DESIGN.md categorically stated Atlas was unimplemented", "verdict": "resolved" }],
+	"verdictScope": "Ship verdict scores the listed persistence fix; full visual review found no material visual repairs",
+	"detectorFindings": [],
+	"review": "Fresh Impeccable finish reviewer; primary implementation files sampled"
+}

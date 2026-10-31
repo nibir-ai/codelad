@@ -1,0 +1,32 @@
+{
+  "styles": {
+    "background": "rgb(17, 26, 37)",
+    "opacity": "1",
+    "node": [
+      208,
+      64
+    ],
+    "mapViewBox": "0 0 820 344",
+    "mapNodes": 6,
+    "actualNodes": 6,
+    "viewport": [
+      205,
+      211
+    ],
+    "world": [
+      820,
+      344
+    ]
+  },
+  "minimapClick": {
+    "before": {
+      "x": 0,
+      "y": 0
+    },
+    "after": {
+      "x": 615,
+      "y": 133
+    }
+  },
+  "scope": "Packaged CSS geometry, opaque Graphite surface, actual minimap node count and viewport movement"
+}
